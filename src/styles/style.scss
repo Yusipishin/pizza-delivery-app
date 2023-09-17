@@ -1,0 +1,52 @@
+@import url(reset.scss); //  RESET-STYLES
+@import url(fonts.scss); //  CONNECTING-FONTS
+
+
+//---------------------------   COMMON-STYLES  -------------------------------//
+
+
+#wrapper {
+  width: 100%;
+  overflow: hidden;
+  min-height: 100%;
+}
+
+html, body {
+  color: #0E0C0D;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 120%;
+  background: #fff;
+  scroll-behavior: smooth;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 1140px;
+}
+
+
+//---------------------------  REUSED-STYLES  -------------------------------//
+
+
+.call-btn {
+  font-weight: 700;
+  font-size: 14px;
+  color: #696F7A;
+  line-height: 200%;
+  border-radius: 28px;
+  background: #F3F3F7;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone {
+  font-size: 26px;
+  color: #F7D22D;
+}

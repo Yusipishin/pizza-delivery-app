@@ -1,0 +1,47 @@
+//------------------------  HERO-STYLES  --------------------------------//
+
+
+.hero {
+  .swiper {
+    overflow: visible;
+    position: relative;
+    &-button-disabled {
+      opacity: .5;
+      pointer-events: none;
+    }
+    &-slide-active .hero__slider-img, &-slide-next .hero__slider-img {
+      opacity: 1;
+      transform: scale(1);
+      transition: .7s;
+    }
+    &-slide-active {
+      transform: scale(1.5);
+    }
+  }
+
+  &__slider {
+    &-img {
+      opacity: .5;
+      transition: .5s;
+      border-radius: 13px;
+      transform: scale(.9);
+    }
+    &-next, &-prev {
+      top: 50%;
+      z-index: 5;
+      width: 31px;
+      height: 31px;
+      position: absolute;
+      border-radius: 27px;
+      background: rgba(247, 210, 45, 0.90) url('../../resources/img/icons/arrow-ic.svg') 50% 50% no-repeat;
+    }
+    &-prev {
+      left: -45px;
+      transform: translateY(-50%);
+    }
+    &-next {
+      right: -45px;
+      transform: translateY(-50%) scaleX(-1);
+    }
+  }
+}
