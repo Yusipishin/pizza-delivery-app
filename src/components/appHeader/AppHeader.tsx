@@ -1,22 +1,8 @@
 import './appHeader.scss'
+
 import logo from '../../resources/img/logo.svg'
 
-function AppHeader() {
-
-  const createLinks = () => {
-    const links = ['Пицца', 'Паста', 'Супы', 'Салаты','Напитки', 'Десерты', 'Бакалея', 'Антипасти', 'Акции', 'Комбо', 'Контакты']
-    console.log('create!')
-
-    return (
-      links.map((link, i) => {
-      return (
-        <li className="header__item" key = {i}>
-          <a className='header__link' href='#'>{link}</a>
-        </li>
-      )
-    }))
-  }
-
+const AppHeader = () => {
   return (
     <header className='header'>
       <div className="container">
@@ -59,7 +45,39 @@ function AppHeader() {
           <div className="wrapper header__menu">
             <nav className='header__nav'>
               <ul className="wrapper header__list">
-                {createLinks()}
+                <li className="header__item">
+                  <a className='header__link' href='#'>Пицца</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Паста</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Супы</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Салаты</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Напитки</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Десерты</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Бакалея</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Антипасти</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Акции</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Комбо</a>
+                </li>
+                <li className="header__item">
+                  <a className='header__link' href='#'>Контакты</a>
+                </li>
               </ul>
             </nav>
             <div className='wrapper header__menu-inner'>
