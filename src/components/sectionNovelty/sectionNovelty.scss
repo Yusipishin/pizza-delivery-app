@@ -1,0 +1,46 @@
+.novelty {
+  margin-bottom: 46px;
+  &__title {
+    font-size: 24px;
+    color: #231F20;
+    margin-bottom: 33px;
+  }
+
+  &__list {
+    gap: 30px;
+
+    &-inner {
+      gap: 25px;
+      padding: 14px 35px 14px 17px;
+    }
+
+    &-item {
+      border-radius: 12px;
+      box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.06);
+    }
+
+    &-name, &-sale {
+      line-height: 1.21em;
+      display: inline-block;
+    }
+
+    &-name {
+      color: #000;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    &-sale {
+      font-size: 16px;
+      font-weight: 800;
+      color: #F7D22D;
+    }
+
+    &-img {
+      width: 71px;
+      height: 71px;
+      border-radius: 50%;
+      background-color: #fcdc4f;
+    }
+  }
+}

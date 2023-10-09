@@ -4,8 +4,9 @@
 import '../../styles/style.scss'
 
 import AppHeader from '../appHeader/AppHeader'
-import HeroSection from '../heroSection/HeroSection'
-import MenuSection from '../menuSection/MenuSection'
+import SectionHero from '../sectionHero/SectionHero'
+import SectionNovelty from '../sectionNovelty/SectionNovelty'
+import SectionMenu from '../sectionMenu/SectionMenu'
 // ...
 import AppFooter from '../appFooter/AppFooter'
 
@@ -13,9 +14,11 @@ const App = () => {
   return (
     <>
       <AppHeader/>
+      <SectionHero/>
       <main className='main'>
-        <HeroSection/>
-        <MenuSection/>
+        <div className="main__bg"></div>
+        <SectionNovelty/>
+        <SectionMenu/>
         {/* ... */}
       </main>
       <AppFooter/>

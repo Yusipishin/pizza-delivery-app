@@ -2,6 +2,7 @@
 
 
 .hero {
+  margin-bottom: 71px;
   .swiper {
     overflow: visible;
     position: relative;
@@ -22,6 +23,9 @@
   &__slider {
     &-img {
       opacity: .5;
+      width: 540px;
+      height: 312px;
+      background-color: #fcdc4f;
       transition: .5s;
       border-radius: 13px;
       transform: scale(.9);

@@ -1,11 +1,11 @@
-import './heroSection.scss'
+import './sectionHero.scss'
 import 'swiper/css'
 import sliderImg from '../../resources/img/dark-fibo-img.webp'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper , SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules';
 
-function HeroSection() {
+function SectionHero() {
 
   return (
     <section className="hero">
@@ -49,4 +49,4 @@ function HeroSection() {
   )
 }
 
-export default HeroSection;
+export default SectionHero;

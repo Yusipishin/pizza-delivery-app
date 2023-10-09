@@ -50,3 +50,26 @@ html, body {
   font-size: 26px;
   color: #F7D22D;
 }
+
+.logo {
+  width: 80px;
+  height: 60px;
+}
+
+// .img-wrapper -- обёртка изображений
+
+
+
+//---------------------------  OTHER-STYLES  -------------------------------//
+
+.main {
+  position: relative;
+
+  &__bg {
+    width: 239px;
+    height: 364px;
+    top: -10%;
+    position: absolute;
+    background: url("../resources/img/main-bg-img.webp") no-repeat;
+  }
+}
