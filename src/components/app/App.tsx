@@ -16,7 +16,6 @@ const App = () => {
       <AppHeader/>
       <SectionHero/>
       <main className='main'>
-        <div className="main__bg"></div>
         <SectionNovelty/>
         <SectionMenu/>
         {/* ... */}

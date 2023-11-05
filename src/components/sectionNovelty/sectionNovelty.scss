@@ -1,5 +1,13 @@
 .novelty {
   margin-bottom: 46px;
+  position: relative;
+  &__bg-man {
+    top: -10%;
+    width: 239px;
+    height: 364px;
+    position: absolute;
+    background: url("../../resources/img/main-bg-img.webp") no-repeat;
+  }
   &__title {
     font-size: 24px;
     color: #231F20;
@@ -31,8 +39,8 @@
     }
 
     &-sale {
+      @apply font-extrabold;
       font-size: 16px;
-      font-weight: 800;
       color: #F7D22D;
     }
 

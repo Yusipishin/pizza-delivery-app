@@ -1,6 +1,9 @@
 @import url(reset.scss); //  RESET-STYLES
 @import url(fonts.scss); //  CONNECTING-FONTS
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 //---------------------------   COMMON-STYLES  -------------------------------//
 
@@ -56,20 +59,9 @@ html, body {
   height: 60px;
 }
 
-// .img-wrapper -- обёртка изображений
-
+.img-wrapper {
+  width: 100%;
+}
 
 
 //---------------------------  OTHER-STYLES  -------------------------------//
-
-.main {
-  position: relative;
-
-  &__bg {
-    width: 239px;
-    height: 364px;
-    top: -10%;
-    position: absolute;
-    background: url("../resources/img/main-bg-img.webp") no-repeat;
-  }
-}

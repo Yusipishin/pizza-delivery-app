@@ -4,16 +4,12 @@
 .hero {
   margin-bottom: 71px;
   .swiper {
-    overflow: visible;
-    position: relative;
+    @apply overflow-visible relative;
     &-button-disabled {
-      opacity: .5;
-      pointer-events: none;
+      @apply opacity-50 pointer-events-none;
     }
     &-slide-active .hero__slider-img, &-slide-next .hero__slider-img {
-      opacity: 1;
-      transform: scale(1);
-      transition: .7s;
+      @apply opacity-100 scale-100 duration-700;
     }
     &-slide-active {
       transform: scale(1.5);
@@ -22,21 +18,13 @@
 
   &__slider {
     &-img {
-      opacity: .5;
+      @apply opacity-50 duration-500 rounded-xl scale-90;
       width: 540px;
       height: 312px;
       background-color: #fcdc4f;
-      transition: .5s;
-      border-radius: 13px;
-      transform: scale(.9);
     }
     &-next, &-prev {
-      top: 50%;
-      z-index: 5;
-      width: 31px;
-      height: 31px;
-      position: absolute;
-      border-radius: 27px;
+      @apply top-1/2 z-10 w-9 h-9 absolute rounded-3xl;
       background: rgba(247, 210, 45, 0.90) url('../../resources/img/icons/arrow-ic.svg') 50% 50% no-repeat;
     }
     &-prev {

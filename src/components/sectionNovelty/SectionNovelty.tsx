@@ -14,6 +14,7 @@ const SectionNovelty = () => {
 
   return (
     <section className="novelty">
+      <div className="novelty__bg-man"></div>
       <div className='container'>
         <h2 className="novelty__title">
           Новинки
