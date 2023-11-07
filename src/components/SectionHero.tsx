@@ -1,6 +1,6 @@
-import './slider/sectionHero.scss'
+import './slider/slider.scss'
 import 'swiper/css'
-import sliderImg from '../resources/img/dark-fibo-img.webp'
+import sliderImg from '../assets/img/dark-fibo-img.webp'
 
 import { Swiper , SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules';

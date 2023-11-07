@@ -1,4 +1,4 @@
-import logo from "../resources/img/logo.svg";
+import logo from "../assets/img/logo.svg";
 
 const AppHeader = () => {
   const arrLinks = [
@@ -39,7 +39,7 @@ const AppHeader = () => {
                         w-[18px] 
                         h-[18px] 
                         mr-2
-                        bg-[url("/src/resources/img/icons/yandex-food-ic.svg")]
+                        bg-[url("/src/assets/img/icons/yandex-food-ic.svg")]
                     '
                     />
                     <span className="header__food-txt">Яндекс еда</span>
@@ -66,7 +66,7 @@ const AppHeader = () => {
                         h-[13px]
                         mt-[-3px]
                         ml-1
-                        bg-[url('/src/resources/img/icons/star-ic.svg')]
+                        bg-[url('/src/assets/img/icons/star-ic.svg')]
                     "
                     />
                   </div>

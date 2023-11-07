@@ -1,0 +1,35 @@
+{
+  "novelty": [
+    {
+      "name": "Карбонара",
+      "sale": 120,
+      "img": {
+        "url": "/src/assets/img/novelty-pizza-img.png"
+      }
+    },
+    {
+      "name": "Карбонара",
+      "sale": 145,
+      "img": {
+        "url": "/src/assets/img/novelty-pizza-img.png"
+      }
+    },
+    {
+      "name": "Карбонара",
+      "sale": 100,
+      "img": {
+        "url": "/src/assets/img/novelty-pizza-img.png"
+      }
+    },
+    {
+      "name": "Карбонара",
+      "sale": 65,
+      "img": {
+        "url": "/src/assets/img/novelty-pizza-img.png"
+      }
+    }
+  ],
+  "menu": [
+
+  ]
+}

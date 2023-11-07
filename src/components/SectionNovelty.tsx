@@ -18,7 +18,7 @@ const SectionNovelty = () => {
           h-[364px]
           absolute
           bg-no-repeat
-          bg-[url('/src/resources/img/main-bg-img.webp')]
+          bg-[url('/src/assets/img/main-bg-img.webp')]
           ">
       </div>
       <div className='container'>
