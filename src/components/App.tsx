@@ -1,14 +1,14 @@
 // import {lazy, Suspense} from 'react'
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-import '../../styles/style.scss'
+import '../styles/style.scss'
 
-import AppHeader from '../appHeader/AppHeader'
-import SectionHero from '../sectionHero/SectionHero'
-import SectionNovelty from '../sectionNovelty/SectionNovelty'
-import SectionMenu from '../sectionMenu/SectionMenu'
+import AppHeader from './AppHeader'
+import SectionHero from './SectionHero'
+import SectionNovelty from './SectionNovelty'
+import SectionMenu from './SectionMenu'
 // ...
-import AppFooter from '../appFooter/AppFooter'
+import AppFooter from './AppFooter'
 
 const App = () => {
   return (

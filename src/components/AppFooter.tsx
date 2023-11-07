@@ -1,5 +1,3 @@
-import './appFooter.scss'
-
 function AppFooter() {
   return (
     <footer className="footer">

@@ -1,8 +1,6 @@
 //------------------------  HERO-STYLES  --------------------------------//
 
-
 .hero {
-  margin-bottom: 71px;
   .swiper {
     @apply overflow-visible relative;
     &-button-disabled {
@@ -18,9 +16,7 @@
 
   &__slider {
     &-img {
-      @apply opacity-50 duration-500 rounded-xl scale-90;
-      width: 540px;
-      height: 312px;
+      @apply opacity-50 duration-500 rounded-xl scale-90 w-[540px] h-[312px];
       background-color: #fcdc4f;
     }
     &-next, &-prev {

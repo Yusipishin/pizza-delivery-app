@@ -1,5 +1,3 @@
-import './sectionMenu.scss'
-
 const SectionMenu = () => {
 
   return (
