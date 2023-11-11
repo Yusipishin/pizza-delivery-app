@@ -1,14 +1,22 @@
+import { useHttp } from "../hooks/http.hook"
+import { useCallback, useState } from "react"
+
 const SectionNovelty = () => {
   
   type dataObj = {name: string, sale: number, img: {url: string}}
-  type dataType = dataObj[]
-  
-  const data: dataType = [
-    {name: "Карбонара", sale: 120, img: {url: "https://img.freepik.com/premium-photo/pepperoni-pizza-cheese-pizza-food-pizza-pizza-pepperoni-mozzarella-mozzarella-cheese-cheese_812450-5.jpg?w=740"}},
-    {name: "Карбонара", sale: 145, img: {url: "https://img.freepik.com/premium-photo/pepperoni-pizza-cheese-pizza-food-pizza-pizza-pepperoni-mozzarella-mozzarella-cheese-cheese_812450-5.jpg?w=740"}},
-    {name: "Карбонара", sale: 100, img: {url: "https://img.freepik.com/premium-photo/pepperoni-pizza-cheese-pizza-food-pizza-pizza-pepperoni-mozzarella-mozzarella-cheese-cheese_812450-5.jpg?w=740"}},
-    {name: "Карбонара", sale: 65, img: {url: "https://img.freepik.com/premium-photo/pepperoni-pizza-cheese-pizza-food-pizza-pizza-pepperoni-mozzarella-mozzarella-cheese-cheese_812450-5.jpg?w=740"}},
-  ]
+
+  const [noveltyItems, setNoveltyItems] = useState([])
+  const [noveltyLoadingStatus, setNoveltyLoadingStatus] = useState("loading")
+  const {request} = useHttp();
+
+  const dataNovelty = useCallback(() => {
+    request('pizza.json')
+      .then(data => setNoveltyItems(data.novelty))
+      .then(() => setNoveltyLoadingStatus("loaded"))
+      .then(data => console.log(data))
+  }, [request])
+
+  noveltyLoadingStatus === "loading" ? dataNovelty() : null
 
   return (
     <section className="mb-12 relative">
@@ -30,7 +38,7 @@ const SectionNovelty = () => {
           Новинки
         </h2>
         <ul className='wrapper gap-8'>
-          {data.map((item: dataObj, i: number) => {
+          {noveltyItems.map((item: dataObj, i: number) => {
             return (
               <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={i}>
                 <a href='#'>
