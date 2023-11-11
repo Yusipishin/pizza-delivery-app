@@ -26,7 +26,7 @@ function SectionHero() {
               <button className="hero__slider-prev"/>
               <button className="hero__slider-next"/>
               {pictures.map((img, i) => (
-                <SwiperSlide className="hero__slider-item">
+                <SwiperSlide className="hero__slider-item" key={i}>
                     <img 
                       src={img} 
                       key={i} 
