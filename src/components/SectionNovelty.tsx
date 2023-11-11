@@ -2,7 +2,7 @@ import { useHttp } from "../hooks/http.hook"
 import { useCallback, useState } from "react"
 
 const SectionNovelty = () => {
-  
+
   type dataObj = {name: string, sale: number, img: {url: string}}
 
   const [noveltyItems, setNoveltyItems] = useState([])
@@ -13,7 +13,6 @@ const SectionNovelty = () => {
     request('pizza.json')
       .then(data => setNoveltyItems(data.novelty))
       .then(() => setNoveltyLoadingStatus("loaded"))
-      .then(data => console.log(data))
   }, [request])
 
   noveltyLoadingStatus === "loading" ? dataNovelty() : null
