@@ -8,6 +8,7 @@ import SectionHero from './SectionHero'
 import SectionNovelty from './SectionNovelty'
 import SectionMenu from './SectionMenu'
 import SectionStocks from './SectionStocks'
+import SectionMap from './SectionMap'
 // ...
 import AppFooter from './AppFooter'
 
@@ -20,6 +21,7 @@ const App = () => {
         <SectionNovelty/>
         <SectionMenu/>
         <SectionStocks/>
+        <SectionMap/>
         {/* ... */}
       </main>
       <AppFooter/>

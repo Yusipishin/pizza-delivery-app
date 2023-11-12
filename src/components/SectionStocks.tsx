@@ -3,7 +3,6 @@ import { useCallback, useState } from "react";
 
 const SectionStocks = () => {
   type dataObj = { name: string; img: { url: string } };
-  type stockProps = { arg: string };
 
   const [stocksItems, setStocksItems] = useState([]);
   const [stocksLoadingStatus, setStocksLoadingStatus] = useState("loading");
@@ -16,34 +15,6 @@ const SectionStocks = () => {
   }, [request]);
 
   stocksLoadingStatus === "loading" ? dataStocks() : null;
-
-  const Stock = ({ arg }: stockProps) => {
-    const items = stocksItems.map((item: dataObj, i: number) => {
-      if (arg === "main" && i === 1) {
-        return (
-          <article className="img-wrapper" key={i}>
-            <a href="#">
-              <img src={item.img.url} alt={item.name} />
-            </a>
-          </article>
-        );
-      } else if (arg === "others" && i !== 1) {
-        return (
-          <article className="max-w-[255px]" key={i}>
-            <a href="#">
-              <img
-                src={item.img.url}
-                alt={item.name}
-                key={i}
-                className="rounded-[20px]"
-              />
-            </a>
-          </article>
-        );
-      }
-    });
-    return items;
-  };
 
   return (
     <section className="relative">
@@ -102,6 +73,7 @@ const SectionStocks = () => {
           w-60
           h-[460px]
           absolute
+          -z-10
           bg-no-repeat
           bg-[url('/src/assets/img/bg-stocks.png')]
           "
