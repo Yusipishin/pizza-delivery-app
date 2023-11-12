@@ -16,7 +16,7 @@ const SectionMenu = () => {
   const dataMenu = useCallback(() => {
     request("pizza.json")
       .then((data) => setMenuItems(data.menu))
-      .then(() => setMenuLoadingStatus("loaded"));
+      .then(() => setMenuLoadingStatus("loaded"))
   }, [request]);
 
   menuLoadingStatus === "loading" ? dataMenu() : null;

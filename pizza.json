@@ -4,28 +4,28 @@
       "name": "Карбонара",
       "sale": 120,
       "img": {
-        "url": "/src/assets/img/novelty-pizza-img.png"
+        "url": "src/assets/img/novelty-pizza-img.png"
       }
     },
     {
       "name": "Карбонара",
       "sale": 145,
       "img": {
-        "url": "/src/assets/img/novelty-pizza-img.png"
+        "url": "src/assets/img/novelty-pizza-img.png"
       }
     },
     {
       "name": "Карбонара",
       "sale": 100,
       "img": {
-        "url": "/src/assets/img/novelty-pizza-img.png"
+        "url": "src/assets/img/novelty-pizza-img.png"
       }
     },
     {
       "name": "Карбонара",
       "sale": 65,
       "img": {
-        "url": "/src/assets/img/novelty-pizza-img.png"
+        "url": "src/assets/img/novelty-pizza-img.png"
       }
     }
   ],
@@ -35,7 +35,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "600",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-1.png"
+        "url": "src/assets/img/menu/pizza-menu-1.png"
       }
     },
     {
@@ -43,7 +43,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "500",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-2.png"
+        "url": "src/assets/img/menu/pizza-menu-2.png"
       }
     },
     {
@@ -51,7 +51,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "400",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-3.png"
+        "url": "src/assets/img/menu/pizza-menu-3.png"
       }
     },
     {
@@ -59,7 +59,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "300",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-4.png"
+        "url": "src/assets/img/menu/pizza-menu-4.png"
       }
     },
     {
@@ -67,7 +67,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "600",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-1.png"
+        "url": "src/assets/img/menu/pizza-menu-1.png"
       }
     },
     {
@@ -75,7 +75,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "500",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-2.png"
+        "url": "src/assets/img/menu/pizza-menu-2.png"
       }
     },
     {
@@ -83,7 +83,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "400",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-3.png"
+        "url": "src/assets/img/menu/pizza-menu-3.png"
       }
     },
     {
@@ -91,7 +91,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "300",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-4.png"
+        "url": "src/assets/img/menu/pizza-menu-4.png"
       }
     },
     {
@@ -99,7 +99,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "600",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-1.png"
+        "url": "src/assets/img/menu/pizza-menu-1.png"
       }
     },
     {
@@ -107,7 +107,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "500",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-2.png"
+        "url": "src/assets/img/menu/pizza-menu-2.png"
       }
     },
     {
@@ -115,7 +115,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "400",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-3.png"
+        "url": "src/assets/img/menu/pizza-menu-3.png"
       }
     },
     {
@@ -123,7 +123,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "300",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-4.png"
+        "url": "src/assets/img/menu/pizza-menu-4.png"
       }
     },
     {
@@ -131,7 +131,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "600",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-1.png"
+        "url": "src/assets/img/menu/pizza-menu-1.png"
       }
     },
     {
@@ -139,7 +139,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "500",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-2.png"
+        "url": "src/assets/img/menu/pizza-menu-2.png"
       }
     },
     {
@@ -147,7 +147,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "400",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-3.png"
+        "url": "src/assets/img/menu/pizza-menu-3.png"
       }
     },
     {
@@ -155,7 +155,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "300",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-4.png"
+        "url": "src/assets/img/menu/pizza-menu-4.png"
       }
     },
     {
@@ -163,7 +163,7 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "400",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-3.png"
+        "url": "src/assets/img/menu/pizza-menu-3.png"
       }
     },
     {
@@ -171,7 +171,39 @@
       "description": "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан",
       "sale": "300",
       "img": {
-        "url": "/src/assets/img/menu/pizza-menu-4.png"
+        "url": "src/assets/img/menu/pizza-menu-4.png"
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "name": "Акция 1",
+      "img": {
+        "url": "src/assets/img/stocks/stock_1.jpg"
+      }
+    },
+    {
+      "name": "Акция 2",
+      "img": {
+        "url": "src/assets/img/stocks/stock_1.jpg"
+      }
+    },
+    {
+      "name": "Акция 3",
+      "img": {
+        "url": "src/assets/img/stocks/stock_1.jpg"
+      }
+    },
+    {
+      "name": "Акция 4",
+      "img": {
+        "url": "src/assets/img/stocks/stock_1.jpg"
+      }
+    },
+    {
+      "name": "Акция 5",
+      "img": {
+        "url": "src/assets/img/stocks/stock_1.jpg"
       }
     }
   ]

@@ -22,10 +22,10 @@ const SectionNovelty = () => {
       <div className="
           top-[-10%]
           w-60
-          h-[364px]
+          h-[460px]
           absolute
           bg-no-repeat
-          bg-[url('/src/assets/img/main-bg-img.webp')]
+          bg-[url('/src/assets/img/main-bg-img.png')]
           ">
       </div>
       <div className='container'>
@@ -48,7 +48,7 @@ const SectionNovelty = () => {
                           h-[71px] 
                           rounded-[50%]
                           bg-[#fcdc4f]
-                      ' 
+                        ' 
                       src={item.img.url}
                       alt="Пицца"/>
                     </div>
