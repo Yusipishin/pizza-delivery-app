@@ -19,15 +19,7 @@ const SectionNovelty = () => {
 
   return (
     <section className="mb-12 relative">
-      <div className="
-          top-[-10%]
-          w-60
-          h-[460px]
-          absolute
-          bg-no-repeat
-          bg-[url('/src/assets/img/main-bg-img.png')]
-          ">
-      </div>
+      
       <div className='container'>
         <h2 className="
             text-[24px]
@@ -76,6 +68,15 @@ const SectionNovelty = () => {
             )
           })}
         </ul>
+      </div>
+      <div className="
+          top-[-10%]
+          w-60
+          h-[460px]
+          absolute
+          bg-no-repeat
+          bg-[url('/src/assets/img/main-bg-img.png')]
+          ">
       </div>
     </section>
   )

@@ -148,7 +148,7 @@ const SectionMap = () => {
             </div>
           </div>
         </div>
-        <iframe className="w-full h-96" src="https://yandex.ru/map-widget/v1/?um=constructor%3Aae346d3b29954bada9def805fb08e1ce6b2e3a27de6522f83b54422ae9dd3b80&amp;source=constructor" cl="true"></iframe>
+        <iframe className="w-full h-96 rounded-2xl" src="https://yandex.ru/map-widget/v1/?um=constructor%3Aae346d3b29954bada9def805fb08e1ce6b2e3a27de6522f83b54422ae9dd3b80&amp;source=constructor" cl="true"></iframe>
       </div>
     </section>
   );
