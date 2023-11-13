@@ -1,13 +1,7 @@
 import logo from "../assets/img/logo.svg";
-import visa from "../assets/img/icons/visa-ic.svg"
-import paypal from "../assets/img/icons/paypal-ic.svg"
-import mastercard from "../assets/img/icons/mastercard-ic.svg"
-import viber from "../assets/img/messengers/viber-ic.svg"
-import skype from "../assets/img/messengers/skype-ic.svg"
-import fbm from "../assets/img/messengers/fbm-ic.svg"
-import tg from "../assets/img/messengers/tg-ic.svg"
-import fb from "../assets/img/messengers/fb-ic.svg"
-import vk from "../assets/img/messengers/vk-ic.svg"
+import paySystems from "../static/paySystems";
+import messengers from "../static/messengers";
+import socialNetworks from "../static/socialNetworks";
 
 const AppFooter = () => {
   return (
@@ -17,7 +11,6 @@ const AppFooter = () => {
           <div className="leading-7">
             <a href="#" className="logo inline-block mb-9">
               <img
-                className="logo__img"
                 src={logo}
                 alt="Логотип Fibo Pasta Bar"
               />
@@ -28,55 +21,49 @@ const AppFooter = () => {
                 <a className="ml-14" href="#">Правовая информация</a>
               </div>
               <span className="inline-block mb-5">Мы в соцсетях</span>
-              <div className="wrapper font-semibold gap-[90px]">
+              <address className="wrapper font-semibold gap-[90px]">
                 <ul className="columns-2 gap-[90px]">
-                  <li className="mb-2"><a href="#">YouTube</a></li>
-                  <li><a href="#">Instagram</a></li>
-                  <li className="mb-2"><a href="#">Facebook</a></li>
-                  <li><a href="#">ВКонтакте</a></li>
+                  {socialNetworks.map((name, i) => {
+                    return (
+                      <li className={i % 2 === 0 ? 'mb-2': ''} key={i}><a href="#">{name}</a></li>
+                    )
+                  })}
                 </ul>
-                <a href="#"><span className="mb-2 inline-block">Москва ул. Проспект</span> <span>Вернадского 86В</span></a>
-              </div>
+                <span><span className="mb-2 inline-block">Москва ул. Проспект</span> <span>Вернадского 86В</span></span>
+              </address>
             </div>
             <div className="wrapper font-semibold">
               <p>YaBao Все права защищены © 2023</p>
               <div className="wrapper gap-6">
-                <img src={visa} alt="Виза" />
-                <img src={paypal} alt="Пейпал" />
-                <img src={mastercard} alt="Мастеркард" />
+                {paySystems.map(({img, name}, i) => {
+                  return (
+                    <img src={img} alt={name} key={i}/>
+                  )
+                })}
               </div>
             </div>
           </div>
           <div>
-            <span className="mb-8 inline-block">Остались вопросы? А мы всегда на связи:</span>
-            <div className="grid gap-4 grid-cols-4 grid-rows-2 mb-12">
-              <a className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
-                <img src={viber} alt="Логотип Вайбер" />
-              </a>
-              <a className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
-                <img src={skype} alt="Логотип Скайп" />
-              </a>
-              <a className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
-                <img src={fbm} alt="Логотип Фейсбук Мессенджер" />
-              </a>
-              <a className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
-                <img src={tg} alt="Логотип Телеграмм" />
-              </a>
-              <a className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
-                <img src={fb} alt="Логотип Фейсбук" />
-              </a>
-              <a className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
-                <img src={vk} alt="Логотип Вконтакте" />
-              </a>
+            <span className="mb-8 inline-block uppercase">Остались вопросы? А мы всегда на связи:</span>
+            <address className="grid gap-4 grid-cols-4 grid-rows-2 mb-12">
+              {messengers.map(({img, name}, i) => {
+                return (
+                  <a key={i} className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2" href="#">
+                    <img src={img} alt={name} />
+                  </a>
+                )
+              })}
               <a className="flex items-center justify-center py-3 px-9 rounded-xl border-[#E3ECF5] border-2 col-span-2" href="#">
                 Написать нам
               </a>
-            </div>
+            </address>
             <div className="flex flex-col">
-              <a href="tel:+84993918449" className="phone mb-7">
-                8 499 391-84-49
-              </a>
-              <button className="call-btn py-2 px-7">Заказать звонок</button>
+              <address className="mb-7">
+                <a href="tel:+84993918449" className="phone">
+                  8 499 391-84-49
+                </a>
+              </address>
+              <button className="call-btn py-2 px-7" aria-label="Заказать звонок">Заказать звонок</button>
             </div>
           </div>
         </div>

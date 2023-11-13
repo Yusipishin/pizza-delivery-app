@@ -1,38 +1,22 @@
 import logo from "../assets/img/logo.svg";
+import headerLinks from "../static/headerList";
 
 const AppHeader = () => {
-  const arrLinks = [
-    "Пицца",
-    "Паста",
-    "Супы",
-    "Салаты",
-    "Напитки",
-    "Десерты",
-    "Бакалея",
-    "Антипасти",
-    "Акции",
-    "Комбо",
-    "Контакты",
-  ];
   return (
     <header className="mb-8">
       <div className="container">
-        <div className="header__box">
+        <div>
           <div className="wrapper mt-4">
-            <div className="wrapper header__inner">
+            <div className="wrapper">
               <a href="#" className="logo">
-                <img
-                  className="logo__img"
-                  src={logo}
-                  alt="Логотип Fibo Pasta Bar"
-                />
+                <img src={logo} alt="Логотип Fibo Pasta Bar" />
               </a>
               <div className="text-[#231F20] ml-[52px]">
-                <div className="text-[17px] flex">
-                  <h1 className="header__title">Доставка пасты</h1>
-                  <span className="text-[#F7D22D] ml-2">Москва</span>
+                <div className="text-[17px] flex mb-4">
+                  <h1>Доставка пасты</h1>
+                  <address className="text-[#F7D22D] ml-2" tabIndex={0}>Москва</address>
                 </div>
-                <div className="gap-5 flex mt-3">
+                <div className="gap-5 flex">
                   <div className="wrapper relative">
                     <span
                       className='
@@ -40,9 +24,9 @@ const AppHeader = () => {
                         h-[18px] 
                         mr-2
                         bg-[url("/src/assets/img/icons/yandex-food-ic.svg")]
-                    '
+                      '
                     />
-                    <span className="header__food-txt">Яндекс еда</span>
+                    <span>Яндекс еда</span>
                     <span
                       className="
                         ml-5
@@ -56,7 +40,7 @@ const AppHeader = () => {
                         before:w-1
                         before:h-1
                         before:rounded-full
-                    "
+                      "
                     >
                       4.8
                     </span>
@@ -67,11 +51,11 @@ const AppHeader = () => {
                         mt-[-3px]
                         ml-1
                         bg-[url('/src/assets/img/icons/star-ic.svg')]
-                    "
+                      "
                     />
                   </div>
                   <div className="wrapper relative">
-                    <span className="header__food-txt">Время доставки</span>
+                    <span>Время доставки</span>
                     <span
                       className="
                         ml-5
@@ -85,7 +69,7 @@ const AppHeader = () => {
                         before:w-1
                         before:h-1
                         before:rounded-full
-                    "
+                      "
                     >
                       от 31 мин
                     </span>
@@ -94,17 +78,19 @@ const AppHeader = () => {
               </div>
             </div>
             <div className="wrapper">
-              <button className="call-btn py-2 px-7">Заказать звонок</button>
-              <a href="tel:+84993918449" className="phone ml-7">
-                8 499 391-84-49
-              </a>
+              <button className="call-btn py-2 px-7" aria-label="Заказать звонок">Заказать звонок</button>
+              <address>
+                <a href="tel:+84993918449" className="phone ml-7">
+                  8 499 391-84-49
+                </a>
+              </address>
             </div>
           </div>
           <div className="wrapper header__menu mt-3">
             <nav className="header__nav">
               <ul className="wrapper gap-5 font-semibold text-[15px]">
-                {arrLinks.map((item) => (
-                  <li className="header__item" key={item}>
+                {headerLinks.map((item, i) => (
+                  <li className="header__item" key={i}>
                     <a className="header__link" href="#">
                       {item}
                     </a>
@@ -113,8 +99,9 @@ const AppHeader = () => {
               </ul>
             </nav>
             <div className="wrapper header__menu-inner">
-              <button className="text-[#696F7A] mx-8 text-[16px]">Войти</button>
+              <button className="text-[#696F7A] mx-8 text-[16px]" aria-label="Авторизоваться">Войти</button>
               <button
+                aria-label="Открыть корзину"
                 className="
                   wrapper
                   gap-8 

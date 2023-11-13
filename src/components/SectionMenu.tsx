@@ -1,14 +1,14 @@
 import { useHttp } from "../hooks/http.hook";
 import { useCallback, useState } from "react";
 
-const SectionMenu = () => {
-  type dataObj = {
-    name: string;
-    description: string;
-    sale: number;
-    img: { url: string };
-  };
+type dataObj = {
+  name: string;
+  description: string;
+  sale: number;
+  img: { url: string };
+};
 
+const SectionMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [menuLoadingStatus, setMenuLoadingStatus] = useState("loading");
   const { request } = useHttp();
@@ -35,61 +35,62 @@ const SectionMenu = () => {
         >
           Паста
         </h2>
-        <div className="flex flex-wrap gap-8 mb-9">
+        <ul className="flex flex-wrap gap-8 mb-9">
           {menuItems.map((item: dataObj, i: number) => {
             return (
-              <article className="max-w-[255px] mb-7" key={i}>
-                <div className="img-wrapper mb-3">
-                  <img src={item.img.url} alt={item.name} />
-                </div>
-                <h3
-                  className="
-                  text-[#797979] 
-                    mb-4 
-                    text-[24px] 
-                    font-extrabold
-                    leading-7
-                  "
-                >
-                  {item.name}
-                </h3>
-                <p
-                  className="
-                  text-[#686466] 
-                    mb-6
-                    leading-5
-                    font-medium
-                  "
-                >
-                  {item.description}
-                </p>
-                <div className="wrapper">
-                  <span
+              <li className="max-w-[255px] mb-7" key={i}>
+                <article>
+                  <img className="mb-3" src={item.img.url} alt={item.name} />
+                  <h3
                     className="
-                      text-[#231F20]
-                      text-2xl
+                    text-[#797979] 
+                      mb-4 
+                      text-[24px] 
+                      font-extrabold
                       leading-7
                     "
                   >
-                    от {item.sale} ₽
-                  </span>
-                  <button
+                    {item.name}
+                  </h3>
+                  <p
                     className="
-                      text-[#fff]
-                      py-2
-                      px-7
-                      rounded-lg
-                      leading-7
-                      bg-[#F7D22D]
+                    text-[#686466] 
+                      mb-6
+                      leading-5
+                      font-medium
                     "
                   >
-                    В корзину
-                  </button>
-                </div>
-              </article>
+                    {item.description}
+                  </p>
+                  <div className="wrapper">
+                    <span
+                      className="
+                        text-[#231F20]
+                        text-2xl
+                        leading-7
+                      "
+                    >
+                      от {item.sale} ₽
+                    </span>
+                    <button
+                      aria-label="Добавить в корзину"
+                      className="
+                        text-[#fff]
+                        py-2
+                        px-7
+                        rounded-lg
+                        leading-7
+                        bg-[#F7D22D]
+                      "
+                    >
+                      В корзину
+                    </button>
+                  </div>
+                </article>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );

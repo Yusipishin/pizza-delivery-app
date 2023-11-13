@@ -1,10 +1,9 @@
 import { useHttp } from "../hooks/http.hook"
 import { useCallback, useState } from "react"
 
+type dataObj = {name: string, sale: number, img: {url: string}}
+
 const SectionNovelty = () => {
-
-  type dataObj = {name: string, sale: number, img: {url: string}}
-
   const [noveltyItems, setNoveltyItems] = useState([])
   const [noveltyLoadingStatus, setNoveltyLoadingStatus] = useState("loading")
   const {request} = useHttp();
@@ -19,7 +18,6 @@ const SectionNovelty = () => {
 
   return (
     <section className="mb-12 relative">
-      
       <div className='container'>
         <h2 className="
             text-[24px]
@@ -34,16 +32,14 @@ const SectionNovelty = () => {
               <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={i}>
                 <a href='#'>
                   <article className='wrapper gap-6 py-4 pr-9 pl-4'>
-                    <div className='img-wrapper'>
-                      <img className='
-                          w-[71px] 
-                          h-[71px] 
-                          rounded-[50%]
-                          bg-[#fcdc4f]
-                        ' 
-                      src={item.img.url}
-                      alt="Пицца"/>
-                    </div>
+                    <img className='
+                        w-[71px] 
+                        h-[71px] 
+                        rounded-[50%]
+                        bg-[#fcdc4f]
+                      ' 
+                    src={item.img.url}
+                    alt="Пицца"/>
                     <div>
                       <span className="
                           leading-6 

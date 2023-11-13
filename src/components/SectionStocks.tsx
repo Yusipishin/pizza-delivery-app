@@ -1,9 +1,9 @@
 import { useHttp } from "../hooks/http.hook";
 import { useCallback, useState } from "react";
 
-const SectionStocks = () => {
-  type dataObj = { name: string; img: { url: string } };
+type dataObj = { name: string; img: { url: string } };
 
+const SectionStocks = () => {
   const [stocksItems, setStocksItems] = useState([]);
   const [stocksLoadingStatus, setStocksLoadingStatus] = useState("loading");
   const { request } = useHttp();
@@ -28,8 +28,9 @@ const SectionStocks = () => {
           >
             Наши <span className="text-[#F7D22D]">акции</span>
           </h2>
-          <div
-            className="my-12
+          <ul
+            className="
+              my-12
               grid 
               gap-[28px] 
               grid-cols-[541px_253px_253px] 
@@ -39,19 +40,22 @@ const SectionStocks = () => {
           >
             {stocksItems.map((item: dataObj, i: number) => {
               return (
-                <article className={i === 0 ? "row-span-2" : ""} key={i}>
-                  <a href="#">
-                    <img
-                      src={item.img.url}
-                      alt={item.name}
-                      className={i !== 0 ? "rounded-[20px]" : ""}
-                    />
-                  </a>
-                </article>
+                <li className={i === 0 ? "row-span-2" : ""} key={i}>
+                  <article>
+                    <a href="#">
+                      <img
+                        src={item.img.url}
+                        alt={item.name}
+                        className={i !== 0 ? "rounded-[20px]" : ""}
+                      />
+                    </a>
+                  </article>
+                </li>
               );
             })}
-          </div>
+          </ul>
           <button
+            aria-label="Посмотреть все акции"
             className="
               py-[10px]
               px-10

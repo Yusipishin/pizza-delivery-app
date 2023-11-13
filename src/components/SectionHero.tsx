@@ -1,13 +1,11 @@
 import './slider/slider.scss'
 import 'swiper/css'
-import sliderImg from '../assets/img/dark-fibo-img.webp'
 
+import sliders from '../static/sliders';
 import { Swiper , SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules';
 
 function SectionHero() {
-  const pictures = [sliderImg, sliderImg, sliderImg, sliderImg, sliderImg, sliderImg]
-
   return (
     <section className="hero mb-[71px]">
       <div className="container">
@@ -23,10 +21,10 @@ function SectionHero() {
               prevEl: '.hero__slider-prev',
             }}
             >
-              <button className="hero__slider-prev"/>
-              <button className="hero__slider-next"/>
-              {pictures.map((img, i) => (
-                <SwiperSlide className="hero__slider-item" key={i}>
+              <button className="hero__slider-prev" aria-label='Показать прошлый слайд'/>
+              <button className="hero__slider-next" aria-label='Показать следующий слайд'/>
+              {sliders.map((img, i) => (
+                <SwiperSlide key={i}>
                     <img 
                       src={img} 
                       key={i} 
