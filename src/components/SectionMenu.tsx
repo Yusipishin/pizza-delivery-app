@@ -11,12 +11,19 @@ type dataObj = {
 const SectionMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [menuLoadingStatus, setMenuLoadingStatus] = useState("loading");
+  const [offset, setOffset] = useState(0)
+  const [ended, setEnded] = useState(false)
   const { request } = useHttp();
 
   const dataMenu = useCallback(() => {
     request("pizza.json")
-      .then((data) => setMenuItems(data.menu))
+      .then((data) => {
+        const newItems = data.menu.slice(offset, offset + 8)
+        setEnded(newItems.length < 8 ? true : false)
+        setMenuItems([...menuItems, ...newItems])
+      })
       .then(() => setMenuLoadingStatus("loaded"))
+      .then(() => setOffset(offset + 8))
   }, [request]);
 
   menuLoadingStatus === "loading" ? dataMenu() : null;
@@ -35,7 +42,7 @@ const SectionMenu = () => {
         >
           Паста
         </h2>
-        <ul className="flex flex-wrap gap-8 mb-9">
+        <ul className="flex flex-wrap gap-8 mb-5">
           {menuItems.map((item: dataObj, i: number) => {
             return (
               <li className="max-w-[255px] mb-7" key={i}>
@@ -91,6 +98,21 @@ const SectionMenu = () => {
             );
           })}
         </ul>
+        {
+          ended === true ? null :
+          <button onClick={dataMenu}
+                disabled={menuLoadingStatus === "loading" ? true : false}
+                aria-label="Посмотреть ещё варианты пицц"
+                className="mx-auto 
+                          block 
+                          mb-14 
+                          bg-[#F3F3F7] 
+                          rounded-lg 
+                          py-4 
+                          px-7 
+                          text-lg
+          ">Посмотреть ещё</button>
+        }
       </div>
     </section>
   );
