@@ -1,5 +1,7 @@
 import { useHttp } from "../hooks/http.hook";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { menuFetching, menuFetched, menuFetchingError} from "../actions/actions";
 
 type dataObj = {
   name: string;
@@ -8,25 +10,98 @@ type dataObj = {
   img: { url: string };
 };
 
+type offsetState = [number, Function]
+type endedState = [boolean, Function]
+
 const SectionMenu = () => {
-  const [menuItems, setMenuItems] = useState([]);
-  const [menuLoadingStatus, setMenuLoadingStatus] = useState("loading");
-  const [offset, setOffset] = useState(0)
-  const [ended, setEnded] = useState(false)
+
+  const {menu, menuLoadingStatus} = useSelector(state => state)
+  const dispatch = useDispatch();
+
+  const [offset, setOffset] : offsetState = useState(0)
+  const [menuEnded, setMenuEnded] : endedState = useState(false)
   const { request } = useHttp();
 
-  const dataMenu = useCallback(() => {
+  const onRequest = () => {
+    dispatch(menuFetching())
     request("pizza.json")
-      .then((data) => {
-        const newItems = data.menu.slice(offset, offset + 8)
-        setEnded(newItems.length < 8 ? true : false)
-        setMenuItems([...menuItems, ...newItems])
-      })
-      .then(() => setMenuLoadingStatus("loaded"))
-      .then(() => setOffset(offset + 8))
-  }, [request]);
+    .then(data => {
+      const newItems = data.menu.slice(offset, offset + 8)
+      setMenuEnded(newItems.length < 8 ? true : false)
+      setOffset(offset + newItems.length)
+      dispatch(menuFetched(newItems))
+    })
+    .catch(() => dispatch(menuFetchingError()))
+  }
 
-  menuLoadingStatus === "loading" ? dataMenu() : null;
+  useEffect(() => onRequest, [])
+
+  const checkLoading = () => {
+    if (menuLoadingStatus === 'loading') {
+      return <p className="font-black mb-5">Загрузка...</p>
+    } else if (menuLoadingStatus === 'error') {
+      return <p className="font-black mb-5">Ошибка...</p>
+    }
+  }
+
+  const renderItems = () => {
+    const items = menu.map((item: dataObj, i: number) => {
+      return (
+        <li className="max-w-[255px] mb-7" key={i}>
+          <article>
+            <img className="mb-3" src={item.img.url} alt={item.name} />
+            <h3
+              className="
+              text-[#797979] 
+                mb-4 
+                text-[24px] 
+                font-extrabold
+                leading-7
+              "
+            >
+              {item.name}
+            </h3>
+            <p
+              className="
+              text-[#686466] 
+                mb-6
+                leading-5
+                font-medium
+              "
+            >
+              {item.description}
+            </p>
+            <div className="wrapper">
+              <span
+                className="
+                  text-[#231F20]
+                  text-2xl
+                  leading-7
+                "
+              >
+                от {item.sale} ₽
+              </span>
+              <button
+                aria-label="Добавить в корзину"
+                className="
+                  text-[#fff]
+                  py-2
+                  px-7
+                  rounded-lg
+                  leading-7
+                  bg-[#F7D22D]
+                "
+              >
+                В корзину
+              </button>
+            </div>
+          </article>
+        </li>
+      );
+    })
+
+    return items
+  }
 
   return (
     <section className="menu">
@@ -43,76 +118,22 @@ const SectionMenu = () => {
           Паста
         </h2>
         <ul className="flex flex-wrap gap-8 mb-5">
-          {menuItems.map((item: dataObj, i: number) => {
-            return (
-              <li className="max-w-[255px] mb-7" key={i}>
-                <article>
-                  <img className="mb-3" src={item.img.url} alt={item.name} />
-                  <h3
-                    className="
-                    text-[#797979] 
-                      mb-4 
-                      text-[24px] 
-                      font-extrabold
-                      leading-7
-                    "
-                  >
-                    {item.name}
-                  </h3>
-                  <p
-                    className="
-                    text-[#686466] 
-                      mb-6
-                      leading-5
-                      font-medium
-                    "
-                  >
-                    {item.description}
-                  </p>
-                  <div className="wrapper">
-                    <span
-                      className="
-                        text-[#231F20]
-                        text-2xl
-                        leading-7
-                      "
-                    >
-                      от {item.sale} ₽
-                    </span>
-                    <button
-                      aria-label="Добавить в корзину"
-                      className="
-                        text-[#fff]
-                        py-2
-                        px-7
-                        rounded-lg
-                        leading-7
-                        bg-[#F7D22D]
-                      "
-                    >
-                      В корзину
-                    </button>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
+          {renderItems()}
+          {checkLoading()}
         </ul>
-        {
-          ended === true ? null :
-          <button onClick={dataMenu}
-                disabled={menuLoadingStatus === "loading" ? true : false}
-                aria-label="Посмотреть ещё варианты пицц"
-                className="mx-auto 
-                          block 
-                          mb-14 
-                          bg-[#F3F3F7] 
-                          rounded-lg 
-                          py-4 
-                          px-7 
-                          text-lg
-          ">Посмотреть ещё</button>
-        }
+        <button onClick={() => onRequest()}
+              disabled={menuLoadingStatus === "loading" ? true : false}
+              aria-label="Посмотреть ещё варианты пицц"
+              style={{'display': menuEnded || menuLoadingStatus === 'loading' ? 'none' : 'block'}}
+              className="mx-auto 
+                        block 
+                        mb-14 
+                        bg-[#F3F3F7] 
+                        rounded-lg 
+                        py-4 
+                        px-7 
+                        text-lg
+        ">Посмотреть ещё</button>
       </div>
     </section>
   );

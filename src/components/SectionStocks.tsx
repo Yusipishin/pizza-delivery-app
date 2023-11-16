@@ -1,20 +1,29 @@
 import { useHttp } from "../hooks/http.hook";
-import { useCallback, useState } from "react";
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
+import { stocksFetching, stocksFetched, stocksFetchingError} from "../actions/actions";
 
 type dataObj = { name: string; img: { url: string } };
 
 const SectionStocks = () => {
-  const [stocksItems, setStocksItems] = useState([]);
-  const [stocksLoadingStatus, setStocksLoadingStatus] = useState("loading");
+  const {stocks, stocksLoadingStatus} = useSelector(state => state)
+  const dispatch = useDispatch()
   const { request } = useHttp();
 
-  const dataStocks = useCallback(() => {
+  useEffect(() => {
+    dispatch(stocksFetching())
     request("pizza.json")
-      .then((data) => setStocksItems(data.stocks))
-      .then(() => setStocksLoadingStatus("loaded"));
-  }, [request]);
+      .then((data) => dispatch(stocksFetched(data.stocks)))
+      .catch(() => dispatch(stocksFetchingError()));
+  }, [])
 
-  stocksLoadingStatus === "loading" ? dataStocks() : null;
+  const checkLoading = () => {
+    if (stocksLoadingStatus === 'loading') {
+      return <p className="font-black mb-5">Загрузка...</p>
+    } else if (stocksLoadingStatus === 'error') {
+      return <p className="font-black mb-5">Ошибка...</p>
+    }
+  }
 
   return (
     <section className="relative">
@@ -38,7 +47,8 @@ const SectionStocks = () => {
               items-end
             "
           >
-            {stocksItems.map((item: dataObj, i: number) => {
+            {checkLoading()}
+            {stocks.map((item: dataObj, i: number) => {
               return (
                 <li className={i === 0 ? "row-span-2" : ""} key={i}>
                   <article>
