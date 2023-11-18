@@ -1,4 +1,13 @@
-const initialState = {
+import { MainState } from "../intefaces/interfaces"
+import { ActionType } from "../intefaces/interfaces"
+
+const enum Status {
+  OK = 'idle',
+  ERROR = 'error',
+  LOADING = 'loading',
+}
+
+const initialState: MainState = {
   menu: [],
   stocks: [],
   novelty: [],
@@ -7,55 +16,55 @@ const initialState = {
   noveltyLoadingStatus: 'idle',
 }
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
     case "MENU_FETCHING":
       return {
         ...state,
-        menuLoadingStatus: 'loading'
+        menuLoadingStatus: Status.LOADING
       }
     case "MENU_FETCHED":
       return {
         ...state,
-        menu: [...state.menu, ...action.payload],
-        menuLoadingStatus: 'idle'
+        menu: action.payload ? [...state.menu, ...action.payload]: [...state.menu],
+        menuLoadingStatus: Status.OK
       }
     case "MENU_FETCHING_ERROR":
       return {
         ...state,
-        menuLoadingStatus: 'error'
+        menuLoadingStatus: Status.ERROR
       }
     case "NOVELTY_FETCHING":
       return {
         ...state,
-        noveltyLoadingStatus: 'loading'
+        noveltyLoadingStatus: Status.LOADING
       }
     case "NOVELTY_FETCHED":
       return {
         ...state,
         novelty: action.payload,
-        noveltyLoadingStatus: 'idle'
+        noveltyLoadingStatus: Status.OK
       }
     case "NOVELTY_FETCHING_ERROR":
       return {
         ...state,
-        noveltyLoadingStatus: 'error'
+        noveltyLoadingStatus: Status.ERROR
       }
     case "STOCKS_FETCHING":
       return {
         ...state,
-        stocksLoadingStatus: 'loading'
+        stocksLoadingStatus: Status.LOADING
       }
     case "STOCKS_FETCHED":
       return {
         ...state,
         stocks: action.payload,
-        stocksLoadingStatus: 'idle'
+        stocksLoadingStatus: Status.OK
       }
     case "STOCKS_FETCHING_ERROR":
       return {
         ...state,
-        stocksLoadingStatus: 'error'
+        stocksLoadingStatus: Status.ERROR
       }
     default: return state
   }

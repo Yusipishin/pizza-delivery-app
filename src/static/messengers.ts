@@ -5,9 +5,12 @@ import tg from "../assets/img/messengers/tg-ic.svg"
 import fb from "../assets/img/messengers/fb-ic.svg"
 import vk from "../assets/img/messengers/vk-ic.svg"
 
-type messengerInfo = {img: string, name: string} 
+type MessengerInfo = {
+  img: string, 
+  name: string
+} 
 
-const messengers: messengerInfo[] = [
+const messengers: MessengerInfo[] = [
   {img: viber, name: 'Viber'}, 
   {img: skype, name: 'Skype'}, 
   {img: fbm, name: 'Facebook Messenger'}, 

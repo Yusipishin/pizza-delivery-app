@@ -1,12 +1,15 @@
 import { useHttp } from "../hooks/http.hook";
+import ErrorMessage from "./ErrorMessage/MessageError";
+import LoadingMessage from "./LoadingMessage/MessageLoading";
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { stocksFetching, stocksFetched, stocksFetchingError} from "../actions/actions";
 
-type dataObj = { name: string; img: { url: string } };
+import { StockInfo } from "../intefaces/interfaces";
+import { MainState } from "../intefaces/interfaces";
 
 const SectionStocks = () => {
-  const {stocks, stocksLoadingStatus} = useSelector(state => state)
+  const {stocks, stocksLoadingStatus} = useSelector((state: MainState) => state)
   const dispatch = useDispatch()
   const { request } = useHttp();
 
@@ -19,9 +22,9 @@ const SectionStocks = () => {
 
   const checkLoading = () => {
     if (stocksLoadingStatus === 'loading') {
-      return <p className="font-black mb-5">Загрузка...</p>
+      return <LoadingMessage/>
     } else if (stocksLoadingStatus === 'error') {
-      return <p className="font-black mb-5">Ошибка...</p>
+      return <ErrorMessage/>
     }
   }
 
@@ -37,6 +40,7 @@ const SectionStocks = () => {
           >
             Наши <span className="text-[#F7D22D]">акции</span>
           </h2>
+          {checkLoading()}
           <ul
             className="
               my-12
@@ -47,8 +51,7 @@ const SectionStocks = () => {
               items-end
             "
           >
-            {checkLoading()}
-            {stocks.map((item: dataObj, i: number) => {
+            {stocks.map((item: StockInfo, i: number) => {
               return (
                 <li className={i === 0 ? "row-span-2" : ""} key={i}>
                   <article>
@@ -66,6 +69,7 @@ const SectionStocks = () => {
           </ul>
           <button
             aria-label="Посмотреть все акции"
+            style={{'display': stocksLoadingStatus === 'loading' || 'error' ? 'none' : 'block'}}
             className="
               py-[10px]
               px-10

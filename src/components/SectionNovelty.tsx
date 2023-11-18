@@ -1,33 +1,36 @@
 import { useHttp } from "../hooks/http.hook"
+import ErrorMessage from "./ErrorMessage/MessageError";
+import LoadingMessage from "./LoadingMessage/MessageLoading";
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { noveltyFetching, noveltyFetched, noveltyFetchingError} from "../actions/actions";
 
-type dataObj = {name: string, sale: number, img: {url: string}}
+import { NoveltyInfo } from "../intefaces/interfaces";
+import { MainState } from "../intefaces/interfaces";
 
 const SectionNovelty = () => {
-  const {novelty, noveltyLoadingStatus} = useSelector(state => state)
+  const {novelty, noveltyLoadingStatus} = useSelector((state: MainState) => state)
   const dispatch = useDispatch()
   const {request} = useHttp();
 
   useEffect(() => {
     dispatch(noveltyFetching())
     request('pizza.json')
-      .then(data => dispatch(noveltyFetched(data.novelty)))
+      .then((data) => dispatch(noveltyFetched(data.novelty)))
       .catch(() => dispatch(noveltyFetchingError()))
   }, [])
 
   const checkLoading = () => {
     if (noveltyLoadingStatus === 'loading') {
-      return <p className="font-black mb-5">Загрузка...</p>
+      return <LoadingMessage/>
     } else if (noveltyLoadingStatus === 'error') {
-      return <p className="font-black mb-5">Ошибка...</p>
+      return <ErrorMessage/>
     }
   }
 
   const renderItems = () => {
     return (
-      novelty.map((item: dataObj, i: number) => {
+      novelty.map((item: NoveltyInfo, i: number) => {
         return (
           <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={i}>
             <a href='#'>

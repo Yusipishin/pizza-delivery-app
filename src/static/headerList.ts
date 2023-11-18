@@ -1,6 +1,6 @@
-type links = string[];
+type link = string;
 
-const headerLinks: links = [
+const headerLinks: link[] = [
   "Пицца",
   "Паста",
   "Супы",

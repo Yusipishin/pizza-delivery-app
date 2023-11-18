@@ -3,9 +3,12 @@ import img2 from '../assets/img/map/map-2.svg';
 import img3 from '../assets/img/map/map-3.svg';
 import img4 from '../assets/img/map/map-4.svg';
 
-type deliveryObj = {img: string, descr: string}
+type DeliveryObj = {
+  img: string, 
+  descr: string
+}
 
-const deliveryInfo: deliveryObj[] = [
+const deliveryInfo: DeliveryObj[] = [
   {
     img: img1, 
     descr: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'

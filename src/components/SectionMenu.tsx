@@ -1,32 +1,27 @@
 import { useHttp } from "../hooks/http.hook";
+import ErrorMessage from "./ErrorMessage/MessageError";
+import LoadingMessage from "./LoadingMessage/MessageLoading";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { menuFetching, menuFetched, menuFetchingError} from "../actions/actions";
 
-type dataObj = {
-  name: string;
-  description: string;
-  sale: number;
-  img: { url: string };
-};
-
-type offsetState = [number, Function]
-type endedState = [boolean, Function]
+import { PizzaInfo } from "../intefaces/interfaces";
+import { MainState } from "../intefaces/interfaces";
 
 const SectionMenu = () => {
 
-  const {menu, menuLoadingStatus} = useSelector(state => state)
+  const {menu, menuLoadingStatus} = useSelector((state: MainState) => state)
   const dispatch = useDispatch();
 
-  const [offset, setOffset] : offsetState = useState(0)
-  const [menuEnded, setMenuEnded] : endedState = useState(false)
+  const [offset, setOffset] = useState(0)
+  const [menuEnded, setMenuEnded] = useState(false)
   const { request } = useHttp();
 
   const onRequest = () => {
     dispatch(menuFetching())
     request("pizza.json")
-    .then(data => {
-      const newItems = data.menu.slice(offset, offset + 8)
+    .then((data) => {
+      const newItems: PizzaInfo[] = data.menu.slice(offset, offset + 8)
       setMenuEnded(newItems.length < 8 ? true : false)
       setOffset(offset + newItems.length)
       dispatch(menuFetched(newItems))
@@ -38,14 +33,14 @@ const SectionMenu = () => {
 
   const checkLoading = () => {
     if (menuLoadingStatus === 'loading') {
-      return <p className="font-black mb-5">Загрузка...</p>
+      return <LoadingMessage/>
     } else if (menuLoadingStatus === 'error') {
-      return <p className="font-black mb-5">Ошибка...</p>
+      return <ErrorMessage/>
     }
   }
 
   const renderItems = () => {
-    const items = menu.map((item: dataObj, i: number) => {
+    const items = menu.map((item: PizzaInfo, i: number) => {
       return (
         <li className="max-w-[255px] mb-7" key={i}>
           <article>
@@ -122,9 +117,9 @@ const SectionMenu = () => {
           {checkLoading()}
         </ul>
         <button onClick={() => onRequest()}
-              disabled={menuLoadingStatus === "loading" ? true : false}
               aria-label="Посмотреть ещё варианты пицц"
-              style={{'display': menuEnded || menuLoadingStatus === 'loading' ? 'none' : 'block'}}
+              style={{'display': menuEnded || menuLoadingStatus === 'loading' 
+                                            || menuLoadingStatus === 'error' ? 'none' : 'block'}}
               className="mx-auto 
                         block 
                         mb-14 
