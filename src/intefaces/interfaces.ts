@@ -1,37 +1,32 @@
-export type ActionType = {
+export interface ActionType {
   type: string,
   payload?: PizzaInfo[] | NoveltyInfo[] | StockInfo[]
 }
 
-export type MainState = {
-  menu: PizzaInfo[],
-  stocks: StockInfo[],
-  novelty: NoveltyInfo[],
+export interface MainState extends ApiResponse {
   menuLoadingStatus: string,
   stocksLoadingStatus: string,
   noveltyLoadingStatus: string,
 }
 
-export type PizzaInfo = {
+export interface ApiResponse {
+  novelty: NoveltyInfo[],
+  menu: PizzaInfo[],
+  stocks: StockInfo[],
+}
+
+interface BaseInfo {
   name: string,
-  description: string,
-  sale: number,
   img: { 
     url: string
   },
+}
+
+export interface PizzaInfo extends BaseInfo {
+  description: string,
+  sale: number,
 };
 
-export type StockInfo = {
-  name: string,
-  img: {
-    url: string,
-  }
-}
+export interface StockInfo extends BaseInfo {}
 
-export type NoveltyInfo = {
-  name: string, 
-  sale: number, 
-  img: {
-    url: string,
-  }
-}
+export interface NoveltyInfo extends BaseInfo {sale: number}

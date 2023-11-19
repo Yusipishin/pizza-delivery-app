@@ -20,7 +20,7 @@ const SectionMenu = () => {
   const onRequest = () => {
     dispatch(menuFetching())
     request("pizza.json")
-    .then((data) => {
+    .then(data => {
       const newItems: PizzaInfo[] = data.menu.slice(offset, offset + 8)
       setMenuEnded(newItems.length < 8 ? true : false)
       setOffset(offset + newItems.length)

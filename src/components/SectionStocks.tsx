@@ -16,7 +16,7 @@ const SectionStocks = () => {
   useEffect(() => {
     dispatch(stocksFetching())
     request("pizza.json")
-      .then((data) => dispatch(stocksFetched(data.stocks)))
+      .then(data => dispatch(stocksFetched(data.stocks)))
       .catch(() => dispatch(stocksFetchingError()));
   }, [])
 

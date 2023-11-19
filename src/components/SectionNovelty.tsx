@@ -16,7 +16,7 @@ const SectionNovelty = () => {
   useEffect(() => {
     dispatch(noveltyFetching())
     request('pizza.json')
-      .then((data) => dispatch(noveltyFetched(data.novelty)))
+      .then(data => dispatch(noveltyFetched(data.novelty)))
       .catch(() => dispatch(noveltyFetchingError()))
   }, [])
 
