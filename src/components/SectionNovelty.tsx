@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { noveltyFetching, noveltyFetched, noveltyFetchingError} from "../actions/actions";
 
-import { NoveltyInfo } from "../intefaces/interfaces";
+import { ApiResponse } from "../intefaces/interfaces";
 import { MainState } from "../intefaces/interfaces";
 
 const SectionNovelty = () => {
@@ -15,8 +15,8 @@ const SectionNovelty = () => {
 
   useEffect(() => {
     dispatch(noveltyFetching())
-    request('pizza.json')
-      .then(data => dispatch(noveltyFetched(data.novelty)))
+    request('http://localhost:3001/novelty')
+      .then(data => dispatch(noveltyFetched(data)))
       .catch(() => dispatch(noveltyFetchingError()))
   }, [])
 
@@ -30,7 +30,7 @@ const SectionNovelty = () => {
 
   const renderItems = () => {
     return (
-      novelty.map((item: NoveltyInfo, i: number) => {
+      novelty.map((item: ApiResponse, i: number) => {
         return (
           <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={i}>
             <a href='#'>

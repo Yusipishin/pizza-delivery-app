@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { menuFetching, menuFetched, menuFetchingError} from "../actions/actions";
 
-import { PizzaInfo } from "../intefaces/interfaces";
+import { ApiResponse } from "../intefaces/interfaces";
 import { MainState } from "../intefaces/interfaces";
 
 const SectionMenu = () => {
@@ -19,9 +19,9 @@ const SectionMenu = () => {
 
   const onRequest = () => {
     dispatch(menuFetching())
-    request("pizza.json")
+    request("http://localhost:3001/menu")
     .then(data => {
-      const newItems: PizzaInfo[] = data.menu.slice(offset, offset + 8)
+      const newItems = data.slice(offset, offset + 8)
       setMenuEnded(newItems.length < 8 ? true : false)
       setOffset(offset + newItems.length)
       dispatch(menuFetched(newItems))
@@ -40,7 +40,7 @@ const SectionMenu = () => {
   }
 
   const renderItems = () => {
-    const items = menu.map((item: PizzaInfo, i: number) => {
+    const items = menu.map((item: ApiResponse, i: number) => {
       return (
         <li className="max-w-[255px] mb-7" key={i}>
           <article>

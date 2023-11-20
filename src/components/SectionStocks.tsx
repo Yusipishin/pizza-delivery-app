@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { stocksFetching, stocksFetched, stocksFetchingError} from "../actions/actions";
 
-import { StockInfo } from "../intefaces/interfaces";
+import { ApiResponse } from "../intefaces/interfaces";
 import { MainState } from "../intefaces/interfaces";
 
 const SectionStocks = () => {
@@ -15,8 +15,8 @@ const SectionStocks = () => {
 
   useEffect(() => {
     dispatch(stocksFetching())
-    request("pizza.json")
-      .then(data => dispatch(stocksFetched(data.stocks)))
+    request("http://localhost:3001/stocks")
+      .then(data => dispatch(stocksFetched(data)))
       .catch(() => dispatch(stocksFetchingError()));
   }, [])
 
@@ -51,7 +51,7 @@ const SectionStocks = () => {
               items-end
             "
           >
-            {stocks.map((item: StockInfo, i: number) => {
+            {stocks.map((item: ApiResponse, i: number) => {
               return (
                 <li className={i === 0 ? "row-span-2" : ""} key={i}>
                   <article>

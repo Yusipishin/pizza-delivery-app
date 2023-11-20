@@ -6,7 +6,7 @@ export const useHttp = () => {
                           method: string = 'GET', 
                           body = null, 
                           headers = {'Content-Type': 'application/json'})
-                          :Promise<ApiResponse> => {
+                          :Promise<ApiResponse[]> => {
 
     try {
       const response = await fetch(url, {method, body, headers});
@@ -15,7 +15,7 @@ export const useHttp = () => {
         throw new Error(`Could not fetch ${url}, status: ${response.status}`);
       }
 
-      const data: ApiResponse = await response.json();
+      const data: ApiResponse[] = await response.json();
 
       return data;
     } catch(e) {

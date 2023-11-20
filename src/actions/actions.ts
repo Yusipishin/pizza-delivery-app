@@ -1,6 +1,4 @@
-import { PizzaInfo } from "../intefaces/interfaces"
-import { StockInfo } from "../intefaces/interfaces"
-import { NoveltyInfo } from "../intefaces/interfaces"
+import { ApiResponse } from "../intefaces/interfaces"
 
 import { ActionType } from "../intefaces/interfaces"
 
@@ -10,7 +8,7 @@ export const menuFetching = (): ActionType => {
   }
 }
 
-export const menuFetched = (pizza: PizzaInfo[]): ActionType => {
+export const menuFetched = (pizza: ApiResponse[]): ActionType => {
   return {
     type: "MENU_FETCHED",
     payload: pizza
@@ -29,7 +27,7 @@ export const noveltyFetching = (): ActionType => {
   }
 }
 
-export const noveltyFetched = (novelty: NoveltyInfo[]): ActionType => {
+export const noveltyFetched = (novelty: ApiResponse[]): ActionType => {
   return {
     type: "NOVELTY_FETCHED",
     payload: novelty
@@ -48,7 +46,7 @@ export const stocksFetching = (): ActionType => {
   }
 }
 
-export const stocksFetched = (stocks: StockInfo[]): ActionType => {
+export const stocksFetched = (stocks: ApiResponse[]): ActionType => {
   return {
     type: "STOCKS_FETCHED",
     payload: stocks
