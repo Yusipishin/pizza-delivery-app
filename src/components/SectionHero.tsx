@@ -5,7 +5,7 @@ import sliders from '../static/sliders';
 import { Swiper , SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules';
 
-function SectionHero() {
+const SectionHero = () => {
   return (
     <section className="hero mb-[71px]">
       <div className="container">

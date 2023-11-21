@@ -1,7 +1,7 @@
 import { useHttp } from "../hooks/http.hook"
 import ErrorMessage from "./ErrorMessage/MessageError";
 import LoadingMessage from "./LoadingMessage/MessageLoading";
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { noveltyFetching, noveltyFetched, noveltyFetchingError} from "../actions/actions";
 
@@ -28,7 +28,7 @@ const SectionNovelty = () => {
     }
   }
 
-  const renderItems = () => {
+  const renderItems = useMemo(() => {
     return (
       novelty.map((item: ApiResponse, i: number) => {
         return (
@@ -67,7 +67,7 @@ const SectionNovelty = () => {
         )
       })
     )
-  }
+  }, [novelty])
 
   return (
     <section className="mb-12 relative">
@@ -81,7 +81,7 @@ const SectionNovelty = () => {
         </h2>
         <ul className='wrapper gap-8'>
           {checkLoading()}
-          {renderItems()}
+          {renderItems}
         </ul>
       </div>
       <div className="

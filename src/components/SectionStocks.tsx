@@ -1,7 +1,7 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "./ErrorMessage/MessageError";
 import LoadingMessage from "./LoadingMessage/MessageLoading";
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { stocksFetching, stocksFetched, stocksFetchingError} from "../actions/actions";
 
@@ -28,6 +28,26 @@ const SectionStocks = () => {
     }
   }
 
+  const renderItems = useMemo(() => {
+    return (
+      stocks.map((item: ApiResponse, i: number) => {
+        return (
+          <li className={i === 0 ? "row-span-2" : ""} key={i}>
+            <article>
+              <a href="#">
+                <img
+                  src={item.img.url}
+                  alt={item.name}
+                  className={i !== 0 ? "rounded-[20px]" : ""}
+                />
+              </a>
+            </article>
+          </li>
+        );
+      })
+    )
+  }, [stocks])
+
   return (
     <section className="relative">
       <div className="container">
@@ -51,21 +71,7 @@ const SectionStocks = () => {
               items-end
             "
           >
-            {stocks.map((item: ApiResponse, i: number) => {
-              return (
-                <li className={i === 0 ? "row-span-2" : ""} key={i}>
-                  <article>
-                    <a href="#">
-                      <img
-                        src={item.img.url}
-                        alt={item.name}
-                        className={i !== 0 ? "rounded-[20px]" : ""}
-                      />
-                    </a>
-                  </article>
-                </li>
-              );
-            })}
+            {renderItems}
           </ul>
           <button
             aria-label="Посмотреть все акции"
