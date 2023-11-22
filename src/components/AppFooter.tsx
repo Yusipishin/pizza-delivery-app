@@ -3,18 +3,20 @@ import paySystems from "../static/paySystems";
 import messengers from "../static/messengers";
 import socialNetworks from "../static/socialNetworks";
 
+import { Link } from "react-router-dom";
+
 const AppFooter = () => {
   return (
-    <footer className="footer py-16 relative">
+    <footer className="footer my-16 relative">
       <div className="container">
         <div className="flex justify-between items-end gap-16">
           <div className="leading-7">
-            <a href="#" className="logo inline-block mb-9">
+            <Link to="/" className="logo inline-block mb-9">
               <img
                 src={logo}
                 alt="Логотип Fibo Pasta Bar"
               />
-            </a>
+            </Link>
             <div className="text-[16px] mb-9 max-w-[545px]">
               <div className="mb-6">
                 <a href="#">Калорийность и состав</a>
@@ -25,11 +27,18 @@ const AppFooter = () => {
                 <ul className="columns-2 gap-[90px]">
                   {socialNetworks.map((name, i) => {
                     return (
-                      <li className={i % 2 === 0 ? 'mb-2': ''} key={i}><a href="#">{name}</a></li>
+                      <li className={i % 2 === 0 ? 'mb-2': ''} key={i}>
+                        <a href="#">
+                          {name}
+                        </a>
+                      </li>
                     )
                   })}
                 </ul>
-                <span><span className="mb-2 inline-block">Москва ул. Проспект</span> <span>Вернадского 86В</span></span>
+                <span>
+                  <span className="mb-2 inline-block">Москва ул. Проспект</span>
+                  <span>Вернадского 86В</span>
+                </span>
               </address>
             </div>
             <div className="wrapper font-semibold">
@@ -63,7 +72,9 @@ const AppFooter = () => {
                   8 499 391-84-49
                 </a>
               </address>
-              <button className="call-btn py-2 px-7" aria-label="Заказать звонок">Заказать звонок</button>
+              <button className="call-btn py-2 px-7" aria-label="Заказать звонок">
+                Заказать звонок
+              </button>
             </div>
           </div>
         </div>

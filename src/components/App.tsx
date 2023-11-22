@@ -1,26 +1,25 @@
 // import {lazy, Suspense} from 'react'
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 
 import '../styles/style.scss'
 
 import AppHeader from './AppHeader'
 import SectionHero from './SectionHero'
-import SectionNovelty from './SectionNovelty'
-import SectionMenu from './SectionMenu'
-import SectionStocks from './SectionStocks'
-import SectionMap from './SectionMap'
 import AppFooter from './AppFooter'
+
+import { MainPage, Page404, ContactPage } from "./pages"
 
 const App = () => {
   return (
     <>
       <AppHeader/>
-      <SectionHero/>
+      { useLocation().pathname !== '/contact' ? <SectionHero/> : null }
       <main>
-        <SectionNovelty/>
-        <SectionMenu/>
-        <SectionStocks/>
-        <SectionMap/>
+        <Routes>
+          <Route path="/" element={<MainPage/>}/>
+          <Route path="/404" element={<Page404/>}/>
+          <Route path="/contact" element={<ContactPage/>}/>
+        </Routes>
       </main>
       <AppFooter/>
     </>

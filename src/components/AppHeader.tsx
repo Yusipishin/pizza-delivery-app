@@ -1,6 +1,8 @@
 import logo from "../assets/img/logo.svg";
 import headerLinks from "../static/headerList";
 
+import { Link, NavLink } from "react-router-dom";
+
 const AppHeader = () => {
   return (
     <header className="mb-8">
@@ -8,9 +10,9 @@ const AppHeader = () => {
         <div>
           <div className="wrapper mt-4">
             <div className="wrapper">
-              <a href="#" className="logo">
+              <Link to="/" className="logo">
                 <img src={logo} alt="Логотип Fibo Pasta Bar" />
-              </a>
+              </Link>
               <div className="text-[#231F20] ml-[52px]">
                 <div className="text-[17px] flex mb-4">
                   <h1>Доставка пасты</h1>
@@ -89,11 +91,11 @@ const AppHeader = () => {
           <div className="wrapper header__menu mt-3">
             <nav className="header__nav">
               <ul className="wrapper gap-5 font-semibold text-[15px]">
-                {headerLinks.map((item, i) => (
+                {headerLinks.map(({name, path}, i) => (
                   <li className="header__item" key={i}>
-                    <a className="header__link" href="#">
-                      {item}
-                    </a>
+                    <NavLink className="header__link" end to={path}>
+                      {name}
+                    </NavLink>
                   </li>
                 ))}
               </ul>

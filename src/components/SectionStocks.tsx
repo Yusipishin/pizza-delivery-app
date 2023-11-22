@@ -75,7 +75,7 @@ const SectionStocks = () => {
           </ul>
           <button
             aria-label="Посмотреть все акции"
-            style={{'display': stocksLoadingStatus === 'loading' || 'error' ? 'none' : 'block'}}
+            style={{'display': stocksLoadingStatus === 'loading' || stocksLoadingStatus === 'error' ? 'none' : 'block'}}
             className="
               py-[10px]
               px-10
