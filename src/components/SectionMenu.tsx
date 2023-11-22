@@ -1,6 +1,6 @@
 import { useHttp } from "../hooks/http.hook";
-import ErrorMessage from "./ErrorMessage/MessageError";
-import LoadingMessage from "./LoadingMessage/MessageLoading";
+import ErrorMessage from "./UI/ErrorMessage/MessageError";
+import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { menuFetching, menuFetched, menuFetchingError} from "../actions/actions";

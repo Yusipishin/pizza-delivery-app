@@ -13,7 +13,7 @@ const App = () => {
   return (
     <>
       <AppHeader/>
-      { useLocation().pathname !== '/contact' ? <SectionHero/> : null }
+      { useLocation().pathname === '/' ? <SectionHero/> : null }
       <main>
         <Routes>
           <Route path="/" element={<MainPage/>}/>
