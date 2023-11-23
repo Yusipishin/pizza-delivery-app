@@ -3,7 +3,9 @@ import headerLinks from "../static/headerList";
 
 import { Link, NavLink } from "react-router-dom";
 
-const AppHeader = () => {
+import { memo } from "react";
+
+const AppHeader = memo(() => {
   return (
     <header className="mb-8">
       <div className="container">
@@ -142,6 +144,6 @@ const AppHeader = () => {
       </div>
     </header>
   );
-};
+});
 
 export default AppHeader;

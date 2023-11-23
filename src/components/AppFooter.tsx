@@ -4,8 +4,9 @@ import messengers from "../static/messengers";
 import socialNetworks from "../static/socialNetworks";
 
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-const AppFooter = () => {
+const AppFooter = memo(() => {
   return (
     <footer className="footer my-16 relative">
       <div className="container">
@@ -84,6 +85,6 @@ const AppFooter = () => {
       </div>
     </footer>
   )
-}
+})
 
 export default AppFooter;

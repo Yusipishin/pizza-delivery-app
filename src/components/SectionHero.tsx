@@ -5,7 +5,9 @@ import sliders from '../static/sliders';
 import { Swiper , SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules';
 
-const SectionHero = () => {
+import { memo } from 'react';
+
+const SectionHero = memo(() => {
   return (
     <section className="hero mb-[71px]">
       <div className="container">
@@ -37,6 +39,6 @@ const SectionHero = () => {
       </div>
     </section>
   )
-}
+})
 
 export default SectionHero;

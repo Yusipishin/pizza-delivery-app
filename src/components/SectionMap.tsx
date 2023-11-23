@@ -1,6 +1,8 @@
 import deliveryInfo from "../static/deliveryInfo";
 
-const SectionMap = () => {
+import { memo } from "react";
+
+const SectionMap = memo(() => {
   return (
     <section className="bg-[#E3ECF5] py-16">
       <div className="container">
@@ -59,6 +61,6 @@ const SectionMap = () => {
       </div>
     </section>
   );
-};
+});
 
 export default SectionMap;

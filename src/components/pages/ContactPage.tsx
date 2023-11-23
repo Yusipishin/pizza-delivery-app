@@ -1,4 +1,6 @@
-const ContactPage = () => {
+import { memo } from "react"
+
+const ContactPage = memo(() => {
   return (
     <section className="">
       <div className="container">
@@ -16,6 +18,6 @@ const ContactPage = () => {
       </div>
     </section>
   )
-}
+})
 
 export default ContactPage
