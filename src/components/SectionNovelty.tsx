@@ -9,7 +9,8 @@ import { ApiResponse } from "../intefaces/interfaces";
 import { MainState } from "../intefaces/interfaces";
 
 const SectionNovelty = () => {
-  const {novelty, noveltyLoadingStatus} = useSelector((state: MainState) => state)
+  const novelty = useSelector((state: MainState) => state.novelty)
+  const noveltyLoadingStatus = useSelector((state: MainState) => state.noveltyLoadingStatus)
   const dispatch = useDispatch()
   const {request} = useHttp();
 

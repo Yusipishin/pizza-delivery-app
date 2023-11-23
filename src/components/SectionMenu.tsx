@@ -9,9 +9,8 @@ import { ApiResponse } from "../intefaces/interfaces";
 import { MainState } from "../intefaces/interfaces";
 
 const SectionMenu = () => {
-  console.log('MENU')
-
-  const {menu, menuLoadingStatus} = useSelector((state: MainState) => state)
+  const menu = useSelector((state: MainState) => state.menu)
+  const menuLoadingStatus = useSelector((state: MainState) => state.menuLoadingStatus)
   const dispatch = useDispatch();
 
   const [offset, setOffset] = useState(0)
