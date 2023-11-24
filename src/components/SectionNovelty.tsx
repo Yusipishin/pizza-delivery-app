@@ -1,24 +1,24 @@
 import { useHttp } from "../hooks/http.hook"
 import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
-import { useEffect, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux";
-import { noveltyFetching, noveltyFetched, noveltyFetchingError} from "../actions/actions";
+import { useEffect, useState } from "react"
 
 import { ApiResponse } from "../intefaces/interfaces";
-import { MainState } from "../intefaces/interfaces";
 
 const SectionNovelty = () => {
-  const novelty = useSelector((state: MainState) => state.novelty)
-  const noveltyLoadingStatus = useSelector((state: MainState) => state.noveltyLoadingStatus)
-  const dispatch = useDispatch()
+  const [novelty, setNovelty] = useState<ApiResponse[]>([])
+  const [noveltyLoadingStatus, setNoveltyLoadingStatus] = useState<string>('')
+
   const {request} = useHttp();
 
   useEffect(() => {
-    dispatch(noveltyFetching())
+    setNoveltyLoadingStatus('loading')
     request('http://localhost:3001/novelty')
-      .then(data => dispatch(noveltyFetched(data)))
-      .catch(() => dispatch(noveltyFetchingError()))
+      .then(data => {
+        setNovelty(data)
+        setNoveltyLoadingStatus('idle')
+    })
+      .catch(() => setNoveltyLoadingStatus('error'))
   }, [])
 
   const checkLoading = () => {
@@ -29,7 +29,7 @@ const SectionNovelty = () => {
     }
   }
 
-  const renderItems = useMemo(() => {
+  const renderItems = () => {
     return (
       novelty.map((item: ApiResponse, i: number) => {
         return (
@@ -68,7 +68,7 @@ const SectionNovelty = () => {
         )
       })
     )
-  }, [novelty])
+  }
 
   return (
     <section className="mb-12 relative">
@@ -82,7 +82,7 @@ const SectionNovelty = () => {
         </h2>
         <ul className='wrapper gap-8'>
           {checkLoading()}
-          {renderItems}
+          {renderItems()}
         </ul>
       </div>
       <div className="

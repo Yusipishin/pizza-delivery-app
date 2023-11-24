@@ -5,11 +5,7 @@ export interface ActionType {
 
 export interface MainState {
   menu: ApiResponse[],
-  stocks: ApiResponse[],
-  novelty: ApiResponse[],
   menuLoadingStatus: string,
-  stocksLoadingStatus: string,
-  noveltyLoadingStatus: string,
 }
 
 export interface ApiResponse {

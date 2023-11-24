@@ -1,24 +1,23 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
-import { useEffect, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux";
-import { stocksFetching, stocksFetched, stocksFetchingError} from "../actions/actions";
+import { useEffect, useMemo, useState } from "react"
 
 import { ApiResponse } from "../intefaces/interfaces";
-import { MainState } from "../intefaces/interfaces";
 
 const SectionStocks = () => {
-  const stocks = useSelector((state: MainState) => state.stocks)
-  const stocksLoadingStatus = useSelector((state: MainState) => state.stocksLoadingStatus)
-  const dispatch = useDispatch()
+  const [stocks, setStocks] = useState<ApiResponse[]>([])
+  const [stocksLoadingStatus, setStocksLoadingStatus] = useState<string>('')
   const { request } = useHttp();
 
   useEffect(() => {
-    dispatch(stocksFetching())
-    request("http://localhost:3001/stocks")
-      .then(data => dispatch(stocksFetched(data)))
-      .catch(() => dispatch(stocksFetchingError()));
+    setStocksLoadingStatus('loading')
+    request('http://localhost:3001/stocks')
+      .then(data => {
+        setStocks(data)
+        setStocksLoadingStatus('idle')
+    })
+      .catch(() => setStocksLoadingStatus('error'))
   }, [])
 
   const checkLoading = () => {

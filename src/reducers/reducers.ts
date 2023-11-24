@@ -1,5 +1,4 @@
-import { MainState } from "../intefaces/interfaces"
-import { ActionType } from "../intefaces/interfaces"
+import { MainState, ActionType } from "../intefaces/interfaces"
 
 const enum Status {
   OK = 'idle',
@@ -9,11 +8,7 @@ const enum Status {
 
 const initialState: MainState = {
   menu: [],
-  stocks: [],
-  novelty: [],
   menuLoadingStatus: 'idle',
-  stocksLoadingStatus: 'idle',
-  noveltyLoadingStatus: 'idle',
 }
 
 const reducer = (state = initialState, action: ActionType) => {
@@ -33,38 +28,6 @@ const reducer = (state = initialState, action: ActionType) => {
       return {
         ...state,
         menuLoadingStatus: Status.ERROR
-      }
-    case "NOVELTY_FETCHING":
-      return {
-        ...state,
-        noveltyLoadingStatus: Status.LOADING
-      }
-    case "NOVELTY_FETCHED":
-      return {
-        ...state,
-        novelty: action.payload,
-        noveltyLoadingStatus: Status.OK
-      }
-    case "NOVELTY_FETCHING_ERROR":
-      return {
-        ...state,
-        noveltyLoadingStatus: Status.ERROR
-      }
-    case "STOCKS_FETCHING":
-      return {
-        ...state,
-        stocksLoadingStatus: Status.LOADING
-      }
-    case "STOCKS_FETCHED":
-      return {
-        ...state,
-        stocks: action.payload,
-        stocksLoadingStatus: Status.OK
-      }
-    case "STOCKS_FETCHING_ERROR":
-      return {
-        ...state,
-        stocksLoadingStatus: Status.ERROR
       }
     default: return state
   }
