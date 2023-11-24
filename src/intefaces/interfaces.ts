@@ -3,10 +3,10 @@ export interface ActionType {
   payload?: ApiResponse[]
 }
 
-export interface MainState {
-  menu: ApiResponse[],
-  menuLoadingStatus: string,
-}
+// export interface MainState {
+//   menu: ApiResponse[],
+//   menuLoadingStatus: string,
+// }
 
 export interface ApiResponse {
   name: string,

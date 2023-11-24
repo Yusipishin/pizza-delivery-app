@@ -1,7 +1,7 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 
 import { ApiResponse } from "../intefaces/interfaces";
 
@@ -28,7 +28,7 @@ const SectionStocks = () => {
     }
   }
 
-  const renderItems = useMemo(() => {
+  const renderItems = () => {
     return (
       stocks.map((item: ApiResponse, i: number) => {
         return (
@@ -46,7 +46,7 @@ const SectionStocks = () => {
         );
       })
     )
-  }, [stocks])
+  }
 
   return (
     <section className="relative">
@@ -71,7 +71,7 @@ const SectionStocks = () => {
               items-end
             "
           >
-            {renderItems}
+            {renderItems()}
           </ul>
           <button
             aria-label="Посмотреть все акции"
