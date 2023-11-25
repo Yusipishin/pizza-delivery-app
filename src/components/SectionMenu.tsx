@@ -95,6 +95,8 @@ const SectionMenu = () => {
     )
   }
 
+  const btnStyle = menuEnded || menuLoadingStatus === 'loading' || menuLoadingStatus === 'error' ? 'none' : 'block'
+
   return (
     <section className="menu">
       <div className="container">
@@ -115,8 +117,7 @@ const SectionMenu = () => {
         </ul>
         <button onClick={() => onRequest()}
               aria-label="Посмотреть ещё варианты пицц"
-              style={{'display': menuEnded || menuLoadingStatus === 'loading' 
-                                            || menuLoadingStatus === 'error' ? 'none' : 'block'}}
+              style={{display: btnStyle}}
               className="mx-auto 
                         block 
                         mb-14 
