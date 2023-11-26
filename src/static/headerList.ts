@@ -6,43 +6,43 @@ type link = {
 const headerLinks: link[] = [
   {
     name: "Пицца",
-    path: ''
+    path: '/'
   },
   {
     name: "Паста",
-    path: ''
+    path: '/'
   },
   {
     name: "Супы",
-    path: ''
+    path: '/'
   },
   {
     name: "Салаты",
-    path: ''
+    path: '/'
   },
   {
     name: "Напитки",
-    path: ''
+    path: '/'
   },
   {
     name: "Десерты",
-    path: ''
+    path: '/'
   },
   {
     name: "Бакалея",
-    path: ''
+    path: '/'
   },
   {
     name: "Антипасти",
-    path: ''
+    path: '/'
   },
   {
     name: "Акции",
-    path: '/action'
+    path: '/actions'
   },
   {
     name: "Комбо",
-    path: ''
+    path: '/'
   },
   {
     name: "Контакты",

@@ -1,11 +1,11 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
 import { ApiResponse } from "../intefaces/interfaces";
 
-const SectionMenu = () => {
+const SectionMenu = memo(() => {
   console.log('MENU RENDER')
   const [menu, setMenu] = useState<ApiResponse[]>([])
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>('')
@@ -131,6 +131,6 @@ const SectionMenu = () => {
       </div>
     </section>
   );
-};
+});
 
 export default SectionMenu;
