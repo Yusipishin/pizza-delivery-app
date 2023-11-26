@@ -1,4 +1,4 @@
-import logo from "../assets/img/logo.svg";
+import logo from "../assets/img/logo.png";
 import paySystems from "../static/paySystems";
 import messengers from "../static/messengers";
 import socialNetworks from "../static/socialNetworks";

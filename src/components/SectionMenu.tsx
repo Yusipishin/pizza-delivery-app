@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ApiResponse } from "../intefaces/interfaces";
 
 const SectionMenu = () => {
+  console.log('MENU RENDER')
   const [menu, setMenu] = useState<ApiResponse[]>([])
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>('')
 
