@@ -31,9 +31,9 @@ const ActionsPage = memo(() => {
 
   const renderItems = () => {
     return (
-      actions.map((item: ApiResponse, i: number) => {
+      actions.map((item: ApiResponse) => {
         return (
-          <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={i}>
+          <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={item.id}>
             <article className='max-w-[350px]'>
               <img className="block" src={item.img.url} alt={item.name}/>
               <div className="mt-3 mr-2 mb-5 ml-5">
@@ -52,8 +52,8 @@ const ActionsPage = memo(() => {
     <section>
       <div className="container">
         <h1 className="text-[#F7D22D] text-4xl mb-6">Акции</h1>
+        {checkLoading()}
         <ul className="flex flex-wrap gap-7">
-          {checkLoading()}
           {renderItems()}
         </ul>
       </div>

@@ -31,9 +31,9 @@ const SectionNovelty = () => {
 
   const renderItems = () => {
     return (
-      novelty.map((item: ApiResponse, i: number) => {
+      novelty.map((item: ApiResponse) => {
         return (
-          <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={i}>
+          <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={item.id}>
             <a href='#'>
               <article className='wrapper gap-6 py-4 pr-9 pl-4'>
                 <img className='

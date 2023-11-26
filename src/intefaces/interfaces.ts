@@ -1,7 +1,7 @@
-export interface ActionType {
-  type: string,
-  payload?: ApiResponse[]
-}
+// export interface ActionType {
+//   type: string,
+//   payload?: ApiResponse[]
+// }
 
 // export interface MainState {
 //   menu: ApiResponse[],
@@ -9,6 +9,7 @@ export interface ActionType {
 // }
 
 export interface ApiResponse {
+  id: string,
   name: string,
   img: { 
     url: string

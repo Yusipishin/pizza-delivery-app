@@ -6,7 +6,6 @@ import { useEffect, useState, memo } from "react";
 import { ApiResponse } from "../intefaces/interfaces";
 
 const SectionMenu = memo(() => {
-  console.log('MENU RENDER')
   const [menu, setMenu] = useState<ApiResponse[]>([])
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>('')
 
@@ -39,9 +38,9 @@ const SectionMenu = memo(() => {
 
   const renderItems = () => {
     return (
-      menu.map((item: ApiResponse, i: number) => {
+      menu.map((item: ApiResponse) => {
         return (
-          <li className="max-w-[255px] mb-7" key={i}>
+          <li className="max-w-[255px] mb-7" key={item.id}>
             <article>
               <img className="mb-3" src={item.img.url} alt={item.name} />
               <h3

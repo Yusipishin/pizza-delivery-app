@@ -32,7 +32,7 @@ const SectionStocks = () => {
     return (
       stocks.map((item: ApiResponse, i: number) => {
         return (
-          <li className={i === 0 ? "row-span-2" : ""} key={i}>
+          <li className={i === 0 ? "row-span-2" : ""} key={item.id}>
             <article>
               <a href="#">
                 <img
