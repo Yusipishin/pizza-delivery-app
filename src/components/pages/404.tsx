@@ -4,14 +4,16 @@ import { memo } from 'react'
 
 const Page404 = memo(() => {
   return (
-    <div>
+    <div className='flex justify-center items-center gap-6'>
         <ErrorMessage/>
-        <p style={{'fontSize': '24px'}}>
-          404! Page not found...
-        </p>
-        <Link to="/">
-            Back to main page
-        </Link>
+        <div>
+          <p className='text-3xl mb-4'>
+            404! Страница не найдена...
+          </p>
+          <Link to="/">
+              Вернуться на главную
+          </Link>
+        </div>
     </div>
   )
 })
