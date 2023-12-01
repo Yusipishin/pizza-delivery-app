@@ -21,7 +21,7 @@
     }
     &-next, &-prev {
       @apply top-1/2 z-10 w-9 h-9 absolute rounded-3xl;
-      background: rgba(247, 210, 45, 0.90) url('../../assets/img/icons/arrow-ic.svg') 50% 50% no-repeat;
+      background: rgba(247, 210, 45, 0.90) url('../assets/img/icons/arrow-ic.svg') 50% 50% no-repeat;
     }
     &-prev {
       left: -45px;

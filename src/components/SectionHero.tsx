@@ -1,4 +1,4 @@
-import './slider/slider.scss'
+import '../styles/slider.scss'
 import 'swiper/css'
 
 import sliders from '../static/sliders';

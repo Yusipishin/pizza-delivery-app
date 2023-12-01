@@ -80,8 +80,8 @@ const SectionNovelty = () => {
         ">
           Новинки
         </h2>
+        {checkLoading()}
         <ul className='wrapper gap-8'>
-          {checkLoading()}
           {renderItems()}
         </ul>
       </div>

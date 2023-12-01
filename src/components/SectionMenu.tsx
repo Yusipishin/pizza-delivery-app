@@ -1,6 +1,9 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
+
+import Modal from "./modal/Modal";
+
 import { useEffect, useState, memo } from "react";
 
 import { ApiResponse } from "../intefaces/interfaces";
@@ -8,6 +11,7 @@ import { ApiResponse } from "../intefaces/interfaces";
 const SectionMenu = memo(() => {
   const [menu, setMenu] = useState<ApiResponse[]>([])
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>('')
+  const [modalActive, setModalActive] = useState<boolean>(false)
 
   const [offset, setOffset] = useState(0)
   const [menuEnded, setMenuEnded] = useState(false)
@@ -27,6 +31,13 @@ const SectionMenu = memo(() => {
   }
 
   useEffect(() => onRequest, [])
+
+  const openModal = (event: React.MouseEvent<HTMLElement>) => {
+    const elem = event.target as HTMLElement
+    if (elem.tagName === 'BUTTON') {
+      setModalActive(true)
+    }
+  }
 
   const checkLoading = () => {
     if (menuLoadingStatus === 'loading') {
@@ -88,6 +99,7 @@ const SectionMenu = memo(() => {
                   В корзину
                 </button>
               </div>
+              
             </article>
           </li>
         );
@@ -109,11 +121,11 @@ const SectionMenu = memo(() => {
           mb-7
         "
         >
-          Паста
+          Пицца
         </h2>
-        <ul className="flex flex-wrap gap-8 mb-5">
+        {checkLoading()}
+        <ul className="flex flex-wrap gap-8 mb-5" onClick={openModal}>
           {renderItems()}
-          {checkLoading()}
         </ul>
         <button onClick={() => onRequest()}
               aria-label="Посмотреть ещё варианты пицц"
@@ -128,6 +140,9 @@ const SectionMenu = memo(() => {
                         text-lg
         ">Посмотреть ещё</button>
       </div>
+      <Modal active={modalActive} setActive={setModalActive}>
+        Привет
+      </Modal>
     </section>
   );
 });

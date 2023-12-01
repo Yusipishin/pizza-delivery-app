@@ -8,7 +8,7 @@ import { memo } from "react";
 
 const AppFooter = memo(() => {
   return (
-    <footer className="footer my-16 relative">
+    <footer className="footer py-16 relative">
       <div className="container">
         <div className="flex justify-between items-end gap-16">
           <div className="leading-7">
