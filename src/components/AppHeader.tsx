@@ -2,15 +2,33 @@ import logo from "../assets/img/logo.png";
 import headerLinks from "../static/headerList";
 
 import { Link, NavLink } from "react-router-dom";
+import { memo, useEffect, useState } from "react";
 
-import { memo } from "react";
+interface Props {
+  mainRef: React.RefObject<HTMLElement>
+}
 
-const AppHeader = memo(() => {
+const AppHeader = memo(({mainRef} : Props ) => {
+  const [headerScroll, setHeaderScroll] = useState(false)
+
+  headerScroll ? mainRef.current?.classList.add('mt-40') 
+                : mainRef.current?.classList.remove('mt-40')
+
+  useEffect(() => {
+    const handleScroll = () => setHeaderScroll(window.scrollY > 14 ? true : false)
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <header className="mb-8">
+    <header className={headerScroll ? 'fixed top-0 left-0 right-0 z-10 bg-white py-5' : 'mb-7'}>
       <div className="container">
         <div>
-          <div className="wrapper mt-4">
+          <div className={`mb-3 mt-4 ${headerScroll ? "hidden" : "wrapper"}`}>
             <div className="wrapper">
               <Link to="/" className="logo">
                 <img src={logo} alt="Логотип Fibo Pasta Bar" />
@@ -90,9 +108,12 @@ const AppHeader = memo(() => {
               </address>
             </div>
           </div>
-          <div className="wrapper header__menu mt-3">
-            <nav className="header__nav">
-              <ul className="wrapper gap-5 font-semibold text-[15px]">
+          <div className="wrapper header__menu">
+            <Link to="/" className={`logo w-[72px] h-[53px] ${headerScroll ? "" : "hidden"}`}>
+              <img src={logo} alt="Логотип Fibo Pasta Bar" />
+            </Link>
+            <nav className={headerScroll ? "ml-[20px] mr-[30px]" : ""}>
+              <ul className={`wrapper gap-4 font-semibold text-[15px] ${headerScroll ? "gap-4" : "gap-5"}`}>
                 {headerLinks.map(({name, path}, i) => (
                   <li className="header__item" key={i}>
                     <NavLink className="header__link" end to={path}>
@@ -103,7 +124,7 @@ const AppHeader = memo(() => {
               </ul>
             </nav>
             <div className="wrapper header__menu-inner">
-              <button className="text-[#696F7A] mx-8 text-[16px]" aria-label="Авторизоваться">Войти</button>
+              <button className={`text-[#696F7A] mx-8 text-[16px] ${headerScroll ? "hidden" : ""}`} aria-label="Авторизоваться">Войти</button>
               <button
                 aria-label="Открыть корзину"
                 className="
