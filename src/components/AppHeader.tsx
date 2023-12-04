@@ -1,5 +1,9 @@
 import logo from "../assets/img/logo.png";
 import headerLinks from "../static/headerList";
+import Modal from "./modal/Modal";
+
+//https://github.com/sanniassin/react-input-mask
+import InputMask from "react-input-mask";
 
 import { Link, NavLink } from "react-router-dom";
 import { memo, useEffect, useState } from "react";
@@ -10,6 +14,7 @@ interface Props {
 
 const AppHeader = memo(({mainRef} : Props ) => {
   const [headerScroll, setHeaderScroll] = useState(false)
+  const [modalActive, setModalActive] = useState<boolean>(false)
 
   headerScroll ? mainRef.current?.classList.add('mt-40') 
                 : mainRef.current?.classList.remove('mt-40')
@@ -100,7 +105,9 @@ const AppHeader = memo(({mainRef} : Props ) => {
               </div>
             </div>
             <div className="wrapper">
-              <button className="call-btn py-2 px-7" aria-label="Заказать звонок">Заказать звонок</button>
+              <button className="call-btn py-2 px-7" aria-label="Заказать звонок">
+                Заказать звонок
+              </button>
               <address>
                 <a href="tel:+84993918449" className="phone ml-7">
                   8 499 391-84-49
@@ -124,7 +131,12 @@ const AppHeader = memo(({mainRef} : Props ) => {
               </ul>
             </nav>
             <div className="wrapper header__menu-inner">
-              <button className={`text-[#696F7A] mx-8 text-[16px] ${headerScroll ? "hidden" : ""}`} aria-label="Авторизоваться">Войти</button>
+              <button onClick={() => setModalActive(true)} 
+                      aria-label="Авторизоваться"
+                      className={`text-[#696F7A] mx-8 text-[16px] 
+                              ${headerScroll ? "hidden" : ""}`}>
+                Войти
+              </button>
               <button
                 aria-label="Открыть корзину"
                 className="
@@ -163,6 +175,64 @@ const AppHeader = memo(({mainRef} : Props ) => {
           </div>
         </div>
       </div>
+
+      <Modal active={modalActive} setActive={setModalActive}>
+        <span className="text-[#F7D22D] text-4xl font-extrabold">
+          Вход на сайт
+        </span>
+        <form action="#" method="post">
+          <div className="mt-10 mb-20 flex items-center gap-8">
+            <label className="text-[#686466] font-semibold" htmlFor="post-tel">
+              Номер телефона
+            </label>
+            <InputMask 
+                id="post-tel"
+                name="user_telephone"
+                mask="+7 (999) 999-99-99"
+                type="tel" 
+                placeholder="+7 (999) 999-99-99"
+                className="
+                  py-4
+                  px-5
+                  text-[#231F20]
+                  text-[15px]
+                  rounded-lg
+                  border-[1.5px]
+                  border-[solid]
+                border-[#E2E2E9]
+                "
+            />
+          </div>
+          <div className="wrapper gap-6">
+            <button 
+              name="submit"
+              type="submit"
+              className="
+                text-white
+                text-[15px]
+                rounded-lg
+                bg-[#F7D22D]
+                font-extrabold
+                py-5
+                px-14
+            ">
+              Выслать код
+            </button>
+            <p className="
+                text-[#9D9D9B]
+                font-semibold
+                text-[13px]
+                leading-5
+                max-w-[330px]
+            ">
+              Продолжая, вы соглашаетесь&nbsp;
+              <a href="#" className="underline">
+                со сбором и обработкой персональных данных и пользовательским соглашением
+              </a>
+            </p>
+          </div>
+        </form>
+      </Modal>
     </header>
   );
 });

@@ -3,6 +3,8 @@ import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
 import { useEffect, useState } from "react"
 
+import { Link } from "react-router-dom";
+
 import { ApiResponse } from "../intefaces/interfaces";
 
 const SectionStocks = () => {
@@ -48,7 +50,7 @@ const SectionStocks = () => {
     )
   }
 
-  const btnStyle = stocksLoadingStatus === 'loading' || stocksLoadingStatus === 'error' ? 'none' : 'block'
+  const linkStyle = stocksLoadingStatus === 'loading' || stocksLoadingStatus === 'error' ? 'none' : 'block'
 
   return (
     <section className="relative">
@@ -75,9 +77,9 @@ const SectionStocks = () => {
           >
             {renderItems()}
           </ul>
-          <button
-            aria-label="Посмотреть все акции"
-            style={{display: btnStyle}}
+          <Link
+            to="/actions"
+            style={{display: linkStyle}}
             className="
               py-[10px]
               px-10
@@ -89,7 +91,7 @@ const SectionStocks = () => {
             "
           >
             Все акции
-          </button>
+          </Link>
         </div>
       </div>
       <div

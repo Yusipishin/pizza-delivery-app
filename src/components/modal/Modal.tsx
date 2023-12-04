@@ -34,7 +34,6 @@ const Modal = memo(({active, setActive, children} : Props) => {
               -translate-x-1/2 
               -translate-y-1/2
               bg-white
-              w-[500px]
               p-10
               rounded-xl
             ">
