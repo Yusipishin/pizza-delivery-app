@@ -1,12 +1,12 @@
 import { useState, useEffect, memo } from "react"
-import { ApiResponse } from "../../intefaces/interfaces"
+import { Action } from "../../intefaces/interfaces"
 import { useHttp } from "../../hooks/http.hook"
 
 import LoadingMessage from "../UI/LoadingMessage/MessageLoading"
 import ErrorMessage from "../UI/ErrorMessage/MessageError"
 
 const ActionsPage = memo(() => {
-  const [actions, setActions] = useState<ApiResponse[]>([])
+  const [actions, setActions] = useState<Action[]>([])
   const [actionsLoadingStatus, setActionsLoadingStatus] = useState<string>('')
 
   const { request } = useHttp();
@@ -14,7 +14,7 @@ const ActionsPage = memo(() => {
   useEffect(() => {
     setActionsLoadingStatus('loading')
     request('http://localhost:3001/actions')
-      .then(data => {
+      .then((data: Action[]) => {
         setActions(data)
         setActionsLoadingStatus('idle')
     })
@@ -31,7 +31,7 @@ const ActionsPage = memo(() => {
 
   const renderItems = () => {
     return (
-      actions.map((item: ApiResponse) => {
+      actions.map((item: Action) => {
         return (
           <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={item.id}>
             <article className='max-w-[350px]'>

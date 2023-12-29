@@ -1,12 +1,9 @@
-import { ApiResponse } from "../intefaces/interfaces";
-
 export const useHttp = () => {
 
   const request = async (url: string, 
                           method: string = 'GET', 
                           body = null, 
-                          headers = {'Content-Type': 'application/json'})
-                          :Promise<ApiResponse[]> => {
+                          headers = {'Content-Type': 'application/json'}) => {
 
     try {
       const response = await fetch(url, {method, body, headers});
@@ -15,11 +12,11 @@ export const useHttp = () => {
         throw new Error(`Could not fetch ${url}, status: ${response.status}`);
       }
 
-      const data: ApiResponse[] = await response.json();
+      const data = await response.json();
 
       return data;
-    } catch(e) {
-      throw e;
+    } catch(error) {
+      throw error instanceof Error ? error : undefined;
     }
   };
 

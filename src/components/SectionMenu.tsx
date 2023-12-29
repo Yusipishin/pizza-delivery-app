@@ -6,12 +6,14 @@ import Modal from "./modal/Modal";
 
 import { useEffect, useState, memo } from "react";
 
-import { ApiResponse } from "../intefaces/interfaces";
+import { Pizza } from "../intefaces/interfaces";
 
 const SectionMenu = memo(() => {
-  const [menu, setMenu] = useState<ApiResponse[]>([])
+  const [menu, setMenu] = useState<Pizza[]>([])
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>('')
   const [modalActive, setModalActive] = useState<boolean>(false)
+
+  const [currentPizza, setCurrentPizza] = useState<Pizza>()
 
   const [offset, setOffset] = useState(0)
   const [menuEnded, setMenuEnded] = useState(false)
@@ -20,7 +22,7 @@ const SectionMenu = memo(() => {
   const onRequest = () => {
     setMenuLoadingStatus('loading')
     request("http://localhost:3001/menu")
-    .then(data => {
+    .then((data: Pizza[]) => {
       const newItems = data.slice(offset, offset + 8)
       setMenuEnded(newItems.length < 8 ? true : false)
       setOffset(offset + newItems.length)
@@ -35,6 +37,9 @@ const SectionMenu = memo(() => {
   const openModal = (event: React.MouseEvent<HTMLElement>) => {
     const elem = event.target as HTMLElement
     if (elem.tagName === 'BUTTON') {
+      const pizzaId = elem.parentElement?.parentElement?.getAttribute('data-pizza-id');
+      const pizza = menu.find((item) => item.id === pizzaId);
+      setCurrentPizza(pizza);
       setModalActive(true)
     }
   }
@@ -49,32 +54,35 @@ const SectionMenu = memo(() => {
 
   const renderItems = () => {
     return (
-      menu.map((item: ApiResponse) => {
+      menu.map((item: Pizza) => {
+        const composition = [...item.composition.basic, ...item.composition.optional].join(', ')
         return (
-          <li className="max-w-[255px] mb-7" key={item.id}>
-            <article>
-              <img className="mb-3" src={item.img.url} alt={item.name} />
-              <h3
-                className="
-                text-[#797979] 
-                  mb-4 
-                  text-[24px] 
-                  font-extrabold
-                  leading-7
-                "
-              >
-                {item.name}
-              </h3>
-              <p
-                className="
-                text-[#686466] 
-                  mb-6
-                  leading-5
-                  font-medium
-                "
-              >
-                {item.description}
-              </p>
+          <li className="max-w-[255px] mb-7 flex" key={item.id}>
+            <article data-pizza-id={item.id} className="flex flex-col justify-between">
+              <div>
+                <img className="mb-3" src={item.img.url} alt={item.name} />
+                <h3
+                  className="
+                  text-[#797979] 
+                    mb-4 
+                    text-[22px] 
+                    font-extrabold
+                    leading-7
+                  "
+                >
+                  {item.name}
+                </h3>
+                <p
+                  className="
+                  text-[#686466] 
+                    mb-6
+                    leading-5
+                    font-medium
+                  "
+                >
+                  {composition[0].toUpperCase() + composition.slice(1)}
+                </p>
+              </div>
               <div className="wrapper">
                 <span
                   className="
@@ -83,7 +91,7 @@ const SectionMenu = memo(() => {
                     leading-7
                   "
                 >
-                  от {item.sale} ₽
+                  от {item.sale.small} ₽
                 </span>
                 <button
                   aria-label="Добавить в корзину"
@@ -99,7 +107,6 @@ const SectionMenu = memo(() => {
                   В корзину
                 </button>
               </div>
-              
             </article>
           </li>
         );
@@ -140,9 +147,50 @@ const SectionMenu = memo(() => {
                         text-lg
         ">Посмотреть ещё</button>
       </div>
+
       <Modal active={modalActive} setActive={setModalActive}>
-        Привет
+        <div className="wrapper">
+          <img src={currentPizza?.img.url} alt={currentPizza?.name} />
+          <div>
+            <div>
+              <span>{currentPizza?.name}</span>
+              <span>
+                {/* НОВЫЕ СОСТОЯНИЯ */}
+                25 см, традиционное тесто, 360 г
+              </span>
+              <span>
+                {/* ... */}
+              </span>
+              <div>
+                <button>
+                  Маленькая
+                </button>
+                <button>
+                  Средняя
+                </button>
+                <button>
+                  Большая
+                </button>
+              </div>
+              <div>
+                <button>
+                  Традиционное
+                </button>
+                <button>
+                  Тонкое
+                </button>
+              </div>
+            </div>
+            <div>
+              <button>
+                Острый халапенью
+                от 120 ₽
+              </button>
+            </div>
+          </div>
+        </div>
       </Modal>
+
     </section>
   );
 });

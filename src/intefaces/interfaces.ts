@@ -8,12 +8,41 @@
 //   menuLoadingStatus: string,
 // }
 
-export interface ApiResponse {
+export interface Stock {
   id: string,
   name: string,
   img: { 
     url: string
+  }
+}
+
+export interface Novelty extends Stock {
+  sale: number
+}
+
+export interface Action extends Stock {
+  description: string
+}
+
+export interface Pizza extends Stock {
+  sale: {
+    small: number,
+    average: number,
+    big: number
   },
-  description?: string,
-  sale?: number,
+  composition: {
+    basic: string[],
+    optional: string[]
+  },
+  weight: {
+    traditional: {
+      small: number,
+      average: number,
+      big: number,
+    },
+    thin: {
+      average: number,
+      big: number,
+    }
+  }
 }

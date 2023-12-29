@@ -5,17 +5,17 @@ import { useEffect, useState } from "react"
 
 import { Link } from "react-router-dom";
 
-import { ApiResponse } from "../intefaces/interfaces";
+import { Stock } from "../intefaces/interfaces";
 
 const SectionStocks = () => {
-  const [stocks, setStocks] = useState<ApiResponse[]>([])
+  const [stocks, setStocks] = useState<Stock[]>([])
   const [stocksLoadingStatus, setStocksLoadingStatus] = useState<string>('')
   const { request } = useHttp();
 
   useEffect(() => {
     setStocksLoadingStatus('loading')
     request('http://localhost:3001/stocks')
-      .then(data => {
+      .then((data: Stock[]) => {
         setStocks(data)
         setStocksLoadingStatus('idle')
     })
@@ -32,7 +32,7 @@ const SectionStocks = () => {
 
   const renderItems = () => {
     return (
-      stocks.map((item: ApiResponse, i: number) => {
+      stocks.map((item: Stock, i: number) => {
         return (
           <li className={i === 0 ? "row-span-2" : ""} key={item.id}>
             <article>

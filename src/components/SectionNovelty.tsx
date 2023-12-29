@@ -3,10 +3,10 @@ import ErrorMessage from "./UI/ErrorMessage/MessageError";
 import LoadingMessage from "./UI/LoadingMessage/MessageLoading";
 import { useEffect, useState } from "react"
 
-import { ApiResponse } from "../intefaces/interfaces";
+import { Novelty } from "../intefaces/interfaces";
 
 const SectionNovelty = () => {
-  const [novelty, setNovelty] = useState<ApiResponse[]>([])
+  const [novelty, setNovelty] = useState<Novelty[]>([])
   const [noveltyLoadingStatus, setNoveltyLoadingStatus] = useState<string>('')
 
   const {request} = useHttp();
@@ -14,7 +14,7 @@ const SectionNovelty = () => {
   useEffect(() => {
     setNoveltyLoadingStatus('loading')
     request('http://localhost:3001/novelty')
-      .then(data => {
+      .then((data: Novelty[]) => {
         setNovelty(data)
         setNoveltyLoadingStatus('idle')
     })
@@ -31,7 +31,7 @@ const SectionNovelty = () => {
 
   const renderItems = () => {
     return (
-      novelty.map((item: ApiResponse) => {
+      novelty.map((item: Novelty) => {
         return (
           <li className='rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]' key={item.id}>
             <a href='#'>
