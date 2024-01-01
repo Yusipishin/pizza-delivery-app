@@ -34,14 +34,15 @@ const Modal = memo(({active, setActive, children} : Props) => {
               -translate-x-1/2 
               -translate-y-1/2
               bg-white
-              p-10
+              py-8
+              px-16
               rounded-xl
             ">
-            <div className='relative'>
+            <div className='leading-7'>
               <button 
                   onClick={() => setActive(false)} 
                   aria-label='Закрыть модальное окно' 
-                  className='absolute right-0 top-0 -mt-3 -mr-3'
+                  className='absolute right-7 top-7'
                 >
                 <img src={closeIcon} alt="Закрытие модального окна" />
               </button>
