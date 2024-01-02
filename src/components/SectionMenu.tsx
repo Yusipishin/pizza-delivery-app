@@ -156,93 +156,96 @@ const SectionMenu = memo(() => {
 
       <Modal active={modalActive} setActive={setModalActive}>
         <div className="wrapper">
-          <img className="mx-24" src={currentPizza?.img.url} alt={currentPizza?.name} />
-          <div className="max-w-sm [&_label]:rounded-lg [&_button]:rounded-lg">
-            <div>
-              <span className="text-[20px] font-extrabold block">
-                {currentPizza?.name}
-              </span>
-              <span className="block text-[#686466] font-semibold my-1">
-                {/* НОВЫЕ СОСТОЯНИЯ */}
-                25 см, традиционное тесто, 360 г
-              </span>
-              <p className="text-[#686466] opacity-60 text-[12px] leading-5 mb-5">
-                {renderComposition()}
-              </p>
-              <div className="
-                mb-5
-                text-[#828792]
-                text-[11px]
-                font-semibold
-                [&_input]:hidden
-                [&_label]:bg-[#F3F3F7]
-                [&_label]:py-2
-                [&_label]:text-center
-                [&_label]:cursor-pointer
-              ">
+          <img className="mx-16" src={currentPizza?.img.url} alt={currentPizza?.name} />
+          <div className="[&_label]:rounded-lg [&_button]:rounded-lg">
+            <div className="scroll__off overflow-y-scroll">
+              <div>
+                <span className="block text-[20px] font-extrabold">
+                  {currentPizza?.name}
+                </span>
+                <span className="block text-[#686466] font-semibold my-1">
+                  {/* НОВЫЕ СОСТОЯНИЯ */}
+                  25 см, традиционное тесто, 360 г
+                </span>
+                <p className="text-[#686466] opacity-60 text-[12px] leading-5 mb-5">
+                  {renderComposition()}
+                </p>
                 <div className="
-                    flex
-                    gap-3
-                    mb-2
-                    [&_label]:w-1/3
+                  mb-5
+                  text-[#828792]
+                  text-[11px]
+                  font-semibold
+                  [&_input]:hidden
+                  [&_label]:bg-[#F3F3F7]
+                  [&_label]:py-2
+                  [&_label]:text-center
+                  [&_label]:cursor-pointer
                 ">
-                  <input type="radio" id="874aacee-c5d2-47a9-833c-ca29d3f7cab0" name="pizza_size"/>
-                  <label htmlFor="874aacee-c5d2-47a9-833c-ca29d3f7cab0">
-                    Маленькая
-                  </label>
-                  <input type="radio" id="49275a6e-9471-4521-b95d-e0d3555dd8cb" name="pizza_size"/>
-                  <label htmlFor="49275a6e-9471-4521-b95d-e0d3555dd8cb">
-                    Средняя
-                  </label>
-                  <input type="radio" id="a60f612f-b729-4d25-bdb0-1f4666251c79" name="pizza_size"/>
-                  <label htmlFor="a60f612f-b729-4d25-bdb0-1f4666251c79">
-                    Большая
-                  </label>
-                </div>
-                
-                <div className="
-                    flex
-                    gap-3
-                    [&_label]:w-1/2
-                ">
-                  <input type="radio" id="9ec1f8a9-e426-4524-9285-e31634eb273f" name="pizza_dough"/>
-                  <label htmlFor="9ec1f8a9-e426-4524-9285-e31634eb273f">
-                    Традиционное
-                  </label>
-                  <input type="radio" id="a43a852d-1d88-4246-ac4d-86a649a6c69f" name="pizza_dough"/>
-                  <label htmlFor="a43a852d-1d88-4246-ac4d-86a649a6c69f">
-                    Тонкое
-                  </label>
+                  <div className="
+                      flex
+                      gap-3
+                      mb-2
+                      [&_label]:w-1/3
+                  ">
+                    <input type="radio" id="874aacee-c5d2-47a9-833c-ca29d3f7cab0" name="pizza_size"/>
+                    <label htmlFor="874aacee-c5d2-47a9-833c-ca29d3f7cab0">
+                      Маленькая
+                    </label>
+                    <input type="radio" id="49275a6e-9471-4521-b95d-e0d3555dd8cb" name="pizza_size"/>
+                    <label htmlFor="49275a6e-9471-4521-b95d-e0d3555dd8cb">
+                      Средняя
+                    </label>
+                    <input type="radio" id="a60f612f-b729-4d25-bdb0-1f4666251c79" name="pizza_size"/>
+                    <label htmlFor="a60f612f-b729-4d25-bdb0-1f4666251c79">
+                      Большая
+                    </label>
+                  </div>
+                  
+                  <div className="
+                      flex
+                      gap-3
+                      [&_label]:w-1/2
+                  ">
+                    <input type="radio" id="9ec1f8a9-e426-4524-9285-e31634eb273f" name="pizza_dough"/>
+                    <label htmlFor="9ec1f8a9-e426-4524-9285-e31634eb273f">
+                      Традиционное
+                    </label>
+                    <input type="radio" id="a43a852d-1d88-4246-ac4d-86a649a6c69f" name="pizza_dough"/>
+                    <label htmlFor="a43a852d-1d88-4246-ac4d-86a649a6c69f">
+                      Тонкое
+                    </label>
+                  </div>
                 </div>
               </div>
+              <div className="
+                  flex
+                  justify-between
+                  gap-3
+                  flex-wrap
+                  [&_button]:w-[31%]
+                  [&_button]:border-[1.5px]
+                  [&_button]:border-[#E2E2E9]
+                  [&_button]:border-solid
+                  h-80
+              ">
+                {addIngredients.map((item, i) => (
+                  <button className="flex flex-col justify-between items-center p-3" data-selected="false" key={i}>
+                    <div className="flex flex-col items-center">
+                      <img className="w-20 mb-1" src={item.path} alt={item.name} />
+                      <span className="leading-4 mb-3 text-[13px] font-semibold ">{item.name}</span>
+                    </div>
+                    <span className="text-[#F7D22D] font-extrabold">от {item.sale} ₽</span>
+                  </button>
+                ))}
+                <div className="h-8 w-1"></div>
+              </div>
             </div>
-            <div className="
-                flex
-                justify-between
-                gap-3
-                flex-wrap
-                [&_button]:w-[31%]
-                [&_button]:border-[1.5px]
-                [&_button]:border-[#E2E2E9]
-                [&_button]:border-solid
-            ">
-              {addIngredients.map(item => (
-                <button className="flex flex-col justify-between items-center" data-selected="false">
-                  <div>
-                    <img src={item.path} alt={item.name} />
-                    <span className="block">{item.name}</span>
-                  </div>
-                  <span className="block text-[#F7D22D]">от {item.sale} ₽</span>
-                </button>
-              ))}
-            </div>
-            <button className="w-full bg-[#F7D22D] py-4">
+            <button className="w-full bg-[#F7D22D] py-4" style={{boxShadow: '0 -37px 30px 10px #fff'}}>
               Добавить в корзину <span>1000</span> ₽
             </button>
           </div>
         </div>
       </Modal>
-
     </section>
   );
 });
