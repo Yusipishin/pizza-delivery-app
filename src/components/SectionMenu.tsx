@@ -14,7 +14,14 @@ const SectionMenu = memo(() => {
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>('')
   const [modalActive, setModalActive] = useState<boolean>(false)
 
-  const [currentPizza, setCurrentPizza] = useState<Pizza>()
+  const [selectedPizza, setSelectedPizza] = useState<Pizza>()
+  const [selectedSize, setSelectedSize] = useState<string>('Средняя')
+  const [selectedDough, setSelectedDough] = useState<string>('Традиционное')
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([])
+
+  const [currentWidth, setCurrentWidth] = useState<number>(30)
+  const [currentWeight, setCurrentWeight] = useState<number>()
+  const [currentSale, setCurrentSale] = useState<number>()
 
   const [offset, setOffset] = useState(0)
   const [menuEnded, setMenuEnded] = useState(false)
@@ -39,8 +46,10 @@ const SectionMenu = memo(() => {
     const elem = event.target as HTMLElement
     if (elem.tagName === 'BUTTON') {
       const pizzaId = elem.parentElement?.parentElement?.getAttribute('data-pizza-id');
-      const pizza = menu.find((item) => item.id === pizzaId);
-      setCurrentPizza(pizza);
+      const pizza = menu.find((item) => item.id === pizzaId) as Pizza;
+      setSelectedPizza(pizza);
+      setCurrentWeight(pizza.weight.traditional.average)
+      setCurrentSale(pizza.sale.average)
       setModalActive(true)
     }
   }
@@ -69,8 +78,7 @@ const SectionMenu = memo(() => {
                     text-[22px] 
                     font-extrabold
                     leading-7
-                  "
-                >
+                  ">
                   {item.name}
                 </h3>
                 <p
@@ -79,8 +87,7 @@ const SectionMenu = memo(() => {
                     mb-6
                     leading-5
                     font-medium
-                  "
-                >
+                  ">
                   {composition[0].toUpperCase() + composition.slice(1)}
                 </p>
               </div>
@@ -90,8 +97,7 @@ const SectionMenu = memo(() => {
                     text-[#231F20]
                     text-2xl
                     leading-7
-                  "
-                >
+                  ">
                   от {item.sale.small} ₽
                 </span>
                 <button
@@ -103,8 +109,7 @@ const SectionMenu = memo(() => {
                     rounded-lg
                     leading-7
                     bg-[#F7D22D]
-                  "
-                >
+                  ">
                   В корзину
                 </button>
               </div>
@@ -118,8 +123,90 @@ const SectionMenu = memo(() => {
   const btnStyle = menuEnded || menuLoadingStatus === 'loading' || menuLoadingStatus === 'error' ? 'none' : 'block'
 
   const renderComposition = () => {
-    let composition = currentPizza ? [...currentPizza.composition.basic, ...currentPizza.composition.optional].join(', ') : null
+    let composition = selectedPizza ? [...selectedPizza.composition.basic, ...selectedPizza.composition.optional].join(', ') : null
     return composition ? composition[0].toUpperCase() + composition.slice(1): null
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>, updateFunction: (value: string) => void) => {
+    const elem = event.target as HTMLElement
+    if (elem.tagName === 'BUTTON') {
+      const name = elem.textContent as string
+      const pizzaWeight = (selectedPizza as Pizza).weight
+      const pizzaSale = (selectedPizza as Pizza).sale
+      updateFunction(name as string)
+      switch (name) {
+        case "Маленькая":
+          setCurrentWidth(25)
+          setCurrentSale(pizzaSale.small)
+          if (selectedDough === 'Традиционное') {
+            setCurrentWeight(pizzaWeight.traditional.small)
+          }
+          break
+        case "Средняя":
+          setCurrentWidth(30)
+          setCurrentSale(pizzaSale.average)
+          if (selectedDough === 'Традиционное') {
+            setCurrentWeight(pizzaWeight.traditional.average)
+          } else if (selectedDough === 'Тонкое') {
+            setCurrentWeight(pizzaWeight.thin.average)
+          }
+          break
+        case "Большая":
+          setCurrentWidth(35)
+          setCurrentSale(pizzaSale.big)
+          if (selectedDough === 'Традиционное') {
+            setCurrentWeight(pizzaWeight.traditional.big)
+          } else if (selectedDough === 'Тонкое') {
+            setCurrentWeight(pizzaWeight.thin.big)
+          }
+          break
+        case "Традиционное":
+          if (currentWidth === 25) {
+            setCurrentWeight(pizzaWeight.traditional.small)
+          } else if (currentWidth === 30) {
+            setCurrentWeight(pizzaWeight.traditional.average)
+          } else if (currentWidth === 35) {
+            setCurrentWeight(pizzaWeight.traditional.big)
+          }
+          break
+        case "Тонкое":
+          if (currentWidth === 30) {
+            setCurrentWeight(pizzaWeight.thin.average)
+          } else if (currentWidth === 35) {
+            setCurrentWeight(pizzaWeight.thin.big)
+          }
+          break
+      }
+    }
+  }
+
+  const handleClickIngr = (event: React.MouseEvent<HTMLElement>, updateFunction: (value: string[]) => void) => {
+    const elem = event.target as HTMLElement
+    if (elem.tagName === 'BUTTON') {
+      console.log(elem)
+      const name = elem.textContent as string
+      updateFunction(selectedIngredients.indexOf(name) === -1 ? [...selectedIngredients, name] : selectedIngredients.filter(item => item !== name))
+    }
+  }
+
+  const styleSmallBtn = () => {
+    if (selectedSize === 'Маленькая') {
+      return 'bg-[#F7D22D] text-[#231F20]'
+    } else if (selectedDough === 'Тонкое') {
+      return 'bg-[#F3F3F7] text-[#828792] opacity-50'
+    } else {
+      return 'bg-[#F3F3F7] text-[#828792]'
+    }
+  }
+
+  const styleThinBtn = () => {
+    if (selectedSize === 'Маленькая') {
+      return  'bg-[#F3F3F7] text-[#828792] opacity-50'
+    } else if (selectedDough === 'Тонкое') {
+      return 'bg-[#F7D22D] text-[#231F20]'
+    } else {
+      return 'bg-[#F3F3F7] text-[#828792]'
+    }
   }
 
   return (
@@ -127,13 +214,12 @@ const SectionMenu = memo(() => {
       <div className="container">
         <h2
           className="
-          text-[32px]
-          font-extrabold
-          leading-10
-          text-[#F7D22D]
-          mb-7
-        "
-        >
+              text-[32px]
+              font-extrabold
+              leading-10
+              text-[#F7D22D]
+              mb-7
+          ">
           Пицца
         </h2>
         {checkLoading()}
@@ -156,80 +242,71 @@ const SectionMenu = memo(() => {
 
       <Modal active={modalActive} setActive={setModalActive}>
         <div className="wrapper">
-          <img className="mx-16" src={currentPizza?.img.url} alt={currentPizza?.name} />
-          <div className="[&_label]:rounded-lg [&_button]:rounded-lg">
+          <img className="mx-16" src={selectedPizza?.img.url} alt={selectedPizza?.name} />
+          <div className="[&_button]:rounded-lg">
             <div className="scroll__off overflow-y-scroll">
               <div>
                 <span className="block text-[20px] font-extrabold">
-                  {currentPizza?.name}
+                  {selectedPizza?.name}
                 </span>
                 <span className="block text-[#686466] font-semibold my-1">
-                  {/* НОВЫЕ СОСТОЯНИЯ */}
-                  25 см, традиционное тесто, 360 г
+                  {currentWidth} см, традиционное тесто, {currentWeight} г
                 </span>
                 <p className="text-[#686466] opacity-60 text-[12px] leading-5 mb-5">
                   {renderComposition()}
                 </p>
                 <div className="
-                  mb-5
-                  text-[#828792]
-                  text-[11px]
-                  font-semibold
-                  [&_input]:hidden
-                  [&_label]:bg-[#F3F3F7]
-                  [&_label]:py-2
-                  [&_label]:text-center
-                  [&_label]:cursor-pointer
-                ">
-                  <div className="
-                      flex
-                      gap-3
-                      mb-2
-                      [&_label]:w-1/3
+                      mb-5
+                      text-[#828792]
+                      text-[11px]
+                      font-semibold
+                      [&_button]:py-2
+                      [&_button]:text-center
                   ">
-                    <input type="radio" id="874aacee-c5d2-47a9-833c-ca29d3f7cab0" name="pizza_size"/>
-                    <label htmlFor="874aacee-c5d2-47a9-833c-ca29d3f7cab0">
-                      Маленькая
-                    </label>
-                    <input type="radio" id="49275a6e-9471-4521-b95d-e0d3555dd8cb" name="pizza_size"/>
-                    <label htmlFor="49275a6e-9471-4521-b95d-e0d3555dd8cb">
-                      Средняя
-                    </label>
-                    <input type="radio" id="a60f612f-b729-4d25-bdb0-1f4666251c79" name="pizza_size"/>
-                    <label htmlFor="a60f612f-b729-4d25-bdb0-1f4666251c79">
-                      Большая
-                    </label>
+                  <div onClick={(event) => handleClick(event, setSelectedSize)}  
+                        className="
+                            flex
+                            gap-3
+                            mb-2
+                            [&_button]:w-1/3
+                        "
+                    >
+                    <button disabled={selectedDough === 'Тонкое'} className={styleSmallBtn()}>Маленькая</button>
+                    <button className={selectedSize === 'Средняя' ? 
+                                              'bg-[#F7D22D] text-[#231F20]' : 
+                                              'bg-[#F3F3F7] text-[#828792]'}>
+                                                Средняя</button>
+                    <button className={selectedSize === 'Большая' ? 
+                                              'bg-[#F7D22D] text-[#231F20]' : 
+                                              'bg-[#F3F3F7] text-[#828792]'}>
+                                                Большая</button>
                   </div>
                   
-                  <div className="
-                      flex
-                      gap-3
-                      [&_label]:w-1/2
-                  ">
-                    <input type="radio" id="9ec1f8a9-e426-4524-9285-e31634eb273f" name="pizza_dough"/>
-                    <label htmlFor="9ec1f8a9-e426-4524-9285-e31634eb273f">
-                      Традиционное
-                    </label>
-                    <input type="radio" id="a43a852d-1d88-4246-ac4d-86a649a6c69f" name="pizza_dough"/>
-                    <label htmlFor="a43a852d-1d88-4246-ac4d-86a649a6c69f">
-                      Тонкое
-                    </label>
+                  <div onClick={(event) => handleClick(event, setSelectedDough)} 
+                        className="
+                          flex
+                          gap-3
+                          [&_button]:w-1/2
+                        "
+                    >
+                    <button className={selectedDough === 'Традиционное' ? 
+                                              'bg-[#F7D22D] text-[#231F20]' : 
+                                              'bg-[#F3F3F7] text-[#828792]'}>
+                                                Традиционное</button>
+                    <button disabled={currentWidth === 25} className={styleThinBtn()}>Тонкое</button>
                   </div>
                 </div>
               </div>
-              <div className="
-                  flex
-                  justify-between
-                  gap-3
-                  flex-wrap
-                  [&_button]:w-[31%]
-                  [&_button]:border-[1.5px]
-                  [&_button]:border-[#E2E2E9]
-                  [&_button]:border-solid
-                  h-80
-              ">
+              <div onClick={(event) => handleClickIngr(event, setSelectedIngredients)}
+                  className="
+                      flex
+                      justify-between
+                      gap-3
+                      flex-wrap
+                      h-80
+                ">
                 {addIngredients.map((item, i) => (
-                  <button className="flex flex-col justify-between items-center p-3" data-selected="false" key={i}>
+                  <button data-name={item.name} className={`flex w-[31%] border-[1.5px] border-solid flex-col justify-between items-center p-3 hover:border-[#fff562] ${selectedIngredients.indexOf(item.name) === -1 ? `border-[#E2E2E9]` : `border-[#fff562]`}`} key={i}>
                     <div className="flex flex-col items-center">
                       <img className="w-20 mb-1" src={item.path} alt={item.name} />
                       <span className="leading-4 mb-3 text-[13px] font-semibold ">{item.name}</span>
@@ -241,7 +318,7 @@ const SectionMenu = memo(() => {
               </div>
             </div>
             <button className="w-full bg-[#F7D22D] py-4" style={{boxShadow: '0 -37px 30px 10px #fff'}}>
-              Добавить в корзину <span>1000</span> ₽
+              Добавить в корзину <span>{currentSale}</span> ₽
             </button>
           </div>
         </div>
