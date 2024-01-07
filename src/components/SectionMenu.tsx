@@ -21,7 +21,10 @@ const SectionMenu = memo(() => {
 
   const [currentWidth, setCurrentWidth] = useState<number>(30)
   const [currentWeight, setCurrentWeight] = useState<number>()
-  const [currentSale, setCurrentSale] = useState<number>()
+  const [currentSale, setCurrentSale] = useState<number>(0)
+  const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0)
+
+  const [differenceOfSale, setDifferenceOfSale] = useState<number>(0)
 
   const [offset, setOffset] = useState(0)
   const [menuEnded, setMenuEnded] = useState(false)
@@ -136,15 +139,17 @@ const SectionMenu = memo(() => {
       updateFunction(name as string)
       switch (name) {
         case "Маленькая":
+          setDifferenceOfSale(-10)
           setCurrentWidth(25)
-          setCurrentSale(pizzaSale.small)
+          setCurrentSale(pizzaSale.small + currentSaleIngr)
           if (selectedDough === 'Традиционное') {
             setCurrentWeight(pizzaWeight.traditional.small)
           }
           break
         case "Средняя":
+          setDifferenceOfSale(0)
           setCurrentWidth(30)
-          setCurrentSale(pizzaSale.average)
+          setCurrentSale(pizzaSale.average + currentSaleIngr)
           if (selectedDough === 'Традиционное') {
             setCurrentWeight(pizzaWeight.traditional.average)
           } else if (selectedDough === 'Тонкое') {
@@ -152,8 +157,9 @@ const SectionMenu = memo(() => {
           }
           break
         case "Большая":
+          setDifferenceOfSale(20)
           setCurrentWidth(35)
-          setCurrentSale(pizzaSale.big)
+          setCurrentSale(pizzaSale.big + currentSaleIngr)
           if (selectedDough === 'Традиционное') {
             setCurrentWeight(pizzaWeight.traditional.big)
           } else if (selectedDough === 'Тонкое') {
@@ -180,12 +186,20 @@ const SectionMenu = memo(() => {
     }
   }
 
-  const handleClickIngr = (event: React.MouseEvent<HTMLElement>, updateFunction: (value: string[]) => void) => {
-    const elem = event.target as HTMLElement
-    if (elem.tagName === 'BUTTON') {
-      console.log(elem)
-      const name = elem.textContent as string
-      updateFunction(selectedIngredients.indexOf(name) === -1 ? [...selectedIngredients, name] : selectedIngredients.filter(item => item !== name))
+  const handleClickIngr = (event: React.MouseEvent<HTMLElement>) => {
+    const name = (event.target as HTMLElement).getAttribute('data-name')
+    const sale = Number((event.target as HTMLElement).getAttribute('data-sale'))
+    if (name && sale) {
+      if (selectedIngredients.indexOf(name) === -1) {
+        setSelectedIngredients([...selectedIngredients, name])
+        setCurrentSaleIngr(currentSaleIngr + sale)
+        setCurrentSale(currentSale + sale)
+      } else {
+        setSelectedIngredients(selectedIngredients.filter(item => item !== name))
+        setCurrentSaleIngr(currentSaleIngr - sale)
+        setCurrentSale(currentSale - sale)
+      }
+      
     }
   }
 
@@ -193,7 +207,7 @@ const SectionMenu = memo(() => {
     if (selectedSize === 'Маленькая') {
       return 'bg-[#F7D22D] text-[#231F20]'
     } else if (selectedDough === 'Тонкое') {
-      return 'bg-[#F3F3F7] text-[#828792] opacity-50'
+      return 'bg-[#F3F3F7] text-[#828792] opacity-50 cursor-not-allowed'
     } else {
       return 'bg-[#F3F3F7] text-[#828792]'
     }
@@ -201,7 +215,7 @@ const SectionMenu = memo(() => {
 
   const styleThinBtn = () => {
     if (selectedSize === 'Маленькая') {
-      return  'bg-[#F3F3F7] text-[#828792] opacity-50'
+      return  'bg-[#F3F3F7] text-[#828792] opacity-50 cursor-not-allowed'
     } else if (selectedDough === 'Тонкое') {
       return 'bg-[#F7D22D] text-[#231F20]'
     } else {
@@ -250,7 +264,7 @@ const SectionMenu = memo(() => {
                   {selectedPizza?.name}
                 </span>
                 <span className="block text-[#686466] font-semibold my-1">
-                  {currentWidth} см, традиционное тесто, {currentWeight} г
+                  {currentWidth} см, {selectedDough.toLowerCase()} тесто, {currentWeight} г
                 </span>
                 <p className="text-[#686466] opacity-60 text-[12px] leading-5 mb-5">
                   {renderComposition()}
@@ -297,7 +311,7 @@ const SectionMenu = memo(() => {
                   </div>
                 </div>
               </div>
-              <div onClick={(event) => handleClickIngr(event, setSelectedIngredients)}
+              <div onClick={(event) => handleClickIngr(event)}
                   className="
                       flex
                       justify-between
@@ -306,12 +320,12 @@ const SectionMenu = memo(() => {
                       h-80
                 ">
                 {addIngredients.map((item, i) => (
-                  <button data-name={item.name} className={`flex w-[31%] border-[1.5px] border-solid flex-col justify-between items-center p-3 hover:border-[#fff562] ${selectedIngredients.indexOf(item.name) === -1 ? `border-[#E2E2E9]` : `border-[#fff562]`}`} key={i}>
+                  <button data-name={item.name} data-sale={item.sale} className={`flex w-[31%] border-[1.5px] border-solid flex-col justify-between items-center p-3 hover:border-[#fff562] ${selectedIngredients.indexOf(item.name) === -1 ? `border-[#E2E2E9]` : `border-[#fff562]`}`} key={i}>
                     <div className="flex flex-col items-center">
                       <img className="w-20 mb-1" src={item.path} alt={item.name} />
                       <span className="leading-4 mb-3 text-[13px] font-semibold ">{item.name}</span>
                     </div>
-                    <span className="text-[#F7D22D] font-extrabold">от {item.sale} ₽</span>
+                    <span className="text-[#F7D22D] font-extrabold">от {item.sale + differenceOfSale} ₽</span>
                   </button>
                 ))}
                 <div className="h-8 w-1"></div>
