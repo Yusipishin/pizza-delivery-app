@@ -1,52 +1,52 @@
 type link = {
-  name: string,
-  path: string
-}
+  name: string;
+  path: string;
+};
 
 const headerLinks: link[] = [
   {
     name: "Пицца",
-    path: '/'
+    path: "/",
   },
   {
     name: "Паста",
-    path: '/'
+    path: "/",
   },
   {
     name: "Супы",
-    path: '/'
+    path: "/",
   },
   {
     name: "Салаты",
-    path: '/'
+    path: "/",
   },
   {
     name: "Напитки",
-    path: '/'
+    path: "/",
   },
   {
     name: "Десерты",
-    path: '/'
+    path: "/",
   },
   {
     name: "Бакалея",
-    path: '/'
+    path: "/",
   },
   {
     name: "Антипасти",
-    path: '/'
-  },
-  {
-    name: "Акции",
-    path: '/actions'
+    path: "/",
   },
   {
     name: "Комбо",
-    path: '/'
+    path: "/",
+  },
+  {
+    name: "Акции",
+    path: "/actions",
   },
   {
     name: "Контакты",
-    path: '/contact'
+    path: "/contact",
   },
 ];
 

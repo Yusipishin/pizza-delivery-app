@@ -1,0 +1,28 @@
+.title {
+  @apply text-[24px] text-[#231F20] mb-8
+}
+
+.item {
+  @apply rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]
+}
+
+.card {
+  @apply gap-6 py-4 pr-9 pl-4
+}
+
+.pizzaImg {
+  @apply w-[71px] h-[71px] rounded-[50%] bg-[#fcdc4f]
+}
+
+.pizzaName {
+  @apply leading-6 inline-block text-black text-[18px] mb-1
+}
+
+.pizzaSale {
+  @apply leading-6 inline-block font-extrabold text-[16px] text-[#F7D22D]
+}
+
+.bgImg {
+  @apply top-[-10%] w-60 h-[460px] absolute bg-no-repeat 
+          bg-[url('/src/assets/img/main-bg-img.png')]
+}

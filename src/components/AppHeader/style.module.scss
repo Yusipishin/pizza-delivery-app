@@ -1,0 +1,53 @@
+.headerFixed {
+  @apply fixed top-0 left-0 right-0 z-10 bg-white py-5;
+}
+
+.yandexIc {
+  @apply w-[18px] h-[18px] mr-2 
+          bg-[url("/src/assets/img/icons/yandex-food-ic.svg")];
+}
+
+.starIc {
+  @apply w-[13px] h-[13px] mt-[-3px] ml-1 
+          bg-[url('/src/assets/img/icons/star-ic.svg')]
+}
+
+.rating {
+  @apply ml-5 before:content-[''] before:-ml-2 before:bg-[#FF2E65] 
+          before:-translate-x-1/2 before:-translate-y-1/2 before:absolute 
+          before:top-1/2 before:w-1 before:h-1 before:rounded-full
+}
+
+.time {
+  @apply ml-5 before:content-[''] before:-ml-2 before:bg-[#FF2E65] 
+          before:-translate-x-1/2 before:-translate-y-1/2 before:absolute 
+          before:top-1/2 before:w-1 before:h-1 before:rounded-full
+}
+
+.btnCart {
+  @apply gap-8  rounded-lg  relative  py-2  px-7 
+          text-[16px] text-[#231F20] leading-8 bg-[#F7D22D]
+}
+
+.txtCart {
+  @apply after:content-[''] after:left-[72%] after:top-1/2 after:w-0.5 
+          after:h-6 after:block after:absolute after:rounded-md 
+          after:bg-[#231F20] after:-translate-x-1/2 after:-translate-y-1/2
+}
+
+.inputTel {
+  @apply mt-10 mb-20 flex items-center gap-8
+}
+
+.tel {
+  @apply py-4 px-5 text-[#231F20] text-[15px] 
+          rounded-lg border-[1.5px] border-solid border-[#E2E2E9]
+}
+
+.sendCode {
+  @apply text-white text-[15px] rounded-lg font-extrabold py-5 px-14
+}
+
+.continue {
+  @apply text-[#9D9D9B] font-semibold text-[13px] leading-5 max-w-[330px]
+}

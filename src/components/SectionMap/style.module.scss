@@ -1,0 +1,15 @@
+.mapTitle {
+  @apply text-[#F7D22D] text-center font-extrabold
+            text-[30px] mb-16 leading-normal
+}
+
+.description {
+  @apply rounded-[14px] bg-white max-w-[255px]
+          text-[#473E43] pt-14 pb-4 px-5 leading-6
+}
+
+.img {
+  @apply absolute w-[77px] h-[77px] rounded-full 
+          bg-white -top-7 left-1/2 -translate-x-1/2 
+          flex items-center justify-center
+}

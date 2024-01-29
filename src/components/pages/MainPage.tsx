@@ -1,17 +1,17 @@
-import SectionNovelty from '../SectionNovelty'
-import SectionMenu from '../SectionMenu'
-import SectionStocks from '../SectionStocks'
-import SectionMap from '../SectionMap'
+import SectionNovelty from "../SectionNovelty/SectionNovelty";
+import SectionMenu from "../SectionMenu/SectionMenu";
+import SectionStocks from "../SectionStocks/SectionStocks";
+import SectionMap from "../SectionMap/SectionMap";
 
 const MainPage = () => {
   return (
     <>
-      <SectionNovelty/>
-      <SectionMenu/>
-      <SectionStocks/>
-      <SectionMap/>
+      <SectionNovelty />
+      <SectionMenu />
+      <SectionStocks />
+      <SectionMap />
     </>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;

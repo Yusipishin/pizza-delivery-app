@@ -9,40 +9,40 @@
 // }
 
 export interface Stock {
-  id: string,
-  name: string,
-  img: { 
-    url: string
-  }
+  id: string;
+  name: string;
+  img: {
+    url: string;
+  };
 }
 
 export interface Novelty extends Stock {
-  sale: number
+  sale: number;
 }
 
 export interface Action extends Stock {
-  description: string
+  description: string;
 }
 
 export interface Pizza extends Stock {
   sale: {
-    small: number,
-    average: number,
-    big: number
-  },
+    small: number;
+    average: number;
+    big: number;
+  };
   composition: {
-    basic: string[],
-    optional: string[]
-  },
+    basic: string[];
+    optional: string[];
+  };
   weight: {
     traditional: {
-      small: number,
-      average: number,
-      big: number,
-    },
+      small: number;
+      average: number;
+      big: number;
+    };
     thin: {
-      average: number,
-      big: number,
-    }
-  }
+      average: number;
+      big: number;
+    };
+  };
 }

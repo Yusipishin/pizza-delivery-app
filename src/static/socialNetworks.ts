@@ -1,10 +1,10 @@
-type socialNetwork = string
+type socialNetwork = string;
 
 const socialNetworks: socialNetwork[] = [
-  'YouTube',
-  'Instagram',
-  'Facebook',
-  'ВКонтакте',
-]
+  "YouTube",
+  "Instagram",
+  "Facebook",
+  "ВКонтакте",
+];
 
 export default socialNetworks;

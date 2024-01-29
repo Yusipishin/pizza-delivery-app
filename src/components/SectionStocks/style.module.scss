@@ -1,0 +1,14 @@
+.list {
+  @apply my-12 grid gap-[28px] grid-cols-[541px_253px_253px] 
+          grid-rows-2 items-end
+}
+
+.link {
+  @apply py-[10px] px-10 rounded-3xl text-[#fff] bg-[#F7D22D] 
+          leading-7 mb-16
+}
+
+.bgImg {
+  @apply -bottom-36 right-0 w-60 h-[460px] absolute -z-10 bg-no-repeat 
+            bg-[url('/src/assets/img/bg-stocks.png')]
+}
