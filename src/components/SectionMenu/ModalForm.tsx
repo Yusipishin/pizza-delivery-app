@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 interface Props {
   modalActive: boolean;
   setModalActive: (arg: boolean) => void;
-  selectedPizza: Pizza;
+  selectedPizza: Pizza | undefined;
   currentWidth: number;
   currentWeight: number;
   selectedDough: string;
@@ -15,7 +15,7 @@ interface Props {
   currentSaleIngr: number;
   setCurrentSale: (arg: number) => void;
   setCurrentWeight: (arg: number) => void;
-  selectedIngredients: (arg: string[]) => void;
+  selectedIngredients: string[];
   setSelectedIngredients: (arg: string[]) => void;
   setCurrentSaleIngr: (arg: number) => void;
   currentSale: number;

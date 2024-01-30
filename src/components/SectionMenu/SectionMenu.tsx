@@ -22,7 +22,7 @@ const SectionMenu = memo(() => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
   const [currentWidth, setCurrentWidth] = useState<number>(30);
-  const [currentWeight, setCurrentWeight] = useState<number>();
+  const [currentWeight, setCurrentWeight] = useState<number>(0);
   const [currentSale, setCurrentSale] = useState<number>(0);
   const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0);
 
@@ -141,7 +141,7 @@ const SectionMenu = memo(() => {
           onClick={() => onRequest()}
           aria-label="Посмотреть ещё варианты пицц"
           style={{ display: btnStyle }}
-          className={styles.btnLaod}
+          className={styles.btnLoad}
         >
           Посмотреть ещё
         </button>
