@@ -11,7 +11,7 @@ type DeliveryObj = {
 const deliveryInfo: DeliveryObj[] = [
   {
     img: img1,
-    descr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    descr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit psum dolor sit amet, consectetur adipiscing elit",
   },
   {
     img: img2,

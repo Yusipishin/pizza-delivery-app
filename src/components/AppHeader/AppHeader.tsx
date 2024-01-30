@@ -102,7 +102,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
               </button>
               <button
                 aria-label="Открыть корзину"
-                className={`wrapper ${styles.btnCart}`}
+                className={styles.btnCart}
               >
                 <span className={styles.txtCart}>Корзина</span>
                 <span>1</span>

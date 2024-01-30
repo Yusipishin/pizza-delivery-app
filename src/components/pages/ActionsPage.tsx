@@ -33,17 +33,21 @@ const ActionsPage = memo(() => {
     return actions.map((item: Action) => {
       return (
         <li
-          className="rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]"
+          className="rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)] flex"
           key={item.id}
         >
-          <article className="max-w-[350px]">
-            <img className="block" src={item.img.url} alt={item.name} />
-            <div className="mt-3 mr-2 mb-5 ml-5">
-              <h3 className="mb-2 text-2xl">{item.name}</h3>
-              <p className="mb-5 text-[#797979] text-[13px] font-medium">
-                {item.description}
-              </p>
-              <button className="text-[#473E43] py-4 px-8 bg-[#F7D22D] rounded-lg">
+          <article className="max-w-[350px] flex flex-col justify-between">
+            <div>
+              <img className="block" src={item.img.url} alt={item.name} />
+              <div className="mt-3 mr-2 mb-5 ml-5">
+                <h3 className="mb-2 text-2xl">{item.name}</h3>
+                <p className="mb-5 text-[#797979] text-[13px] font-medium">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+            <div>
+              <button className="text-[#473E43] py-4 px-8 bg-[#F7D22D] rounded-lg mb-5 ml-5">
                 Посмотреть
               </button>
             </div>

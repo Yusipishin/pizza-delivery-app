@@ -7,7 +7,7 @@ const SectionMap = memo(() => {
   const renderDeliveryInfo = () => {
     return deliveryInfo.map(({ img, descr }, i) => {
       return (
-        <div className="relative" key={i}>
+        <div className="relative flex" key={i}>
           <div className={styles.description}>{descr}</div>
           <div className={styles.img}>
             <img src={img} />
@@ -21,7 +21,7 @@ const SectionMap = memo(() => {
     <section className="bg-[#E3ECF5] py-16">
       <div className="container">
         <h2 className={styles.mapTitle}>Оплата и доставка</h2>
-        <div className="wrapper mb-8">{renderDeliveryInfo()}</div>
+        <div className="flex justify-between mb-8">{renderDeliveryInfo()}</div>
         <iframe
           className="w-full h-96 rounded-2xl"
           src="https://yandex.ru/map-widget/v1/?um=constructor%3Aae346d3b29954bada9def805fb08e1ce6b2e3a27de6522f83b54422ae9dd3b80&amp;source=constructor"

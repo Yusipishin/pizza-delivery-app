@@ -25,7 +25,7 @@ const SectionHero = memo(() => {
         >
           <button
             className="hero__slider-prev"
-            aria-label="Показать прошлый слайд"
+            aria-label="Показать предыдущий слайд"
           />
           <button
             className="hero__slider-next"
@@ -36,7 +36,7 @@ const SectionHero = memo(() => {
               <img
                 src={img}
                 key={i}
-                alt="Fibo Pasta Img"
+                alt="Рекламный постер"
                 className="hero__slider-img"
               />
             </SwiperSlide>

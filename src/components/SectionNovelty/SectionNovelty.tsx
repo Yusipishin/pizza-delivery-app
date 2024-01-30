@@ -35,7 +35,7 @@ const SectionNovelty = () => {
       return (
         <li className={styles.item} key={item.id}>
           <a href="#">
-            <article className={`wrapper ${styles.card}`}>
+            <article className={styles.card}>
               <img
                 className={styles.pizzaImg}
                 src={item.img.url}
