@@ -17,16 +17,9 @@ const SectionMenu = memo(() => {
   const [menuEnded, setMenuEnded] = useState(false);
 
   const [selectedPizza, setSelectedPizza] = useState<Pizza>();
-  const [selectedSize, setSelectedSize] = useState<string>("Средняя");
-  const [selectedDough, setSelectedDough] = useState<string>("Традиционное");
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
-  const [currentWidth, setCurrentWidth] = useState<number>(30);
   const [currentWeight, setCurrentWeight] = useState<number>(0);
   const [currentSale, setCurrentSale] = useState<number>(0);
-  const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0);
-
-  const [differenceOfSale, setDifferenceOfSale] = useState<number>(0);
 
   const { request } = useHttp();
 
@@ -111,22 +104,10 @@ const SectionMenu = memo(() => {
     modalActive,
     setModalActive,
     selectedPizza,
-    currentWidth,
     currentWeight,
-    selectedDough,
-    setDifferenceOfSale,
-    setCurrentWidth,
-    currentSaleIngr,
     setCurrentSale,
     setCurrentWeight,
-    selectedIngredients,
-    setSelectedIngredients,
-    setCurrentSaleIngr,
     currentSale,
-    selectedSize,
-    setSelectedSize,
-    setSelectedDough,
-    differenceOfSale,
   };
 
   return (

@@ -1,5 +1,5 @@
 .title {
-  @apply text-[32px] font-extrabold leading-10 text-[#F7D22D] mb-7
+  @apply text-[32px] font-extrabold leading-10 text-yel mb-7
 }
 
 .list {
@@ -7,7 +7,7 @@
 }
 
 .btnLoad {
-  @apply mx-auto block mb-14 bg-[#F3F3F7] rounded-lg py-4 px-7 text-lg
+  @apply mx-auto block mb-14 bg-whBtn rounded-lg py-4 px-7 text-lg
 }
 
 .subtitle {
@@ -19,11 +19,11 @@
 }
 
 .sale {
-  @apply text-[#231F20] text-2xl leading-7
+  @apply text-bl text-2xl leading-7
 }
 
 .btnCart {
-  @apply text-[#fff] py-2 px-7 rounded-lg leading-7 bg-[#F7D22D]
+  @apply text-white py-2 px-7 rounded-lg leading-7 bg-yel
 }
 
 .pizzaDescription {
@@ -35,7 +35,7 @@
 }
 
 .btnsWrapper {
-  @apply mb-5 text-[#828792] text-[11px] font-semibold 
+  @apply mb-5 text-gr text-[11px] font-semibold 
           [&_button]:py-2 [&_button]:text-center
 }
 
@@ -61,9 +61,9 @@
 }
 
 .ingrSale {
-  @apply text-[#F7D22D] font-extrabold
+  @apply text-yel font-extrabold
 }
 
 .btnBlock {
-  @apply bg-[#F3F3F7] text-[#828792] opacity-50 cursor-not-allowed
+  @apply bg-whBtn text-gr opacity-50 cursor-not-allowed
 }

@@ -33,7 +33,7 @@ const ActionsPage = memo(() => {
     return actions.map((item: Action) => {
       return (
         <li
-          className="rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)] flex"
+          className="rounded-xl shadow-shad flex"
           key={item.id}
         >
           <article className="max-w-[350px] flex flex-col justify-between">
@@ -47,7 +47,7 @@ const ActionsPage = memo(() => {
               </div>
             </div>
             <div>
-              <button className="text-[#473E43] py-4 px-8 bg-[#F7D22D] rounded-lg mb-5 ml-5">
+              <button className="text-[#473E43] py-4 px-8 bg-yel rounded-lg mb-5 ml-5">
                 Посмотреть
               </button>
             </div>
@@ -60,7 +60,7 @@ const ActionsPage = memo(() => {
   return (
     <section>
       <div className="container">
-        <h1 className="text-[#F7D22D] text-4xl mb-6">Акции</h1>
+        <h1 className="text-yel text-4xl mb-6">Акции</h1>
         {checkLoading()}
         <ul className="flex flex-wrap gap-7">{renderItems()}</ul>
       </div>

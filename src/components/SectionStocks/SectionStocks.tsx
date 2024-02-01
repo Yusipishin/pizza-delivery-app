@@ -59,7 +59,7 @@ const SectionStocks = () => {
       <div className="container">
         <div className="flex flex-col items-center">
           <h2 className="font-extrabold text-5xl">
-            Наши <span className="text-[#F7D22D]">акции</span>
+            Наши <span className="text-yel">акции</span>
           </h2>
           {checkLoading()}
           <ul className={styles.list}>{renderItems()}</ul>

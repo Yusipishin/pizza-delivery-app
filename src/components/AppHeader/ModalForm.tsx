@@ -11,7 +11,7 @@ interface Props {
 const ModalForm = memo(({modalActive, setModalActive}: Props) => {
   return (
     <Modal active={modalActive} setActive={setModalActive}>
-      <span className="text-[#F7D22D] text-4xl font-extrabold">
+      <span className="text-yel text-4xl font-extrabold">
         Вход на сайт
       </span>
       <form action="#" method="post">
@@ -20,19 +20,19 @@ const ModalForm = memo(({modalActive, setModalActive}: Props) => {
             Номер телефона
           </label>
           <InputMask
+            type="tel"
             id="post-tel"
             name="user_telephone"
-            mask="+7 (999) 999-99-99"
-            type="tel"
-            placeholder="+7 (999) 999-99-99"
             className={styles.tel}
+            mask="+7 (999) 999-99-99"
+            placeholder="+7 (999) 999-99-99"
           />
         </div>
         <div className="wrapper gap-6">
           <button
             name="submit"
             type="submit"
-            className={`bg-[#F7D22D] ${styles.sendCode}`}
+            className={`bg-yel ${styles.sendCode}`}
           >
             Выслать код
           </button>

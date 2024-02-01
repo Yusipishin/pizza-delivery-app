@@ -28,8 +28,8 @@ const AppHeader = memo(({ mainRef }: Props) => {
   
   const renderLinks = () => {
     return headerLinks.map(({ name, path }, i) => (
-      <li className="header__item" key={i}>
-        <NavLink className="header__link" end to={path}>
+      <li key={i}>
+        <NavLink end to={path}>
           {name}
         </NavLink>
       </li>
@@ -45,10 +45,10 @@ const AppHeader = memo(({ mainRef }: Props) => {
               <Link to="/" className="logo">
                 <img src={logo} alt="Логотип Fibo Pasta Bar" />
               </Link>
-              <div className="text-[#231F20] ml-[52px]">
+              <div className="text-bl ml-[52px]">
                 <div className="text-[17px] flex mb-4">
                   <h1>Доставка пасты</h1>
-                  <address className="text-[#F7D22D] ml-2" tabIndex={0}>
+                  <address className="text-yel ml-2" tabIndex={0}>
                     Москва
                   </address>
                 </div>
@@ -80,7 +80,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
               </address>
             </div>
           </div>
-          <div className="wrapper header__menu">
+          <div className="wrapper">
             <Link
               to="/"
               className={`logo w-[72px] h-[53px] ${headerScroll ? "" : "hidden"}`}
@@ -89,15 +89,15 @@ const AppHeader = memo(({ mainRef }: Props) => {
             </Link>
             <nav className={headerScroll ? "ml-[20px] mr-[30px]" : ""}>
               <ul
-                className={`wrapper gap-4 font-semibold text-[15px] ${headerScroll ? "gap-4" : "gap-5"}`}>
+                className={`wrapper gap-4 font-semibold text-lsr ${headerScroll ? "gap-4" : "gap-5"}`}>
                 {renderLinks()}
               </ul>
             </nav>
-            <div className="wrapper header__menu-inner">
+            <div className="wrapper">
               <button
                 onClick={() => setModalActive(true)}
                 aria-label="Авторизоваться"
-                className={`text-[#696F7A] mx-8 text-[16px] ${headerScroll ? "hidden" : ""}`}>
+                className={`text-[#696F7A] mx-8 text-sr ${headerScroll ? "hidden" : ""}`}>
                 Войти
               </button>
               <button

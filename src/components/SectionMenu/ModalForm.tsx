@@ -2,50 +2,37 @@ import addIngredients from "../../static/addIngredients";
 import Modal from "../UI/modal/Modal";
 import { Pizza } from "../../intefaces/interfaces";
 import styles from "./style.module.scss";
+import { useState, memo } from "react";
 
 interface Props {
   modalActive: boolean;
   setModalActive: (arg: boolean) => void;
   selectedPizza: Pizza | undefined;
-  currentWidth: number;
   currentWeight: number;
-  selectedDough: string;
-  setDifferenceOfSale: (arg: number) => void;
-  setCurrentWidth: (arg: number) => void;
-  currentSaleIngr: number;
   setCurrentSale: (arg: number) => void;
   setCurrentWeight: (arg: number) => void;
-  selectedIngredients: string[];
-  setSelectedIngredients: (arg: string[]) => void;
-  setCurrentSaleIngr: (arg: number) => void;
   currentSale: number;
-  selectedSize: string;
-  setSelectedSize: (arg: string) => void;
-  setSelectedDough: (arg: string) => void;
-  differenceOfSale: number;
 }
 
-const ModalForm = ({
+const ModalForm = memo(({
   modalActive,
   setModalActive,
   selectedPizza,
-  currentWidth,
   currentWeight,
-  selectedDough,
-  setDifferenceOfSale,
-  setCurrentWidth,
-  currentSaleIngr,
   setCurrentSale,
   setCurrentWeight,
-  selectedIngredients,
-  setSelectedIngredients,
-  setCurrentSaleIngr,
   currentSale,
-  selectedSize,
-  differenceOfSale,
-  setSelectedDough,
-  setSelectedSize,
 }: Props) => {
+
+  const [selectedSize, setSelectedSize] = useState<string>("Средняя");
+  const [selectedDough, setSelectedDough] = useState<string>("Традиционное");
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+
+  const [currentWidth, setCurrentWidth] = useState<number>(30);
+  const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0);
+
+  const [differenceOfSale, setDifferenceOfSale] = useState<number>(0);
+
   const handleClickOption = (
     event: React.MouseEvent<HTMLElement>,
     updateFunction: (value: string) => void
@@ -127,11 +114,11 @@ const ModalForm = ({
 
   const styleSmallBtn = () => {
     if (selectedSize === "Маленькая") {
-      return "bg-[#F7D22D] text-[#231F20]";
+      return "bg-yel text-bl";
     } else if (selectedDough === "Тонкое") {
       return styles.btnBlock;
     } else {
-      return "bg-[#F3F3F7] text-[#828792]";
+      return "bg-whBtn text-gr";
     }
   };
 
@@ -139,9 +126,9 @@ const ModalForm = ({
     if (selectedSize === "Маленькая") {
       return styles.btnBlock;
     } else if (selectedDough === "Тонкое") {
-      return "bg-[#F7D22D] text-[#231F20]";
+      return "bg-yel text-bl";
     } else {
-      return "bg-[#F3F3F7] text-[#828792]";
+      return "bg-whBtn text-gr";
     }
   };
 
@@ -233,8 +220,8 @@ const ModalForm = ({
                   <button
                     className={
                       selectedSize === "Средняя"
-                        ? "bg-[#F7D22D] text-[#231F20]"
-                        : "bg-[#F3F3F7] text-[#828792]"
+                        ? "bg-yel text-bl"
+                        : "bg-whBtn text-gr"
                     }
                   >
                     Средняя
@@ -242,8 +229,8 @@ const ModalForm = ({
                   <button
                     className={
                       selectedSize === "Большая"
-                        ? "bg-[#F7D22D] text-[#231F20]"
-                        : "bg-[#F3F3F7] text-[#828792]"
+                        ? "bg-yel text-bl"
+                        : "bg-whBtn text-gr"
                     }
                   >
                     Большая
@@ -259,8 +246,8 @@ const ModalForm = ({
                   <button
                     className={
                       selectedDough === "Традиционное"
-                        ? "bg-[#F7D22D] text-[#231F20]"
-                        : "bg-[#F3F3F7] text-[#828792]"
+                        ? "bg-yel text-bl"
+                        : "bg-whBtn text-gr"
                     }
                   >
                     Традиционное
@@ -280,6 +267,7 @@ const ModalForm = ({
             >
               {addIngredients.map((item, i) => (
                 <button
+                  key={i}
                   data-name={item.name}
                   data-sale={item.sale}
                   className={`${styles.ingrBtn} ${
@@ -287,7 +275,6 @@ const ModalForm = ({
                       ? `border-[#E2E2E9]`
                       : `border-[#fff562]`
                   }`}
-                  key={i}
                 >
                   <div className="flex flex-col items-center">
                     <img
@@ -295,9 +282,7 @@ const ModalForm = ({
                       src={item.path}
                       alt={item.name}
                     />
-                    <span className={styles.ingrName}>
-                      {item.name}
-                    </span>
+                    <span className={styles.ingrName}>{item.name}</span>
                   </div>
                   <span className={styles.ingrSale}>
                     от {item.sale + differenceOfSale} ₽
@@ -307,16 +292,13 @@ const ModalForm = ({
               <div className="h-8 w-1"></div>
             </div>
           </div>
-          <button
-            className="w-full bg-[#F7D22D] py-4"
-            style={{ boxShadow: "0 -37px 30px 10px #fff" }}
-          >
+          <button className="w-full bg-yel py-4">
             Добавить в корзину <span>{currentSale}</span> ₽
           </button>
         </div>
       </div>
     </Modal>
   );
-};
+});
 
 export default ModalForm;

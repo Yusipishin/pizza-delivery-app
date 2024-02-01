@@ -13,7 +13,7 @@ const ContactPage = memo(() => {
             href="tel:+84993918449"
             className="
               text-[38px] 
-              text-[#F7D22D]
+              text-yel
             "
           >
             8 800 333-36-62
@@ -21,7 +21,7 @@ const ContactPage = memo(() => {
           <span className="block text-[26px] mt-7 mb-5">
             ул. Проспект Вернадского 86В
           </span>
-          <span className="block text-[15px] font-semibold">
+          <span className="block text-lsr font-semibold">
             Доставка и самовывоз 10:00 — 23:00
           </span>
         </address>

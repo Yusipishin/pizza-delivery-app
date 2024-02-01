@@ -8,11 +8,11 @@
 }
 
 .title {
-  @apply text-[24px] text-[#231F20] mb-8
+  @apply text-[24px] text-bl mb-8
 }
 
 .item {
-  @apply rounded-xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.06)]
+  @apply rounded-xl shadow-shad
 }
 
 .card {
@@ -28,7 +28,7 @@
 }
 
 .pizzaSale {
-  @apply leading-6 inline-block font-extrabold text-[16px] text-[#F7D22D]
+  @apply leading-6 inline-block font-extrabold text-[16px] text-yel
 }
 
 .bgImg {

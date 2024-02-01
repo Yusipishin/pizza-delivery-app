@@ -18,7 +18,7 @@ const SectionMap = memo(() => {
   };
 
   return (
-    <section className="bg-[#E3ECF5] py-16">
+    <section className="bg-wh py-16">
       <div className="container">
         <h2 className={styles.mapTitle}>Оплата и доставка</h2>
         <div className="flex justify-between mb-8">{renderDeliveryInfo()}</div>

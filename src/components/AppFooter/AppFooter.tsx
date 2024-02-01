@@ -29,7 +29,7 @@ const AppFooter = memo(() => {
         <a
           href="#"
           key={i}
-          className="py-3 px-9 rounded-xl border-[#E3ECF5] border-2"
+          className="py-3 px-9 rounded-xl border-wh border-2"
         >
           <img src={img} alt={name} />
         </a>
@@ -38,14 +38,14 @@ const AppFooter = memo(() => {
   };
 
   return (
-    <footer className="footer py-16 relative">
+    <footer className="py-16 relative">
       <div className="container">
         <div className="flex justify-between items-end gap-16">
           <div className="leading-7">
             <Link to="/" className="logo inline-block mb-9">
               <img src={logo} alt="Логотип Fibo Pasta Bar" />
             </Link>
-            <div className="text-[16px] mb-9 max-w-[545px]">
+            <div className="text-sr mb-9 max-w-[545px]">
               <div className="mb-6">
                 <a href="#">Калорийность и состав</a>
                 <a className="ml-14" href="#">
@@ -81,7 +81,7 @@ const AppFooter = memo(() => {
                     py-3 
                     px-9 
                     rounded-xl 
-                    border-[#E3ECF5] 
+                    border-wh 
                     border-2 
                     col-span-2
                 "

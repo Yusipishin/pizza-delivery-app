@@ -22,26 +22,26 @@
 }
 
 .rating {
-  @apply ml-5 before:content-[''] before:-ml-2 before:bg-[#FF2E65] 
+  @apply ml-5 before:content-[''] before:-ml-2 before:bg-red 
           before:-translate-x-1/2 before:-translate-y-1/2 before:absolute 
           before:top-1/2 before:w-1 before:h-1 before:rounded-full
 }
 
 .time {
-  @apply ml-5 before:content-[''] before:-ml-2 before:bg-[#FF2E65] 
+  @apply ml-5 before:content-[''] before:-ml-2 before:bg-red
           before:-translate-x-1/2 before:-translate-y-1/2 before:absolute 
           before:top-1/2 before:w-1 before:h-1 before:rounded-full
 }
 
 .btnCart {
   @apply wrapper gap-8  rounded-lg  relative  py-2  px-7 
-          text-[16px] text-[#231F20] leading-8 bg-[#F7D22D]
+          text-[16px] text-bl leading-8 bg-yel
 }
 
 .txtCart {
   @apply after:content-[''] after:left-[72%] after:top-1/2 after:w-0.5 
           after:h-6 after:block after:absolute after:rounded-md 
-          after:bg-[#231F20] after:-translate-x-1/2 after:-translate-y-1/2
+          after:bg-bl after:-translate-x-1/2 after:-translate-y-1/2
 }
 
 .inputTel {
@@ -49,12 +49,12 @@
 }
 
 .tel {
-  @apply py-4 px-5 text-[#231F20] text-[15px] 
+  @apply py-4 px-5 text-bl text-lsr
           rounded-lg border-[1.5px] border-solid border-[#E2E2E9]
 }
 
 .sendCode {
-  @apply text-white text-[15px] rounded-lg font-extrabold py-5 px-14
+  @apply text-white text-lsr rounded-lg font-extrabold py-5 px-14
 }
 
 .continue {
