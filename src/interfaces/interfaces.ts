@@ -46,3 +46,26 @@ export interface Pizza extends Stock {
     };
   };
 }
+
+export interface PizzaWeightTraditional extends PizzaWeightThin {
+  small: number;
+}
+export interface PizzaWeightThin {
+  average: number;
+  big: number;
+}
+
+export type PizzaSize = PizzaWeightThin | PizzaWeightTraditional
+
+export interface PizzaDough {
+  traditional: {
+    small: number;
+    average: number;
+    big: number;
+  };
+  thin: {
+    average: number;
+    big: number;
+  };
+}
+

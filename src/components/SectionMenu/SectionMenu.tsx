@@ -7,16 +7,18 @@ import ModalForm from "./ModalForm";
 
 import { useEffect, useState, memo } from "react";
 
-import { Pizza } from "../../intefaces/interfaces";
+import { Pizza, PizzaDough, PizzaSize } from "../../interfaces/interfaces";
 
 const SectionMenu = memo(() => {
   const [menu, setMenu] = useState<Pizza[]>([]);
-  const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>("");
+  const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>("idle");
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [offset, setOffset] = useState(0);
   const [menuEnded, setMenuEnded] = useState(false);
 
-  const [selectedPizza, setSelectedPizza] = useState<Pizza>();
+  const [selectedPizza, setSelectedPizza] = useState<Pizza | undefined>(undefined);
+  const [selectedSize, setSelectedSize] = useState<string>("average");
+  const [selectedDough, setSelectedDough] = useState<string>("traditional");
 
   const [currentWeight, setCurrentWeight] = useState<number>(0);
   const [currentSale, setCurrentSale] = useState<number>(0);
@@ -34,22 +36,9 @@ const SectionMenu = memo(() => {
         setMenuLoadingStatus("idle");
       })
       .catch(() => setMenuLoadingStatus("error"));
-  };
+  }
 
   useEffect(() => onRequest, []);
-
-  const openModal = (event: React.MouseEvent<HTMLElement>) => {
-    const elem = event.target as HTMLElement;
-    if (elem.tagName === "BUTTON") {
-      const pizzaId =
-        elem.parentElement?.parentElement?.getAttribute("data-pizza-id");
-      const pizza = menu.find((item) => item.id === pizzaId) as Pizza;
-      setSelectedPizza(pizza);
-      setCurrentWeight(pizza.weight.traditional.average);
-      setCurrentSale(pizza.sale.average);
-      setModalActive(true);
-    }
-  };
 
   const checkLoading = () => {
     if (menuLoadingStatus === "loading") {
@@ -57,6 +46,33 @@ const SectionMenu = memo(() => {
     } else if (menuLoadingStatus === "error") {
       return <ErrorMessage />;
     }
+  };
+
+  const openModal = (event: React.MouseEvent<HTMLElement>) => {
+    const elem = event.target as HTMLElement;
+    if (elem.tagName === "BUTTON") {
+      const pizzaId = elem.parentElement?.parentElement?.getAttribute("data-pizza-id");
+      const pizza = menu.find((item) => item.id === pizzaId) as Pizza;
+      setCurrentWeight(pizza.weight[selectedDough as keyof PizzaDough][selectedSize as keyof PizzaSize]);
+      setCurrentSale(pizza.sale[selectedSize as keyof PizzaSize]);
+      setModalActive(true);
+      setSelectedPizza(pizza);
+    }
+  };
+
+  const modalFormProps = {
+    modalActive,
+    setModalActive,
+    selectedPizza,
+    currentWeight,
+    setCurrentSale,
+    setCurrentWeight,
+    currentSale,
+    selectedSize,
+    setSelectedSize,
+    selectedDough,
+    setSelectedDough,
+    setSelectedPizza
   };
 
   const renderItems = () => {
@@ -93,35 +109,18 @@ const SectionMenu = memo(() => {
     });
   };
 
-  const btnStyle =
-    menuEnded ||
-    menuLoadingStatus === "loading" ||
-    menuLoadingStatus === "error"
-      ? "none"
-      : "block";
-
-  const modalFormProps = {
-    modalActive,
-    setModalActive,
-    selectedPizza,
-    currentWeight,
-    setCurrentSale,
-    setCurrentWeight,
-    currentSale,
-  };
-
   return (
     <section className="menu">
       <div className="container">
         <h2 className={styles.title}>Пицца</h2>
-        {checkLoading()}
         <ul className={styles.list} onClick={openModal}>
           {renderItems()}
         </ul>
+        {checkLoading()}
         <button
           onClick={() => onRequest()}
           aria-label="Посмотреть ещё варианты пицц"
-          style={{ display: btnStyle }}
+          style={{ display: menuEnded || menuLoadingStatus !== "idle" ? "none" : "block" }}
           className={styles.btnLoad}
         >
           Посмотреть ещё

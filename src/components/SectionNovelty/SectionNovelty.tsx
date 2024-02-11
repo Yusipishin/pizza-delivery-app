@@ -4,7 +4,7 @@ import LoadingMessage from "../UI/LoadingMessage/MessageLoading";
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
-import { Novelty } from "../../intefaces/interfaces";
+import { Novelty } from "../../interfaces/interfaces";
 
 const SectionNovelty = () => {
   const [novelty, setNovelty] = useState<Novelty[]>([]);

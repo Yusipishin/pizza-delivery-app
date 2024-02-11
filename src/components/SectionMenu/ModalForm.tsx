@@ -1,8 +1,9 @@
 import addIngredients from "../../static/addIngredients";
 import Modal from "../UI/modal/Modal";
-import { Pizza } from "../../intefaces/interfaces";
 import styles from "./style.module.scss";
-import { useState, memo } from "react";
+import { useState, memo, useEffect } from "react";
+
+import { Pizza, PizzaDough, PizzaSize } from "../../interfaces/interfaces";
 
 interface Props {
   modalActive: boolean;
@@ -12,157 +13,120 @@ interface Props {
   setCurrentSale: (arg: number) => void;
   setCurrentWeight: (arg: number) => void;
   currentSale: number;
+  selectedSize: string;
+  setSelectedSize: (arg: string) => void;
+  selectedDough: string;
+  setSelectedDough: (arg: string) => void;
+  setSelectedPizza: (arg: Pizza | undefined) => void;
 }
 
-const ModalForm = memo(({
-  modalActive,
-  setModalActive,
-  selectedPizza,
-  currentWeight,
-  setCurrentSale,
-  setCurrentWeight,
-  currentSale,
-}: Props) => {
+const ModalForm = memo(
+  ({
+    modalActive,
+    setModalActive,
+    selectedPizza,
+    currentWeight,
+    setCurrentSale,
+    setCurrentWeight,
+    currentSale,
+    selectedSize,
+    setSelectedSize,
+    selectedDough,
+    setSelectedDough,
+    setSelectedPizza
+  }: Props) => {
+    const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
-  const [selectedSize, setSelectedSize] = useState<string>("Средняя");
-  const [selectedDough, setSelectedDough] = useState<string>("Традиционное");
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+    const [currentWidth, setCurrentWidth] = useState<number>(30);
+    const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0);
 
-  const [currentWidth, setCurrentWidth] = useState<number>(30);
-  const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0);
+    const [differenceOfSale, setDifferenceOfSale] = useState<number>(0);
 
-  const [differenceOfSale, setDifferenceOfSale] = useState<number>(0);
-
-  const handleClickOption = (
-    event: React.MouseEvent<HTMLElement>,
-    updateFunction: (value: string) => void
-  ) => {
-    const elem = event.target as HTMLElement;
-    if (elem.tagName === "BUTTON") {
-      const name = elem.textContent as string;
-      const pizzaWeight = (selectedPizza as Pizza).weight;
-      const pizzaSale = (selectedPizza as Pizza).sale;
-      updateFunction(name as string);
-      switch (name) {
-        case "Маленькая":
-          setDifferenceOfSale(-10);
-          setCurrentWidth(25);
-          setCurrentSale(pizzaSale.small + currentSaleIngr);
-          if (selectedDough === "Традиционное") {
-            setCurrentWeight(pizzaWeight.traditional.small);
-          }
-          break;
-        case "Средняя":
-          setDifferenceOfSale(0);
-          setCurrentWidth(30);
-          setCurrentSale(pizzaSale.average + currentSaleIngr);
-          if (selectedDough === "Традиционное") {
-            setCurrentWeight(pizzaWeight.traditional.average);
-          } else if (selectedDough === "Тонкое") {
-            setCurrentWeight(pizzaWeight.thin.average);
-          }
-          break;
-        case "Большая":
-          setDifferenceOfSale(20);
-          setCurrentWidth(35);
-          setCurrentSale(pizzaSale.big + currentSaleIngr);
-          if (selectedDough === "Традиционное") {
-            setCurrentWeight(pizzaWeight.traditional.big);
-          } else if (selectedDough === "Тонкое") {
-            setCurrentWeight(pizzaWeight.thin.big);
-          }
-          break;
-        case "Традиционное":
-          if (currentWidth === 25) {
-            setCurrentWeight(pizzaWeight.traditional.small);
-          } else if (currentWidth === 30) {
-            setCurrentWeight(pizzaWeight.traditional.average);
-          } else if (currentWidth === 35) {
-            setCurrentWeight(pizzaWeight.traditional.big);
-          }
-          break;
-        case "Тонкое":
-          if (currentWidth === 30) {
-            setCurrentWeight(pizzaWeight.thin.average);
-          } else if (currentWidth === 35) {
-            setCurrentWeight(pizzaWeight.thin.big);
-          }
-          break;
+    useEffect(() => {
+      if (!modalActive) {
+        setDifferenceOfSale(0)
+        setCurrentSaleIngr(0)
+        setCurrentWidth(30)
+        setSelectedIngredients([])
+        setSelectedPizza(undefined)
+        setSelectedSize("average")
+        setSelectedDough("traditional")
+        setCurrentWeight(0)
+        setCurrentSale(0)
       }
-    }
-  };
+    }, [modalActive])
 
-  const handleClickIngr = (event: React.MouseEvent<HTMLElement>) => {
-    const name = (event.target as HTMLElement).getAttribute("data-name");
-    const sale = Number(
-      (event.target as HTMLElement).getAttribute("data-sale")
-    );
-    if (name && sale) {
-      if (selectedIngredients.indexOf(name) === -1) {
-        setSelectedIngredients([...selectedIngredients, name]);
-        setCurrentSaleIngr(currentSaleIngr + sale);
-        setCurrentSale(currentSale + sale);
+    const changeOption = (
+      newDifferenceOfSale: number,
+      newCurrentWidth: number,
+      name: string
+    ) => {
+      setDifferenceOfSale(newDifferenceOfSale);
+      setCurrentWidth(newCurrentWidth);
+      setCurrentSale((selectedPizza as Pizza).sale[name as keyof PizzaSize] + currentSaleIngr);
+      setCurrentWeight((selectedPizza as Pizza).weight[selectedDough as keyof PizzaDough][name as keyof PizzaSize]);
+    };
+
+    const handleClickOption = (
+      event: React.MouseEvent<HTMLElement>,
+      updateFunction: (arg: string) => void
+    ) => {
+      const elem = event.target as HTMLElement;
+      if (elem.tagName === "BUTTON") {
+        const name = elem.getAttribute("data-name");
+        const pizzaWeight = (selectedPizza as Pizza).weight;
+        updateFunction(name as string);
+        if (name === "small") changeOption(-10, 25, name);
+        else if (name === "average") changeOption(0, 30, name);
+        else if (name === "big") changeOption(20, 35, name);
+        else if (name === "traditional") pizzaWeight.traditional[selectedSize as keyof PizzaSize];
+        else if (name === "thin") pizzaWeight.thin[selectedSize as keyof PizzaSize];
+      }
+    };
+
+    const handleClickIngr = (event: React.MouseEvent<HTMLElement>) => {
+      const name = (event.target as HTMLElement).getAttribute("data-name");
+      const sale = Number((event.target as HTMLElement).getAttribute("data-sale"));
+      if (name && sale) {
+        const arrContain = selectedIngredients.indexOf(name) !== -1 ? false: true;
+        setSelectedIngredients(arrContain ? [...selectedIngredients, name] : selectedIngredients.filter(item => item !== name));
+        setCurrentSaleIngr(currentSaleIngr + (arrContain ? sale : -sale));
+        setCurrentSale(currentSale + (arrContain ? sale : -sale));
+      }
+    };
+
+    const setStyleBtn = (styleSmall: string, styleThin: string) => {
+      if (selectedSize === "small") {
+        return styleSmall;
+      } else if (selectedDough === "thin") {
+        return styleThin;
       } else {
-        setSelectedIngredients(
-          selectedIngredients.filter((item: string) => item !== name)
-        );
-        setCurrentSaleIngr(currentSaleIngr - sale);
-        setCurrentSale(currentSale - sale);
+        return "bg-whBtn text-gr";
       }
     }
-  };
 
-  const styleSmallBtn = () => {
-    if (selectedSize === "Маленькая") {
-      return "bg-yel text-bl";
-    } else if (selectedDough === "Тонкое") {
-      return styles.btnBlock;
-    } else {
-      return "bg-whBtn text-gr";
-    }
-  };
-
-  const styleThinBtn = () => {
-    if (selectedSize === "Маленькая") {
-      return styles.btnBlock;
-    } else if (selectedDough === "Тонкое") {
-      return "bg-yel text-bl";
-    } else {
-      return "bg-whBtn text-gr";
-    }
-  };
-
-  return (
-    <Modal active={modalActive} setActive={setModalActive}>
-      <div className="wrapper">
-        <img
-          className="mx-16"
-          src={selectedPizza?.img.url}
-          alt={selectedPizza?.name}
-        />
-        <div className="[&_button]:rounded-lg">
-          <div className="scroll__off overflow-y-scroll">
-            <div>
-              <span className="block text-[20px] font-extrabold">
-                {selectedPizza?.name}
-              </span>
-              <span className={styles.pizzaDescription}>
-                {currentWidth} см, {selectedDough.toLowerCase()} тесто,{" "}
-                {currentWeight} г
-              </span>
-              <p className="text-[#A4A2A3] text-[12px] leading-5 mb-5">
-                {selectedPizza?.composition.basic.map(
-                  (item: string, i: number) => {
+    return (
+      <Modal active={modalActive} setActive={setModalActive}>
+        <div className="wrapper">
+          <img className="mx-16" src={selectedPizza?.img.url} alt={selectedPizza?.name} />
+          <div className="[&_button]:rounded-lg">
+            <div className="scroll__off overflow-y-scroll">
+              <div>
+                <span className="block text-[20px] font-extrabold">{selectedPizza?.name}</span>
+                <span className={styles.pizzaDescription}>
+                  {currentWidth} см, 
+                  {selectedDough === "thin" ? "тонкое" : "традиционное"} тесто,{" "}
+                  {currentWeight} г
+                </span>
+                <p className="text-[#A4A2A3] text-[12px] leading-5 mb-5">
+                  {selectedPizza?.composition.basic.map((item: string, i: number) => {
                     return (
                       <span key={i}>
-                        {i === 0 ? item[0].toUpperCase() + item.slice(1) : item}
-                        ,{" "}
+                        {i === 0 ? item[0].toUpperCase() + item.slice(1) : item},{" "}
                       </span>
                     );
-                  }
-                )}
-                {selectedPizza?.composition.optional.map(
-                  (item: string, i: number) => {
+                  })}
+                  {selectedPizza?.composition.optional.map((item: string, i: number) => {
                     return (
                       <span key={i}>
                         <span className={styles.optionalIngr}>{item}</span>
@@ -198,107 +162,88 @@ const ModalForm = memo(({
                             ></path>
                           </svg>
                         </button>
-                        {i !== selectedPizza?.composition.optional.length - 1
-                          ? ", "
-                          : null}
+                        {i !== selectedPizza?.composition.optional.length - 1 ? ", " : null}
                       </span>
                     );
-                  }
-                )}
-              </p>
-              <div className={styles.btnsWrapper}>
-                <div
-                  onClick={(event) => handleClickOption(event, setSelectedSize)}
-                  className={styles.btnsSizeWrap}
-                >
-                  <button
-                    disabled={selectedDough === "Тонкое"}
-                    className={styleSmallBtn()}
+                  })}
+                </p>
+                <div className={styles.btnsWrapper}>
+                  <div
+                    onClick={(event) => handleClickOption(event, setSelectedSize)}
+                    className={styles.btnsSizeWrap}
                   >
-                    Маленькая
-                  </button>
-                  <button
-                    className={
-                      selectedSize === "Средняя"
-                        ? "bg-yel text-bl"
-                        : "bg-whBtn text-gr"
-                    }
+                    <button
+                      data-name="small"
+                      disabled={selectedDough === "thin"}
+                      className={setStyleBtn("bg-yel text-bl", styles.btnUnclick)}
+                    >
+                      Маленькая
+                    </button>
+                    <button
+                      data-name="average"
+                      className={selectedSize === "average" ? "bg-yel text-bl" : "bg-whBtn text-gr"}
+                    >
+                      Средняя
+                    </button>
+                    <button
+                      data-name="big"
+                      className={selectedSize === "big" ? "bg-yel text-bl" : "bg-whBtn text-gr"}
+                    >
+                      Большая
+                    </button>
+                  </div>
+                  <div
+                    onClick={(event) => handleClickOption(event, setSelectedDough)}
+                    className={styles.btnsDoughWrap}
                   >
-                    Средняя
-                  </button>
-                  <button
-                    className={
-                      selectedSize === "Большая"
-                        ? "bg-yel text-bl"
-                        : "bg-whBtn text-gr"
-                    }
-                  >
-                    Большая
-                  </button>
-                </div>
-
-                <div
-                  onClick={(event) =>
-                    handleClickOption(event, setSelectedDough)
-                  }
-                  className={styles.btnsDoughWrap}
-                >
-                  <button
-                    className={
-                      selectedDough === "Традиционное"
-                        ? "bg-yel text-bl"
-                        : "bg-whBtn text-gr"
-                    }
-                  >
-                    Традиционное
-                  </button>
-                  <button
-                    disabled={currentWidth === 25}
-                    className={styleThinBtn()}
-                  >
-                    Тонкое
-                  </button>
+                    <button
+                      data-name="traditional"
+                      className={
+                        selectedDough === "traditional" ? "bg-yel text-bl" : "bg-whBtn text-gr"
+                      }
+                    >
+                      Традиционное
+                    </button>
+                    <button
+                      data-name="thin"
+                      disabled={currentWidth === 25}
+                      className={setStyleBtn(styles.btnUnclick, "bg-yel text-bl")}
+                    >
+                      Тонкое
+                    </button>
+                  </div>
                 </div>
               </div>
+              <div onClick={(event) => handleClickIngr(event)} className={styles.ingrWrap}>
+                {addIngredients.map((item, i) => (
+                  <button
+                    key={i}
+                    data-name={item.name}
+                    data-sale={item.sale}
+                    className={`${styles.ingrBtn} ${
+                      selectedIngredients.indexOf(item.name) === -1
+                        ? `border-[#E2E2E9]`
+                        : `border-[#fff562]`
+                    }`}
+                  >
+                    <div className="flex flex-col items-center">
+                      <img className="w-20 mb-1" src={item.path} alt={item.name} />
+                      <span className={styles.ingrName}>{item.name}</span>
+                    </div>
+                    <span className={styles.ingrSale}>от {item.sale + differenceOfSale} ₽</span>
+                  </button>
+                ))}
+                <div className="h-8 w-1"></div>
+              </div>
             </div>
-            <div
-              onClick={(event) => handleClickIngr(event)}
-              className={styles.ingrWrap}
-            >
-              {addIngredients.map((item, i) => (
-                <button
-                  key={i}
-                  data-name={item.name}
-                  data-sale={item.sale}
-                  className={`${styles.ingrBtn} ${
-                    selectedIngredients.indexOf(item.name) === -1
-                      ? `border-[#E2E2E9]`
-                      : `border-[#fff562]`
-                  }`}
-                >
-                  <div className="flex flex-col items-center">
-                    <img
-                      className="w-20 mb-1"
-                      src={item.path}
-                      alt={item.name}
-                    />
-                    <span className={styles.ingrName}>{item.name}</span>
-                  </div>
-                  <span className={styles.ingrSale}>
-                    от {item.sale + differenceOfSale} ₽
-                  </span>
-                </button>
-              ))}
-              <div className="h-8 w-1"></div>
-            </div>
+            <button className="w-full bg-yel py-4" style={{ boxShadow: "0 -37px 30px 10px #fff" }}>
+              Добавить в корзину <span>{currentSale}</span> ₽
+            </button>
           </div>
-          <button className="w-full bg-yel py-4">
-            Добавить в корзину <span>{currentSale}</span> ₽
-          </button>
         </div>
-      </div>
-    </Modal>
-  );
-});
+      </Modal>
+    );
+  }
+);
 
 export default ModalForm;

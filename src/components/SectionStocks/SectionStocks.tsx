@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 
 import { Link } from "react-router-dom";
 
-import { Stock } from "../../intefaces/interfaces";
+import { Stock } from "../../interfaces/interfaces";
 
 const SectionStocks = () => {
   const [stocks, setStocks] = useState<Stock[]>([]);

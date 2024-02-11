@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from "react";
-import { Action } from "../../intefaces/interfaces";
+import { Action } from "../../interfaces/interfaces";
 import { useHttp } from "../../hooks/http.hook";
 
 import LoadingMessage from "../UI/LoadingMessage/MessageLoading";
