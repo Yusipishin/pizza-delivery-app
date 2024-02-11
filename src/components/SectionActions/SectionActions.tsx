@@ -1,6 +1,7 @@
 import { useHttp } from "../../hooks/http.hook";
-import ErrorMessage from "../UI/ErrorMessage/MessageError";
-import LoadingMessage from "../UI/LoadingMessage/MessageLoading";
+import ActionBlockSkeleton from "../UI/Skeletons/ActionBlockSkeleton";
+import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
+
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
@@ -25,7 +26,7 @@ const SectionStocks = () => {
 
   const checkLoading = () => {
     if (stocksLoadingStatus === "loading") {
-      return <LoadingMessage />;
+      return <div className="mt-10"><ActionBlockSkeleton /></div>
     } else if (stocksLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -62,7 +63,9 @@ const SectionStocks = () => {
             Наши <span className="text-yel">акции</span>
           </h2>
           {checkLoading()}
-          <ul className={styles.list}>{renderItems()}</ul>
+          <ul className={styles.list}>
+            {renderItems()}
+          </ul>
           <Link
             to="/actions"
             style={{ display: linkStyle }}

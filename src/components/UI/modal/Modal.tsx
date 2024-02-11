@@ -1,4 +1,4 @@
-import Portal from "../portal/Portal";
+import Portal from "../Portal/Portal";
 import closeIcon from "../../../assets/img/icons/close-ic.svg";
 import { memo } from "react";
 

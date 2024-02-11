@@ -1,4 +1,4 @@
-import Modal from "../UI/modal/Modal";
+import Modal from "../UI/Modal/Modal";
 import InputMask from "react-input-mask";
 import styles from "./style.module.scss";
 import { memo } from "react";

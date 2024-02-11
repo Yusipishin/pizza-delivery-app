@@ -1,6 +1,7 @@
 import { useHttp } from "../../hooks/http.hook";
-import ErrorMessage from "../UI/ErrorMessage/MessageError";
-import LoadingMessage from "../UI/LoadingMessage/MessageLoading";
+import ItemSkeleton from "../UI/Skeletons/ItemSkeleton";
+import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
+
 import styles from "./style.module.scss";
 
 import ModalForm from "./ModalForm";
@@ -42,7 +43,7 @@ const SectionMenu = memo(() => {
 
   const checkLoading = () => {
     if (menuLoadingStatus === "loading") {
-      return <LoadingMessage />;
+      return [...Array(4)].map(() => {return <ItemSkeleton/>})
     } else if (menuLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -115,8 +116,8 @@ const SectionMenu = memo(() => {
         <h2 className={styles.title}>Пицца</h2>
         <ul className={styles.list} onClick={openModal}>
           {renderItems()}
+          {checkLoading()}
         </ul>
-        {checkLoading()}
         <button
           onClick={() => onRequest()}
           aria-label="Посмотреть ещё варианты пицц"

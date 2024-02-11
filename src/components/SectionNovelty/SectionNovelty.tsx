@@ -1,6 +1,6 @@
 import { useHttp } from "../../hooks/http.hook";
-import ErrorMessage from "../UI/ErrorMessage/MessageError";
-import LoadingMessage from "../UI/LoadingMessage/MessageLoading";
+import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
+import NoveltySkeleton from "../UI/Skeletons/NoveltySkeleton";
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
@@ -24,7 +24,7 @@ const SectionNovelty = () => {
 
   const checkLoading = () => {
     if (noveltyLoadingStatus === "loading") {
-      return <LoadingMessage />;
+      return [...Array(4)].map(() => {return <NoveltySkeleton/>})
     } else if (noveltyLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -56,8 +56,10 @@ const SectionNovelty = () => {
     <section className="mb-12 relative">
       <div className="container">
         <h2 className={styles.title}>Новинки</h2>
-        {checkLoading()}
-        <ul className="wrapper gap-8">{renderItems()}</ul>
+        <ul className="wrapper gap-8">
+          {renderItems()}
+          {checkLoading()}
+        </ul>
       </div>
       <div className={styles.bgImg}></div>
     </section>

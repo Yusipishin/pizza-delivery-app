@@ -1,5 +1,5 @@
 import addIngredients from "../../static/addIngredients";
-import Modal from "../UI/modal/Modal";
+import Modal from "../UI/Modal/Modal";
 import styles from "./style.module.scss";
 import { useState, memo, useEffect } from "react";
 

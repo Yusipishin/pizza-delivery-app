@@ -2,8 +2,8 @@ import { useState, useEffect, memo } from "react";
 import { Action } from "../../interfaces/interfaces";
 import { useHttp } from "../../hooks/http.hook";
 
-import LoadingMessage from "../UI/LoadingMessage/MessageLoading";
-import ErrorMessage from "../UI/ErrorMessage/MessageError";
+import ActionItemSkeleton from "../UI/Skeletons/ActionItemSkeleton";
+import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
 
 const ActionsPage = memo(() => {
   const [actions, setActions] = useState<Action[]>([]);
@@ -23,7 +23,7 @@ const ActionsPage = memo(() => {
 
   const checkLoading = () => {
     if (actionsLoadingStatus === "loading") {
-      return <LoadingMessage />;
+      return [...Array(3)].map(() => {return <ActionItemSkeleton/>})
     } else if (actionsLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -61,8 +61,10 @@ const ActionsPage = memo(() => {
     <section>
       <div className="container">
         <h1 className="text-yel text-4xl mb-6">Акции</h1>
-        {checkLoading()}
-        <ul className="flex flex-wrap gap-7">{renderItems()}</ul>
+        <ul className="flex flex-wrap gap-7">
+          {renderItems()}
+          {checkLoading()}
+        </ul>
       </div>
     </section>
   );

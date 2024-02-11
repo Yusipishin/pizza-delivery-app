@@ -1,6 +1,6 @@
 import SectionNovelty from "../SectionNovelty/SectionNovelty";
 import SectionMenu from "../SectionMenu/SectionMenu";
-import SectionStocks from "../SectionStocks/SectionStocks";
+import SectionStocks from "../SectionActions/SectionActions";
 import SectionMap from "../SectionMap/SectionMap";
 
 const MainPage = () => {

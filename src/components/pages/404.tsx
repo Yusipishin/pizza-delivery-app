@@ -1,4 +1,4 @@
-import ErrorMessage from "../UI/ErrorMessage/MessageError";
+import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 
