@@ -1,6 +1,9 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 const ContactPage = memo(() => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <section>
       <div className="container">

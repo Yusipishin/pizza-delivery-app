@@ -12,6 +12,7 @@ const ActionsPage = memo(() => {
   const { request } = useHttp();
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     setActionsLoadingStatus("loading");
     request("http://localhost:3001/actions")
       .then((data: Action[]) => {
