@@ -5,7 +5,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import AppFooter from "../AppFooter/AppFooter";
 
 import "../../styles/style.scss";
-import { MainPage, Page404, ContactPage, ActionsPage } from "../pages";
+import { MainPage, Page404, ContactPage, ActionsPage, CartPage } from "../pages";
 
 const App = () => {
   const mainRef = useRef(null);
@@ -15,6 +15,7 @@ const App = () => {
       <main ref={mainRef}>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/actions" element={<ActionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Page404 />} />

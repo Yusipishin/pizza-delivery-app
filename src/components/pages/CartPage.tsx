@@ -7,7 +7,7 @@ const CartPage = memo(() => {
   return (
     <section>
       <div className="container">
-        
+        <h1>Корзина</h1>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import styles from "./style.module.scss";
 import ModalForm from "./ModalForm";
 
 import { Link, NavLink } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 import { memo, useEffect, useState } from "react";
 
 interface Props {
@@ -15,7 +16,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
   const [headerScroll, setHeaderScroll] = useState(false);
   const [modalActive, setModalActive] = useState<boolean>(false);
   
-  mainRef.current?.classList.toggle("mt-40", headerScroll);
+  mainRef.current?.classList.toggle("mt-[38px]", headerScroll);
   
   useEffect(() => {
     const handleScroll = () => setHeaderScroll(window.scrollY > 14 ? true : false);
@@ -27,13 +28,23 @@ const AppHeader = memo(({ mainRef }: Props) => {
   }, []);
   
   const renderLinks = () => {
-    return headerLinks.map(({ name, path }, i) => (
+    return headerLinks.map(({ name, path, id }, i) => (
       <li key={i}>
-        <NavLink end to={path}>
-          {name}
-        </NavLink>
+        {
+          !id ? 
+          <NavLink
+            end
+            to={path}
+            style={({ isActive }) => ({ color: isActive ? "#F7D22D" : "inherit" })}
+            >
+            {name}
+          </NavLink> :
+          <HashLink to={`${path}#${id}`}>
+            {name}
+          </HashLink>
+        }
       </li>
-    ))
+    ));
   }
   
   return (

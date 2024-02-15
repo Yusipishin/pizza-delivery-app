@@ -17,7 +17,7 @@
   &__slider {
     &-img {
       @apply opacity-50 duration-500 rounded-xl scale-90 w-[540px] h-[312px];
-      background-color: #fcdc4f;
+      background-color: #f3f3f3;
     }
     &-next, &-prev {
       @apply top-1/2 z-10 w-9 h-9 absolute rounded-3xl;

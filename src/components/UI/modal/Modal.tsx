@@ -4,14 +4,25 @@ import { memo } from "react";
 
 interface Props {
   active: boolean;
-  setActive: Function;
   children: React.ReactNode;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = memo(({ active, setActive, children }: Props) => {
+const Modal = memo(({ active, children, setActive }: Props) => {
   const renderItems = () => {
+    const getScrollWidth = () => {
+      const testElement = document.createElement('div');
+      testElement.style.visibility = 'hidden';
+      testElement.style.overflow = 'scroll';
+      testElement.style.height = '100px';
+      testElement.style.width = '100px';
+      document.body.appendChild(testElement);
+      const scrollbarWidth = testElement.offsetWidth - testElement.clientWidth;
+      document.body.removeChild(testElement);
+      return scrollbarWidth;
+    }
     document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "23px";
+    document.body.style.paddingRight = `${getScrollWidth()}px`;
     return (
       <Portal>
         <div

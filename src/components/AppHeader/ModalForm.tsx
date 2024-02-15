@@ -5,7 +5,7 @@ import { memo } from "react";
 
 interface Props {
   modalActive: boolean,
-  setModalActive: (active: boolean) => void
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ModalForm = memo(({modalActive, setModalActive}: Props) => {

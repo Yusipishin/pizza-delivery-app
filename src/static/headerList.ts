@@ -1,44 +1,54 @@
 type link = {
   name: string;
   path: string;
+  id?: string;
 };
 
 const headerLinks: link[] = [
   {
     name: "Пицца",
-    path: "/",
+    path: '/',
+    id: "menu-pizza",
   },
   {
     name: "Паста",
-    path: "/",
+    path: '/',
+    id: "menu-pasta",
   },
   {
     name: "Супы",
-    path: "/",
+    path: '/',
+    id: "menu-soups",
   },
   {
     name: "Салаты",
-    path: "/",
+    path: '/',
+    id: "menu-salads",
   },
   {
     name: "Напитки",
-    path: "/",
+    path: '/',
+    id: "menu-drinks",
   },
   {
     name: "Десерты",
-    path: "/",
+    path: '/',
+    id: "menu-desserts",
   },
   {
     name: "Бакалея",
-    path: "/",
+    path: '/',
+    id: "menu-groceries",
   },
   {
     name: "Антипасти",
-    path: "/",
+    path: '/',
+    id: "menu-antipasti",
   },
   {
     name: "Комбо",
-    path: "/",
+    path: '/',
+    id: "menu-combo",
   },
   {
     name: "Акции",

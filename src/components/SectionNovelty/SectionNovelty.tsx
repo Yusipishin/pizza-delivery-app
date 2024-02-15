@@ -24,7 +24,7 @@ const SectionNovelty = () => {
 
   const checkLoading = () => {
     if (noveltyLoadingStatus === "loading") {
-      return [...Array(4)].map(() => {return <NoveltySkeleton/>})
+      return [...Array(4)].map((item, i) => {return <NoveltySkeleton key={i}/>})
     } else if (noveltyLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -53,7 +53,7 @@ const SectionNovelty = () => {
   };
 
   return (
-    <section className="mb-12 relative">
+    <section className="relative">
       <div className="container">
         <h2 className={styles.title}>Новинки</h2>
         <ul className="wrapper gap-8">

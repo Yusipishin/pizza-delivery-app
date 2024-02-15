@@ -1,38 +1,38 @@
-import addIngredients from "../../static/addIngredients";
-import Modal from "../UI/Modal/Modal";
+import addIngredients from "../../../static/addIngredients";
+import Modal from "../../UI/Modal/Modal";
 import styles from "./style.module.scss";
 import { useState, memo, useEffect } from "react";
 
-import { Pizza, PizzaDough, PizzaSize } from "../../interfaces/interfaces";
+import { Pizza, PizzaDough, PizzaSize } from "../../../interfaces/interfaces";
 
 interface Props {
   modalActive: boolean;
-  setModalActive: (arg: boolean) => void;
-  selectedPizza: Pizza | undefined;
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   currentWeight: number;
-  setCurrentSale: (arg: number) => void;
-  setCurrentWeight: (arg: number) => void;
+  setCurrentWeight: React.Dispatch<React.SetStateAction<number>>;
   currentSale: number;
+  setCurrentSale: React.Dispatch<React.SetStateAction<number>>;
   selectedSize: string;
-  setSelectedSize: (arg: string) => void;
+  setSelectedSize: React.Dispatch<React.SetStateAction<string>>;
   selectedDough: string;
-  setSelectedDough: (arg: string) => void;
-  setSelectedPizza: (arg: Pizza | undefined) => void;
+  setSelectedDough: React.Dispatch<React.SetStateAction<string>>;
+  selectedPizza: Pizza | undefined;
+  setSelectedPizza: React.Dispatch<React.SetStateAction<Pizza | undefined>>;
 }
 
 const ModalForm = memo(
   ({
     modalActive,
     setModalActive,
-    selectedPizza,
     currentWeight,
-    setCurrentSale,
     setCurrentWeight,
     currentSale,
+    setCurrentSale,
     selectedSize,
     setSelectedSize,
     selectedDough,
     setSelectedDough,
+    selectedPizza,
     setSelectedPizza
   }: Props) => {
     const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -85,17 +85,20 @@ const ModalForm = memo(
     };
 
     const handleClickIngr = (event: React.MouseEvent<HTMLElement>) => {
-      const name = (event.target as HTMLElement).getAttribute("data-name");
-      const sale = Number((event.target as HTMLElement).getAttribute("data-sale"));
-      if (name && sale) {
-        const arrContain = selectedIngredients.indexOf(name) !== -1 ? false: true;
-        setSelectedIngredients(arrContain ? [...selectedIngredients, name] : selectedIngredients.filter(item => item !== name));
-        setCurrentSaleIngr(currentSaleIngr + (arrContain ? sale : -sale));
-        setCurrentSale(currentSale + (arrContain ? sale : -sale));
+      const elem = (event.target as HTMLElement).closest('.btn-ingr')
+      if (elem) {
+        const name = elem.getAttribute("data-name");
+        const sale = Number(elem.getAttribute("data-sale"));
+        if (name && sale) {
+          const arrContain = selectedIngredients.indexOf(name) !== -1 ? false: true;
+          setSelectedIngredients((selectedIngredients) => arrContain ? [...selectedIngredients, name] : selectedIngredients.filter(item => item !== name));
+          setCurrentSaleIngr((currentSaleIngr) => currentSaleIngr + (arrContain ? sale : -sale));
+          setCurrentSale((currentSale) => currentSale + (arrContain ? sale : -sale));
+        }
       }
     };
 
-    const setStyleBtn = (styleSmall: string, styleThin: string) => {
+    const getStyleBtn = (styleSmall: string, styleThin: string) => {
       if (selectedSize === "small") {
         return styleSmall;
       } else if (selectedDough === "thin") {
@@ -103,6 +106,27 @@ const ModalForm = memo(
       } else {
         return "bg-whBtn text-gr";
       }
+    }
+
+    const renderIngredients = () => {
+      return addIngredients.map((item, i) => (
+        <button
+          key={i}
+          data-name={item.name}
+          data-sale={item.sale}
+          className={`btn-ingr ${styles.ingrBtn} ${
+            selectedIngredients.indexOf(item.name) === -1
+              ? `border-[#E2E2E9]`
+              : `border-[#fff562]`
+          }`}
+        >
+          <span className="flex flex-col items-center">
+            <img className="w-20 mb-1" src={item.path} alt={item.name} />
+            <span className={styles.ingrName}>{item.name}</span>
+          </span>
+          <span className={styles.ingrSale}>от {item.sale + differenceOfSale} ₽</span>
+        </button>
+      ))
     }
 
     return (
@@ -175,7 +199,7 @@ const ModalForm = memo(
                     <button
                       data-name="small"
                       disabled={selectedDough === "thin"}
-                      className={setStyleBtn("bg-yel text-bl", styles.btnUnclick)}
+                      className={getStyleBtn("bg-yel text-bl", styles.btnUnclick)}
                     >
                       Маленькая
                     </button>
@@ -207,7 +231,7 @@ const ModalForm = memo(
                     <button
                       data-name="thin"
                       disabled={currentWidth === 25}
-                      className={setStyleBtn(styles.btnUnclick, "bg-yel text-bl")}
+                      className={getStyleBtn(styles.btnUnclick, "bg-yel text-bl")}
                     >
                       Тонкое
                     </button>
@@ -215,24 +239,7 @@ const ModalForm = memo(
                 </div>
               </div>
               <div onClick={(event) => handleClickIngr(event)} className={styles.ingrWrap}>
-                {addIngredients.map((item, i) => (
-                  <button
-                    key={i}
-                    data-name={item.name}
-                    data-sale={item.sale}
-                    className={`${styles.ingrBtn} ${
-                      selectedIngredients.indexOf(item.name) === -1
-                        ? `border-[#E2E2E9]`
-                        : `border-[#fff562]`
-                    }`}
-                  >
-                    <div className="flex flex-col items-center">
-                      <img className="w-20 mb-1" src={item.path} alt={item.name} />
-                      <span className={styles.ingrName}>{item.name}</span>
-                    </div>
-                    <span className={styles.ingrSale}>от {item.sale + differenceOfSale} ₽</span>
-                  </button>
-                ))}
+                {renderIngredients()}
                 <div className="h-8 w-1"></div>
               </div>
             </div>

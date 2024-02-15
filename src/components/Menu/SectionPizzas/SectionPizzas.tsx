@@ -1,6 +1,6 @@
-import { useHttp } from "../../hooks/http.hook";
-import ItemSkeleton from "../UI/Skeletons/ItemSkeleton";
-import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
+import { useHttp } from "../../../hooks/http.hook";
+import ItemSkeleton from "../../UI/Skeletons/ItemSkeleton";
+import ErrorMessage from "../../UI/ErrorMessage/ErrorMessage";
 
 import styles from "./style.module.scss";
 
@@ -8,7 +8,7 @@ import ModalForm from "./ModalForm";
 
 import { useEffect, useState, memo } from "react";
 
-import { Pizza, PizzaDough, PizzaSize } from "../../interfaces/interfaces";
+import { Pizza, PizzaDough, PizzaSize } from "../../../interfaces/interfaces";
 
 const SectionMenu = memo(() => {
   const [menu, setMenu] = useState<Pizza[]>([]);
@@ -32,7 +32,7 @@ const SectionMenu = memo(() => {
       .then((data: Pizza[]) => {
         const newItems = data.slice(offset, offset + 8);
         setMenuEnded(newItems.length < 8 ? true : false);
-        setOffset(offset + newItems.length);
+        setOffset((offset) => offset + newItems.length);
         setMenu((state) => [...state, ...newItems]);
         setMenuLoadingStatus("idle");
       })
@@ -43,7 +43,7 @@ const SectionMenu = memo(() => {
 
   const checkLoading = () => {
     if (menuLoadingStatus === "loading") {
-      return [...Array(4)].map(() => {return <ItemSkeleton/>})
+      return [...Array(4)].map((item, i) => {return <ItemSkeleton key={i}/>})
     } else if (menuLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -64,15 +64,15 @@ const SectionMenu = memo(() => {
   const modalFormProps = {
     modalActive,
     setModalActive,
-    selectedPizza,
     currentWeight,
-    setCurrentSale,
     setCurrentWeight,
     currentSale,
+    setCurrentSale,
     selectedSize,
     setSelectedSize,
     selectedDough,
     setSelectedDough,
+    selectedPizza,
     setSelectedPizza
   };
 
@@ -111,9 +111,9 @@ const SectionMenu = memo(() => {
   };
 
   return (
-    <section className="menu">
+    <section className="py-14">
       <div className="container">
-        <h2 className={styles.title}>Пицца</h2>
+        <h2 className={styles.title} id="menu-pizza">Пицца</h2>
         <ul className={styles.list} onClick={openModal}>
           {renderItems()}
           {checkLoading()}

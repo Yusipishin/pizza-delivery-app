@@ -1,5 +1,5 @@
 import SectionNovelty from "../SectionNovelty/SectionNovelty";
-import SectionMenu from "../SectionMenu/SectionMenu";
+import SectionMenu from "../Menu/SectionPizzas/SectionPizzas";
 import SectionStocks from "../SectionActions/SectionActions";
 import SectionMap from "../SectionMap/SectionMap";
 import SectionHero from "../SectionHero/SectionHero";

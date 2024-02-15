@@ -10,8 +10,11 @@
 
 #wrapper {
   width: 100%;
-  overflow: hidden;
   min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 html, body {

@@ -1,5 +1,5 @@
 .title {
-  @apply text-[32px] font-extrabold leading-10 text-yel mb-7
+  @apply text-[32px] font-extrabold leading-10 text-yel mb-7 -mt-24 pt-32
 }
 
 .list {
@@ -7,7 +7,7 @@
 }
 
 .btnLoad {
-  @apply mx-auto block mb-14 bg-whBtn rounded-lg py-4 px-7 text-lg
+  @apply mx-auto block bg-whBtn rounded-lg py-4 px-7 text-lg
 }
 
 .subtitle {
