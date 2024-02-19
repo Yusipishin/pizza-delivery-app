@@ -1,39 +1,23 @@
-import { useHttp } from "../../hooks/http.hook";
 import ActionBlockSkeleton from "../UI/Skeletons/ActionBlockSkeleton";
-import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
-
-import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-
+import { withBaseRequest } from "../../hocs/withBaseRequest";
 import { Link } from "react-router-dom";
-
 import { Stock } from "../../interfaces/interfaces";
 
-const SectionStocks = () => {
-  const [stocks, setStocks] = useState<Stock[]>([]);
-  const [stocksLoadingStatus, setStocksLoadingStatus] = useState<string>("");
-  const { request } = useHttp();
+interface Props {
+  checkLoading: () => JSX.Element | JSX.Element[];
+  list: Stock[];
+  loadingStatus: string;
+}
 
-  useEffect(() => {
-    setStocksLoadingStatus("loading");
-    request("http://localhost:3001/stocks")
-      .then((data: Stock[]) => {
-        setStocks(data);
-        setStocksLoadingStatus("idle");
-      })
-      .catch(() => setStocksLoadingStatus("error"));
-  }, []);
-
-  const checkLoading = () => {
-    if (stocksLoadingStatus === "loading") {
-      return <div className="mt-10"><ActionBlockSkeleton /></div>
-    } else if (stocksLoadingStatus === "error") {
-      return <ErrorMessage />;
-    }
-  };
+const SectionStocks = ({
+  checkLoading,
+  list,
+  loadingStatus
+}: Props) => {
 
   const renderItems = () => {
-    return stocks.map((item: Stock, i: number) => {
+    return list.map((item: Stock, i: number) => {
       return (
         <li className={i === 0 ? "row-span-2" : ""} key={item.id}>
           <article>
@@ -51,7 +35,7 @@ const SectionStocks = () => {
   };
 
   const linkStyle =
-    stocksLoadingStatus === "loading" || stocksLoadingStatus === "error"
+  loadingStatus === "loading" || loadingStatus === "error"
       ? "none"
       : "block";
 
@@ -63,9 +47,7 @@ const SectionStocks = () => {
             Наши <span className="text-yel">акции</span>
           </h2>
           {checkLoading()}
-          <ul className={styles.list}>
-            {renderItems()}
-          </ul>
+          <ul className={styles.list}>{renderItems()}</ul>
           <Link
             to="/actions"
             style={{ display: linkStyle }}
@@ -80,4 +62,9 @@ const SectionStocks = () => {
   );
 };
 
-export default SectionStocks;
+export default withBaseRequest(
+  SectionStocks,
+  ActionBlockSkeleton,
+  1,
+  "http://localhost:3001/stocks"
+);

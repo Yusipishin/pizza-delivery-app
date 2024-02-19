@@ -19,7 +19,18 @@ const AppHeader = memo(({ mainRef }: Props) => {
   mainRef.current?.classList.toggle("mt-[38px]", headerScroll);
   
   useEffect(() => {
-    const handleScroll = () => setHeaderScroll(window.scrollY > 14 ? true : false);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      setHeaderScroll(scrollTop > 14)
+      const links = document.querySelectorAll('.header-list li')
+      document.querySelectorAll('.menu-title').forEach((item, i) => {
+        if ((item as HTMLElement).offsetTop - 5 <= scrollTop && scrollTop <= (item.parentElement as HTMLElement).clientHeight + (item as HTMLElement).offsetTop) {
+          links[i].querySelector('a')?.classList.add('text-yel')
+        } 
+        else links[i].querySelector('a')?.classList.remove('text-yel')
+      })
+    }
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -100,7 +111,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
             </Link>
             <nav className={headerScroll ? "ml-[20px] mr-[30px]" : ""}>
               <ul
-                className={`wrapper gap-4 font-semibold text-lsr ${headerScroll ? "gap-4" : "gap-5"}`}>
+                className={`header-list wrapper gap-4 font-semibold text-lsr ${headerScroll ? "gap-4" : "gap-5"}`}>
                 {renderLinks()}
               </ul>
             </nav>

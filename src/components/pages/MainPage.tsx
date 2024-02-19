@@ -9,6 +9,9 @@ import { memo, useEffect } from "react";
 const MainPage = memo(() => {
   useEffect(() => {
     window.scrollTo(0, 0)
+    return () => {
+      document.querySelectorAll('.header-list a').forEach((el) => el.classList.remove('text-yel'))
+    }
   }, [])
   return (
     <>

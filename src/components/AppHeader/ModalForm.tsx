@@ -1,7 +1,7 @@
 import Modal from "../UI/Modal/Modal";
 import InputMask from "react-input-mask";
 import styles from "./style.module.scss";
-import { memo } from "react";
+import { ChangeEvent, memo, useState } from "react";
 
 interface Props {
   modalActive: boolean,
@@ -9,6 +9,12 @@ interface Props {
 }
 
 const ModalForm = memo(({modalActive, setModalActive}: Props) => {
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const onValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value)
+  }
+  
   return (
     <Modal active={modalActive} setActive={setModalActive}>
       <span className="text-yel text-4xl font-extrabold">
@@ -22,7 +28,9 @@ const ModalForm = memo(({modalActive, setModalActive}: Props) => {
           <InputMask
             type="tel"
             id="post-tel"
-            name="user_telephone"
+            name="telephone"
+            value={inputValue}
+            onChange={onValueChange} 
             className={styles.tel}
             mask="+7 (999) 999-99-99"
             placeholder="+7 (999) 999-99-99"

@@ -1,37 +1,22 @@
-import { useState, useEffect, memo } from "react";
+import { useEffect } from "react";
 import { Action } from "../../interfaces/interfaces";
-import { useHttp } from "../../hooks/http.hook";
 
+import { withBaseRequest } from "../../hocs/withBaseRequest";
 import ActionItemSkeleton from "../UI/Skeletons/ActionItemSkeleton";
-import ErrorMessage from "../UI/ErrorMessage/ErrorMessage";
 
-const ActionsPage = memo(() => {
-  const [actions, setActions] = useState<Action[]>([]);
-  const [actionsLoadingStatus, setActionsLoadingStatus] = useState<string>("");
+interface Props {
+  checkLoading: () => JSX.Element | JSX.Element[] | undefined;
+  list: Action[];
+}
 
-  const { request } = useHttp();
+const ActionsPage = ({checkLoading,list}: Props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    setActionsLoadingStatus("loading");
-    request("http://localhost:3001/actions")
-      .then((data: Action[]) => {
-        setActions(data);
-        setActionsLoadingStatus("idle");
-      })
-      .catch(() => setActionsLoadingStatus("error"));
   }, []);
 
-  const checkLoading = () => {
-    if (actionsLoadingStatus === "loading") {
-      return [...Array(3)].map(() => {return <ActionItemSkeleton/>})
-    } else if (actionsLoadingStatus === "error") {
-      return <ErrorMessage />;
-    }
-  };
-
   const renderItems = () => {
-    return actions.map((item: Action) => {
+    return list.map((item: Action) => {
       return (
         <li
           className="rounded-xl shadow-shad flex"
@@ -68,7 +53,12 @@ const ActionsPage = memo(() => {
         </ul>
       </div>
     </section>
-  );
-});
+  )
+}
 
-export default ActionsPage;
+export default withBaseRequest(
+  ActionsPage,
+  ActionItemSkeleton,
+  3,
+  "http://localhost:3001/actions"
+);

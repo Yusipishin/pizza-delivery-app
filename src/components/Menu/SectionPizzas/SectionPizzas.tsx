@@ -31,7 +31,7 @@ const SectionMenu = memo(() => {
     request("http://localhost:3001/menu")
       .then((data: Pizza[]) => {
         const newItems = data.slice(offset, offset + 8);
-        setMenuEnded(newItems.length < 8 ? true : false);
+        setMenuEnded(newItems.length < 8);
         setOffset((offset) => offset + newItems.length);
         setMenu((state) => [...state, ...newItems]);
         setMenuLoadingStatus("idle");
@@ -43,7 +43,7 @@ const SectionMenu = memo(() => {
 
   const checkLoading = () => {
     if (menuLoadingStatus === "loading") {
-      return [...Array(4)].map((item, i) => {return <ItemSkeleton key={i}/>})
+      return [...Array(4)].map((item: undefined, i) => {return <ItemSkeleton key={i}/>})
     } else if (menuLoadingStatus === "error") {
       return <ErrorMessage />;
     }
@@ -113,7 +113,9 @@ const SectionMenu = memo(() => {
   return (
     <section className="py-14">
       <div className="container">
-        <h2 className={styles.title} id="menu-pizza">Пицца</h2>
+        <h2 className={"menu-title relative " + styles.title} id="menu-pizza">
+          Пицца
+        </h2>
         <ul className={styles.list} onClick={openModal}>
           {renderItems()}
           {checkLoading()}

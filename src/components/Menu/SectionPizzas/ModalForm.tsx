@@ -69,18 +69,18 @@ const ModalForm = memo(
 
     const handleClickOption = (
       event: React.MouseEvent<HTMLElement>,
-      updateFunction: (arg: string) => void
+      updateFunction: React.Dispatch<React.SetStateAction<string>>
     ) => {
       const elem = event.target as HTMLElement;
       if (elem.tagName === "BUTTON") {
         const name = elem.getAttribute("data-name");
-        const pizzaWeight = (selectedPizza as Pizza).weight;
         updateFunction(name as string);
+        const pizzaWeight = (selectedPizza as Pizza).weight;
         if (name === "small") changeOption(-10, 25, name);
         else if (name === "average") changeOption(0, 30, name);
         else if (name === "big") changeOption(20, 35, name);
-        else if (name === "traditional") pizzaWeight.traditional[selectedSize as keyof PizzaSize];
-        else if (name === "thin") pizzaWeight.thin[selectedSize as keyof PizzaSize];
+        else if (name === "traditional") setCurrentWeight(pizzaWeight.traditional[selectedSize as keyof PizzaSize]);
+        else if (name === "thin") setCurrentWeight(pizzaWeight.thin[selectedSize as keyof PizzaSize]);
       }
     };
 
