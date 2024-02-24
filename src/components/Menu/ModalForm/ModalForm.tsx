@@ -130,7 +130,7 @@ const ModalForm = memo(
     }
 
     return (
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal active={modalActive} setActive={setModalActive} type="Modal">
         <div className="wrapper">
           <img className="mx-16" src={selectedPizza?.img.url} alt={selectedPizza?.name} />
           <div className="[&_button]:rounded-lg">

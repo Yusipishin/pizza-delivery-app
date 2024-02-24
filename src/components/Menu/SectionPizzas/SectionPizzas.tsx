@@ -4,7 +4,7 @@ import ErrorMessage from "../../UI/ErrorMessage/ErrorMessage";
 
 import styles from "./style.module.scss";
 
-import ModalForm from "./ModalForm";
+import ModalForm from "../ModalForm/ModalForm";
 
 import { useEffect, useState, memo } from "react";
 

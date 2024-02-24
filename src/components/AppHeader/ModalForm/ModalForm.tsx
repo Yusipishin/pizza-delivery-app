@@ -1,4 +1,4 @@
-import Modal from "../UI/Modal/Modal";
+import Modal from "../../UI/Modal/Modal";
 import InputMask from "react-input-mask";
 import styles from "./style.module.scss";
 import { ChangeEvent, memo, useState } from "react";
@@ -16,10 +16,10 @@ const ModalForm = memo(({modalActive, setModalActive}: Props) => {
   }
   
   return (
-    <Modal active={modalActive} setActive={setModalActive}>
-      <span className="text-yel text-4xl font-extrabold">
+    <Modal active={modalActive} setActive={setModalActive} type="Modal">
+      <h2 className="text-yel text-4xl font-extrabold">
         Вход на сайт
-      </span>
+      </h2>
       <form action="#" method="post">
         <div className={styles.inputTel}>
           <label className="text-[#686466] font-semibold" htmlFor="post-tel">

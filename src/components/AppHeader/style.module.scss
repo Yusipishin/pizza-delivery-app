@@ -43,20 +43,3 @@
           after:h-6 after:block after:absolute after:rounded-md 
           after:bg-bl after:-translate-x-1/2 after:-translate-y-1/2
 }
-
-.inputTel {
-  @apply mt-10 mb-20 flex items-center gap-8
-}
-
-.tel {
-  @apply py-4 px-5 text-bl text-lsr
-          rounded-lg border-[1.5px] border-solid border-[#E2E2E9]
-}
-
-.sendCode {
-  @apply text-white text-lsr rounded-lg font-extrabold py-5 px-14
-}
-
-.continue {
-  @apply text-[#9D9D9B] font-semibold text-[13px] leading-5 max-w-[330px]
-}

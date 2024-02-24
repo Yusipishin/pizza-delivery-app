@@ -1,15 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useEffect } from "react";
-import { Action } from "../../interfaces/interfaces";
+import { Action, HocBaseProps } from "../../interfaces/interfaces";
 
 import { withBaseRequest } from "../../hocs/withBaseRequest";
 import ActionItemSkeleton from "../UI/Skeletons/ActionItemSkeleton";
 
-interface Props {
-  checkLoading: () => JSX.Element | JSX.Element[] | undefined;
-  list: Action[];
-}
-
-const ActionsPage = ({checkLoading,list}: Props) => {
+const ActionsPage = ({checkLoading,list}: HocBaseProps) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)

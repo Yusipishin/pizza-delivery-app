@@ -2,7 +2,8 @@ import logo from "../../assets/img/logo.png";
 import headerLinks from "../../static/headerList";
 import styles from "./style.module.scss";
 
-import ModalForm from "./ModalForm";
+import ModalForm from "./ModalForm/ModalForm";
+import CartPanel from "./CartPanel/CartPanel";
 
 import { Link, NavLink } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
@@ -15,6 +16,7 @@ interface Props {
 const AppHeader = memo(({ mainRef }: Props) => {
   const [headerScroll, setHeaderScroll] = useState(false);
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [panelActive, setPanelActive] = useState<boolean>(false);
   
   mainRef.current?.classList.toggle("mt-[38px]", headerScroll);
   
@@ -123,6 +125,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
                 Войти
               </button>
               <button
+              onClick={() => setPanelActive(true)}
                 aria-label="Открыть корзину"
                 className={styles.btnCart}
               >
@@ -134,6 +137,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
         </div>
       </div>
       <ModalForm modalActive={modalActive} setModalActive={setModalActive}/>
+      <CartPanel modalActive={panelActive} setModalActive={setPanelActive}/>
     </header>
   );
 });

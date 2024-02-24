@@ -1,0 +1,21 @@
+@tailwind utilities;
+@layer utilities {
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.ingrBtn {
+  @apply flex border-[1.5px] rounded-xl border-solid items-center 
+          p-4 hover:border-[#fff562]
+}
+
+.pizzaDescription {
+  @apply block text-[#686466] font-semibold my-3 text-[13px]
+}
+
+.listScroller {
+  @apply wrapper my-7 gap-4 max-w-[500px] overflow-x-scroll;
+}

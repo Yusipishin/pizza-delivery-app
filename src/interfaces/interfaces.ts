@@ -69,3 +69,8 @@ export interface PizzaDough {
   };
 }
 
+export interface HocBaseProps {
+  checkLoading: () => JSX.Element | JSX.Element[] | undefined;
+  list: (Action | Stock | Novelty)[];
+  loadingStatus?: string;
+}

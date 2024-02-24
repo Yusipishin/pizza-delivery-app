@@ -1,21 +1,15 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "../components/UI/ErrorMessage/ErrorMessage";
 import { useEffect, useState } from "react";
-import { Action, Stock, Novelty } from "../interfaces/interfaces";
-
-interface PropsComponent {
-  checkLoading: () => JSX.Element | JSX.Element[] | undefined;
-  list: Action[] | Stock[] | Novelty[];
-  loadingStatus?: string;
-}
+import { HocBaseProps } from "../interfaces/interfaces";
 
 export function withBaseRequest(
-  Component: React.ComponentType<PropsComponent>,
+  Component: React.ComponentType<HocBaseProps>,
   Skeleton: React.ComponentType,
   countSkeleton: number,
   url: string,
 ) {
-  return function () {
+  return function (props: HocBaseProps) {
     const [list, setList] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState<string>("");
 
@@ -41,6 +35,6 @@ export function withBaseRequest(
       }
     };
 
-    return <Component checkLoading={checkLoading} list={list} loadingStatus={loadingStatus} />;
+    return <Component {...props} checkLoading={checkLoading} list={list} loadingStatus={loadingStatus} />;
   };
 }

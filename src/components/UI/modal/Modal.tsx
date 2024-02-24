@@ -6,23 +6,33 @@ interface Props {
   active: boolean;
   children: React.ReactNode;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  type: "Modal" | "SidePanel";
 }
 
-const Modal = memo(({ active, children, setActive }: Props) => {
+const Modal = memo(({ active, children, setActive, type }: Props) => {
   const renderItems = () => {
     const getScrollWidth = () => {
-      const testElement = document.createElement('div');
-      testElement.style.visibility = 'hidden';
-      testElement.style.overflow = 'scroll';
-      testElement.style.height = '100px';
-      testElement.style.width = '100px';
+      const testElement = document.createElement("div");
+      testElement.style.visibility = "hidden";
+      testElement.style.overflow = "scroll";
+      testElement.style.height = "100px";
+      testElement.style.width = "100px";
       document.body.appendChild(testElement);
       const scrollbarWidth = testElement.offsetWidth - testElement.clientWidth;
       document.body.removeChild(testElement);
       return scrollbarWidth;
-    }
+    };
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${getScrollWidth()}px`;
+
+    const locationStyle = () => {
+      if (type === "Modal") {
+        return "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl max-w-6xl";
+      } else if (type === "SidePanel") {
+        return "top-0 right-0 max-w-2xl h-100vh";
+      }
+    };
+
     return (
       <Portal>
         <div
@@ -38,22 +48,13 @@ const Modal = memo(({ active, children, setActive }: Props) => {
               left-0 
               right-0 
               z-10
+              overflow-y-scroll
+              scroll__off
             "
         >
           <div
             onClick={(event) => event.stopPropagation()}
-            className="
-                absolute
-                top-1/2 
-                left-1/2 
-                -translate-x-1/2 
-                -translate-y-1/2
-                bg-white
-                py-8
-                px-16
-                rounded-xl
-                max-w-6xl
-            "
+            className={"absolute bg-white py-8 px-16 " + locationStyle()}
           >
             <div className="leading-7">
               <button

@@ -1,20 +1,15 @@
+/* eslint-disable react-refresh/only-export-components */
 import ActionBlockSkeleton from "../UI/Skeletons/ActionBlockSkeleton";
 import styles from "./style.module.scss";
 import { withBaseRequest } from "../../hocs/withBaseRequest";
 import { Link } from "react-router-dom";
-import { Stock } from "../../interfaces/interfaces";
-
-interface Props {
-  checkLoading: () => JSX.Element | JSX.Element[];
-  list: Stock[];
-  loadingStatus: string;
-}
+import { HocBaseProps, Stock } from "../../interfaces/interfaces";
 
 const SectionStocks = ({
   checkLoading,
   list,
   loadingStatus
-}: Props) => {
+}: HocBaseProps) => {
 
   const renderItems = () => {
     return list.map((item: Stock, i: number) => {

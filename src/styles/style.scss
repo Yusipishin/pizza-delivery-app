@@ -27,15 +27,19 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 
+//---------------------------  REUSED-STYLES  -------------------------------//
+
 .container {
   margin: 0 auto;
   padding: 0 15px;
   max-width: 1140px;
 }
 
-
-//---------------------------  REUSED-STYLES  -------------------------------//
-
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .call-btn {
   color: #696F7A;
@@ -43,12 +47,6 @@ html, body {
   border-radius: 28px;
   background: #F3F3F7;
   max-width: 180px;
-}
-
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .phone {
