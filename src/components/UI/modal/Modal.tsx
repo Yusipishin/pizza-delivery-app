@@ -29,7 +29,7 @@ const Modal = memo(({ active, children, setActive, type }: Props) => {
       if (type === "Modal") {
         return "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl max-w-6xl";
       } else if (type === "SidePanel") {
-        return "top-0 right-0 max-w-2xl h-100vh";
+        return "top-0 right-0 max-w-2xl min-h-screen flex flex-col justify-center";
       }
     };
 
