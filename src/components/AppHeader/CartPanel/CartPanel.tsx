@@ -1,5 +1,6 @@
 import styles from "./style.module.scss";
 import { memo } from "react";
+import { NavLink } from "react-router-dom";
 import closeGreyIc from "../../../assets/img/icons/close-grey-ic.svg";
 import sauces from "../../../assets/img/optional/sauces.png";
 import napkins from "../../../assets/img/optional/napkins.png";
@@ -8,11 +9,11 @@ import napkins from "../../../assets/img/optional/napkins.png";
 import Modal from "../../UI/Modal/Modal";
 
 interface Props {
-  modalActive: boolean;
-  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  panelActive: boolean;
+  setPanelActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CartPanel = memo(({ modalActive, setModalActive }: Props) => {
+const CartPanel = memo(({ panelActive, setPanelActive }: Props) => {
   const pizzas = [
     {
       img: "https://dodopizza-a.akamaihd.net/static/Img/Products/11ee8a3878dd949ebe0175e3fc3b1e9b_292x292.webp",
@@ -44,7 +45,7 @@ const CartPanel = memo(({ modalActive, setModalActive }: Props) => {
     },
   ];
   return (
-    <Modal active={modalActive} setActive={setModalActive} type="SidePanel">
+    <Modal active={panelActive} setActive={setPanelActive} type="SidePanel">
       <div className="flex flex-col items-center">
         <h2 className="text-yel text-4xl font-extrabold mb-4">Корзина</h2>
         {/* <div className="flex flex-col items-center text-center">
@@ -80,7 +81,7 @@ const CartPanel = memo(({ modalActive, setModalActive }: Props) => {
                 </div>
                 <button
                   className="absolute top-4 right-4"
-                  aria-label="Удалить ингредиент"
+                  aria-label="Удалить пиццу"
                 >
                   <img src={closeGreyIc} />
                 </button>
@@ -144,9 +145,14 @@ const CartPanel = memo(({ modalActive, setModalActive }: Props) => {
         <p className="my-6 text-2xl font-semibold">
           Сумма заказа: <span className="text-yel text-3xl">2400 ₽</span>
         </p>
-        <button className="w-full bg-yel text-2xl font-medium py-4 rounded-xl">
+        <NavLink
+          end
+          to="/cart"
+          onClick={() => setPanelActive(false)}
+          className="w-full bg-yel text-2xl font-medium py-4 rounded-xl text-center"
+          >
           Оформить заказ {">"}
-        </button>
+        </NavLink>
       </div>
     </Modal>
   );

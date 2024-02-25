@@ -1,0 +1,35 @@
+@tailwind utilities;
+@layer utilities {
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .baseBorder {
+    @apply flex border-[1.5px] rounded-xl border-solid p-4
+  }
+}
+
+.pizzas {
+  @apply flex py-7 gap-2 relative border-t-2
+}
+.pizzas:last-child {
+  @apply border-b-2
+}
+
+.pizzaDescription {
+  @apply block text-[#686466] font-medium text-[13px] max-w-lg
+}
+
+/* .sauces {
+  @apply baseBorder flex-col hover:border-[#fff562] wrapper
+} */
+
+.optional {
+  @apply baseBorder hover:border-[#fff562] gap-2 min-w-[230px] text-left wrapper
+}
+
+/* .form {
+  @apply flex border-[1.5px] rounded-xl border-solid items-center
+} */
+

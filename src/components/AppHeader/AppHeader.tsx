@@ -137,7 +137,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
         </div>
       </div>
       <ModalForm modalActive={modalActive} setModalActive={setModalActive}/>
-      <CartPanel modalActive={panelActive} setModalActive={setPanelActive}/>
+      <CartPanel panelActive={panelActive} setPanelActive={setPanelActive}/>
     </header>
   );
 });

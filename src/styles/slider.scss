@@ -1,6 +1,4 @@
-//------------------------  HERO-STYLES  --------------------------------//
-
-.hero {
+.hero, .cart-main {
   .swiper {
     @apply overflow-visible relative;
     &-button-disabled {
