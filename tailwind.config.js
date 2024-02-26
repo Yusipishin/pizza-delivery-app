@@ -16,7 +16,8 @@ export default {
         red: '#FF2E65',
         bl: '#231F20',
         gr: '#828792',
-        whBtn: '#F3F3F7'
+        whBtn: '#F3F3F7',
+        pink: '#ff2e65',
       },
       boxShadow: {
         shad: '0px 4px 24px 0px rgba(0,0,0,0.06)',

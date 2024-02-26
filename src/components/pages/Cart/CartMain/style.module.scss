@@ -21,15 +21,40 @@
   @apply block text-[#686466] font-medium text-[13px] max-w-lg
 }
 
-/* .sauces {
-  @apply baseBorder flex-col hover:border-[#fff562] wrapper
-} */
+.sauces {
+  @apply baseBorder flex flex-col hover:border-[#fff562] items-center grow 
+}
 
 .optional {
   @apply baseBorder hover:border-[#fff562] gap-2 min-w-[230px] text-left wrapper
 }
 
-/* .form {
+.form {
   @apply flex border-[1.5px] rounded-xl border-solid items-center
-} */
+}
 
+.backMenu {
+  @apply text-[#696f7a] text-lg flex items-center gap-4;
+}
+
+.arrowBack {
+  @apply w-[10px] h-[16px] opacity-70;
+  background: url('../../../../assets/img/icons/arrow-ic.svg') 50% 50% / cover no-repeat;
+}
+
+.arrowNext {
+  @apply w-[7px] h-[11px] absolute rotate-180 top-1/2 -translate-y-1/2 right-7;
+  background: url('../../../../assets/img/icons/arrow-ic.svg') 50% 50% / cover no-repeat;
+}
+
+.promoTxt {
+  @apply text-2xl text-pink block mb-7;
+}
+
+.orderPrice {
+  @apply text-yel font-extrabold text-4xl ml-2;
+}
+
+.checkout {
+  @apply bg-yel text-base font-bold py-4 px-12 rounded-xl text-center relative
+}

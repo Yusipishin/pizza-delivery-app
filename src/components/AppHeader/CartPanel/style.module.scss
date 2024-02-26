@@ -22,10 +22,6 @@
   @apply baseBorder hover:border-[#fff562] gap-2 min-w-[230px] text-left wrapper
 }
 
-.form {
-  @apply flex border-[1.5px] rounded-xl border-solid items-center
-}
-
 .pizzaDescription {
   @apply block text-[#686466] font-semibold my-3 text-[13px]
 }

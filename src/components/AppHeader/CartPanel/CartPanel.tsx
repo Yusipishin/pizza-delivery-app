@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import closeGreyIc from "../../../assets/img/icons/close-grey-ic.svg";
 import sauces from "../../../assets/img/optional/sauces.png";
 import napkins from "../../../assets/img/optional/napkins.png";
+import PromocodeForm from "../../UI/PromocodeForm/PromocodeForm";
 // import emptyСart from './empty-cart.png'
 
 import Modal from "../../UI/Modal/Modal";
@@ -131,17 +132,7 @@ const CartPanel = memo(({ panelActive, setPanelActive }: Props) => {
             </button>
           </li>
         </ul>
-        <form method="get" className={styles.form}>
-          <input
-            className="px-6"
-            type="text"
-            placeholder="Введите промокод"
-            name="promocode"
-          />
-          <button className="bg-yel py-2 px-7" type="submit">
-            Применить
-          </button>
-        </form>
+        <PromocodeForm/>
         <p className="my-6 text-2xl font-semibold">
           Сумма заказа: <span className="text-yel text-3xl">2400 ₽</span>
         </p>
