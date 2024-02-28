@@ -1,9 +1,9 @@
 .inputTel {
-  @apply mt-10 mb-20 flex items-center gap-8
+  @apply mt-10 flex items-center gap-8
 }
 
 .tel {
-  @apply py-4 px-5 text-bl text-lsr
+  @apply py-3 px-5 text-bl text-lsr
           rounded-lg border-[1.5px] border-solid border-[#E2E2E9]
 }
 
@@ -13,4 +13,29 @@
 
 .continue {
   @apply text-[#9D9D9B] font-semibold text-[13px] leading-5 max-w-[330px]
+}
+
+.change {
+  @apply font-semibold text-yel relative ml-6;
+
+  &:after {
+    @apply content-[''] bottom-0 right-0 absolute w-full;
+    border: 2px dashed #f7d22d;
+  }
+}
+
+.inputCode {
+  @apply px-5 py-3 rounded-lg tracking-[3px] max-w-[85px];
+  border: 2px solid #e2e2e9;
+}
+
+.warningMsg {
+  @apply bg-[#FF2E65] w-44 absolute -bottom-14 left-0 
+            flex items-center px-4 py-3 gap-3 rounded-lg;
+
+  &:after {
+    @apply content-[''] absolute left-4 -top-[16px];
+    border: 10px solid transparent;
+    border-bottom: 10px solid #ff2e65;
+  }
 }

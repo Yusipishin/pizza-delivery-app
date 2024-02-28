@@ -1,7 +1,9 @@
 import Modal from "../../UI/Modal/Modal";
 import InputMask from "react-input-mask";
 import styles from "./style.module.scss";
+// import warningIcon from "../../../assets/img/icons/warning-ic.svg"
 import { ChangeEvent, memo, useState } from "react";
+
 
 interface Props {
   modalActive: boolean,
@@ -35,8 +37,22 @@ const ModalForm = memo(({modalActive, setModalActive}: Props) => {
             mask="+7 (999) 999-99-99"
             placeholder="+7 (999) 999-99-99"
           />
+          <button className={styles.change}>Изменить</button>
         </div>
-        <div className="wrapper gap-6">
+
+        {/* <div className="my-9">
+          <span className="text-[#686466] font-semibold mr-20">Код из СМС</span>
+          <div className="inline-block relative">
+            <input type="text" maxLength={4} className={styles.inputCode}/>
+            <div className={styles.warningMsg}>
+              <img src={warningIcon} alt="Ошибка" className="w-[20px] h-[20px]" />
+              <span className="text-xs text-white">Неверный код</span>
+            </div>
+          </div>
+          <button className={styles.change}>Получить новый код</button>
+        </div> */}
+
+        <div className="wrapper gap-6 mt-20">
           <button
             name="submit"
             type="submit"
