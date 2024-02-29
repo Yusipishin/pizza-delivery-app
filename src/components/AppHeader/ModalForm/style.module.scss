@@ -15,15 +15,6 @@
   @apply text-[#9D9D9B] font-semibold text-[13px] leading-5 max-w-[330px]
 }
 
-.change {
-  @apply font-semibold text-yel relative ml-6;
-
-  &:after {
-    @apply content-[''] bottom-0 right-0 absolute w-full;
-    border: 2px dashed #f7d22d;
-  }
-}
-
 .inputCode {
   @apply px-5 py-3 rounded-lg tracking-[3px] max-w-[85px];
   border: 2px solid #e2e2e9;

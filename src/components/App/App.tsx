@@ -6,7 +6,7 @@ import CartHeader from "../CartHeader/CartHeader";
 import AppFooter from "../AppFooter/AppFooter";
 
 import "../../styles/style.scss";
-import { MainPage, Page404, ContactPage, ActionsPage } from "../pages";
+import { MainPage, Page404, ContactPage, ActionsPage, AccountPage } from "../pages";
 import Cart from "../pages/Cart";
 
 const App = () => {
@@ -21,6 +21,7 @@ const App = () => {
           <Route path="/cart/*" element={<Cart />} />
           <Route path="/actions" element={<ActionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/account" element={<AccountPage />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </main>

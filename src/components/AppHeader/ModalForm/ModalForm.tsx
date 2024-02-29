@@ -37,7 +37,7 @@ const ModalForm = memo(({modalActive, setModalActive}: Props) => {
             mask="+7 (999) 999-99-99"
             placeholder="+7 (999) 999-99-99"
           />
-          <button className={styles.change}>Изменить</button>
+          {/* <button className="dashed-txt ml-6">Изменить</button> */}
         </div>
 
         {/* <div className="my-9">
@@ -49,7 +49,7 @@ const ModalForm = memo(({modalActive, setModalActive}: Props) => {
               <span className="text-xs text-white">Неверный код</span>
             </div>
           </div>
-          <button className={styles.change}>Получить новый код</button>
+          <button className="dashed-txt ml-6">Получить новый код</button>
         </div> */}
 
         <div className="wrapper gap-6 mt-20">

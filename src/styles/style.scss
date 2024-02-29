@@ -59,6 +59,14 @@ html, body {
   height: 60px;
 }
 
+.dashed-txt {
+  @apply font-semibold text-yel relative;
+
+  &:after {
+    @apply content-[''] bottom-0 right-0 absolute w-full;
+    border: 2px dashed #f7d22d;
+  }
+}
 
 //---------------------------  OTHER-STYLES  -------------------------------//
 
