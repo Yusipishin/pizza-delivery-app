@@ -6,7 +6,69 @@
     justify-content: space-between;
   }
   .baseBorder {
-    @apply flex border-[1.5px] rounded-xl border-solid p-4
+    @apply flex border-[1.5px] rounded-xl border-solid p-4;
   }
 }
 
+.card {
+  @apply bg-white rounded-lg p-10 my-9 max-w-[255px] min-h-[340px] 
+          text-center flex flex-col items-center gap-9;
+}
+
+.userTitle {
+  @apply text-yel font-extrabold text-3xl mb-6;
+}
+
+.subs {
+  @apply text-yel font-extrabold text-2xl mt-8;
+}
+
+.subsWrapper {
+  @apply flex items-center gap-4 mb-11;
+}
+
+.subsLabel {
+  @apply text-[#656263] cursor-pointer flex gap-4;
+}
+
+.wrapperInput {
+  @apply flex flex-col gap-2;
+}
+
+.input {
+  @apply baseBorder max-w-sm;
+}
+
+.wrapperDate {
+  @apply py-3 pl-6 pr-14 border-[1.5px];
+
+  &:first-child {
+    @apply rounded-s-lg;
+  }
+  &:last-child {
+    @apply rounded-e-lg;
+  }
+}
+
+.realCheckbox {
+  @apply w-0 h-0 opacity-0 absolute -z-10;
+}
+
+.customCheckbox {
+  @apply relative w-[19px] h-[19px] rounded-full inline-block -mt-[2px];
+  border: 2px solid #f7d22d;
+  &::before {
+    @apply content-[''] w-[7px] h-[7px] bg-yel rounded-full scale-0
+            absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .realCheckbox:checked + &::before {
+    @apply scale-100;
+  }
+  .realCheckbox:focus + &::before {
+    @apply shadow-shad;
+  }
+}
+
+.btnExit {
+  @apply py-4 px-10 text-[#696f7a] bg-[#e3ecf5] rounded-lg text-sr;
+}
