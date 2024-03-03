@@ -9,6 +9,8 @@ import { Link, NavLink } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
 import { memo, useEffect, useState } from "react";
 
+import { useSelector } from "react-redux";
+
 interface Props {
   mainRef: React.RefObject<HTMLElement>;
 }
@@ -17,6 +19,8 @@ const AppHeader = memo(({ mainRef }: Props) => {
   const [headerScroll, setHeaderScroll] = useState(false);
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [panelActive, setPanelActive] = useState<boolean>(false);
+
+  const cart = useSelector((state) => state.cart);
   
   mainRef.current?.classList.toggle("mt-[38px]", headerScroll);
   
@@ -80,12 +84,12 @@ const AppHeader = memo(({ mainRef }: Props) => {
                   <div className="wrapper relative">
                     <span className={styles.yandexIc} />
                     <span>Яндекс еда</span>
-                    <span className={styles.rating}>4.8</span>
+                    <span className={styles.dot}>4.8</span>
                     <span className={styles.starIc} />
                   </div>
                   <div className="wrapper relative">
                     <span>Время доставки</span>
-                    <span className={styles.time}>от 31 мин</span>
+                    <span className={styles.dot}>от 31 мин</span>
                   </div>
                 </div>
               </div>
@@ -125,12 +129,12 @@ const AppHeader = memo(({ mainRef }: Props) => {
                 Войти
               </button>
               <button
-              onClick={() => setPanelActive(true)}
+                onClick={() => setPanelActive(true)}
                 aria-label="Открыть корзину"
                 className={styles.btnCart}
               >
                 <span className={styles.txtCart}>Корзина</span>
-                <span>1</span>
+                <span>{cart.length}</span>
               </button>
             </div>
           </div>

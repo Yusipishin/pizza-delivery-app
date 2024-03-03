@@ -1,36 +1,21 @@
-// import { MainState, ActionType } from "../intefaces/interfaces"
+const initialState = {
+  cart: []
+}
 
-// const enum Status {
-//   OK = 'idle',
-//   ERROR = 'error',
-//   LOADING = 'loading',
-// }
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      return {
+        ...state,
+        cart: [...state.cart, action.payload]
+      }
+    case "REMOVE_ITEM":
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload)
+      }
+    default: return state
+  }
+}
 
-// const initialState: MainState = {
-//   menu: [],
-//   menuLoadingStatus: 'idle',
-// }
-
-// const reducer = (state = initialState, action: ActionType) => {
-//   switch (action.type) {
-//     case "MENU_FETCHING":
-//       return {
-//         ...state,
-//         menuLoadingStatus: Status.LOADING
-//       }
-//     case "MENU_FETCHED":
-//       return {
-//         ...state,
-//         menu: action.payload ? [...state.menu, ...action.payload]: [...state.menu],
-//         menuLoadingStatus: Status.OK
-//       }
-//     case "MENU_FETCHING_ERROR":
-//       return {
-//         ...state,
-//         menuLoadingStatus: Status.ERROR
-//       }
-//     default: return state
-//   }
-// }
-
-// export default reducer;
+export default reducer;

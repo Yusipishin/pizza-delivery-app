@@ -10,7 +10,7 @@ import { useEffect, useState, memo } from "react";
 
 import { Pizza, PizzaDough, PizzaSize } from "../../../interfaces/interfaces";
 
-const SectionMenu = memo(() => {
+const SectionPizzas = memo(() => {
   const [menu, setMenu] = useState<Pizza[]>([]);
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>("idle");
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -134,4 +134,4 @@ const SectionMenu = memo(() => {
   );
 });
 
-export default SectionMenu;
+export default SectionPizzas;

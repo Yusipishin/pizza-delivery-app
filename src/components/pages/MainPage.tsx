@@ -1,5 +1,5 @@
 import SectionNovelty from "../SectionNovelty/SectionNovelty";
-import SectionMenu from "../Menu/SectionPizzas/SectionPizzas";
+import SectionPizzas from "../Menu/SectionPizzas/SectionPizzas";
 import SectionStocks from "../SectionActions/SectionActions";
 import SectionMap from "../SectionMap/SectionMap";
 import SectionHero from "../SectionHero/SectionHero";
@@ -17,7 +17,7 @@ const MainPage = memo(() => {
     <>
       <SectionHero />
       <SectionNovelty />
-      <SectionMenu />
+      <SectionPizzas />
       <SectionStocks />
       <SectionMap />
     </>

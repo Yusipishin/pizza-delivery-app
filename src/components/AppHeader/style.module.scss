@@ -5,6 +5,13 @@
     align-items: center;
     justify-content: space-between;
   }
+  .dot {
+    @apply ml-5 ;
+    &:before {
+      @apply content-[''] -ml-2 bg-red -translate-x-1/2 -translate-y-1/2 
+              absolute top-1/2 w-1 h-1 rounded-full
+    }
+  }
 }
 
 .headerFixed {
@@ -21,25 +28,15 @@
           bg-[url('/src/assets/img/icons/star-ic.svg')]
 }
 
-.rating {
-  @apply ml-5 before:content-[''] before:-ml-2 before:bg-red 
-          before:-translate-x-1/2 before:-translate-y-1/2 before:absolute 
-          before:top-1/2 before:w-1 before:h-1 before:rounded-full
-}
-
-.time {
-  @apply ml-5 before:content-[''] before:-ml-2 before:bg-red
-          before:-translate-x-1/2 before:-translate-y-1/2 before:absolute 
-          before:top-1/2 before:w-1 before:h-1 before:rounded-full
-}
-
 .btnCart {
   @apply wrapper gap-8  rounded-lg  relative  py-2  px-7 
           text-[16px] text-bl leading-8 bg-yel
 }
 
 .txtCart {
-  @apply after:content-[''] after:left-[72%] after:top-1/2 after:w-0.5 
-          after:h-6 after:block after:absolute after:rounded-md 
-          after:bg-bl after:-translate-x-1/2 after:-translate-y-1/2
+  @apply relative;
+  &:after {
+    @apply content-[''] -right-4 top-1/2 w-0.5 h-6 block 
+            absolute rounded-md bg-bl -translate-y-1/2
+  }
 }

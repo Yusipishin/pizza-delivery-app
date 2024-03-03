@@ -1,20 +1,13 @@
-// import { ApiResponse, ActionType } from "../intefaces/interfaces"
+export const addItem = (item) => {
+  return {
+    type: "ADD_ITEM",
+    payload: item
+  }
+}
 
-// export const menuFetching = (): ActionType => {
-//   return {
-//     type: "MENU_FETCHING"
-//   }
-// }
-
-// export const menuFetched = (pizza: ApiResponse[]): ActionType => {
-//   return {
-//     type: "MENU_FETCHED",
-//     payload: pizza
-//   }
-// }
-
-// export const menuFetchingError = (): ActionType => {
-//   return {
-//     type: "MENU_FETCHING_ERROR"
-//   }
-// }
+export const removeItem = (item) => {
+  return {
+    type: "REMOVE_ITEM",
+    payload: item
+  }
+}

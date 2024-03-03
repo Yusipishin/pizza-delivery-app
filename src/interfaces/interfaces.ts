@@ -1,13 +1,3 @@
-// export interface ActionType {
-//   type: string,
-//   payload?: ApiResponse[]
-// }
-
-// export interface MainState {
-//   menu: ApiResponse[],
-//   menuLoadingStatus: string,
-// }
-
 export interface Stock {
   id: string;
   name: string;
