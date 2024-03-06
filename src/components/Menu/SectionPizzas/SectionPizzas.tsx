@@ -14,10 +14,12 @@ const SectionPizzas = memo(() => {
   const [menu, setMenu] = useState<Pizza[]>([]);
   const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>("idle");
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(8);
   const [menuEnded, setMenuEnded] = useState(false);
 
-  const [selectedPizza, setSelectedPizza] = useState<Pizza | undefined>(undefined);
+  const [selectedPizza, setSelectedPizza] = useState<Pizza | undefined>(
+    undefined
+  );
   const [selectedSize, setSelectedSize] = useState<string>("average");
   const [selectedDough, setSelectedDough] = useState<string>("traditional");
 
@@ -28,33 +30,44 @@ const SectionPizzas = memo(() => {
 
   const onRequest = () => {
     setMenuLoadingStatus("loading");
-    request("http://localhost:3001/menu")
-      .then((data: Pizza[]) => {
-        const newItems = data.slice(offset, offset + 8);
+    request(
+      `https://db4cff85a63e04f3.mokky.dev/pizzas?page=${offset / 8}&limit=8`
+    )
+      .then((data) => {
+        const newItems: Pizza[] = data.items;
         setMenuEnded(newItems.length < 8);
         setOffset((offset) => offset + newItems.length);
         setMenu((state) => [...state, ...newItems]);
         setMenuLoadingStatus("idle");
       })
       .catch(() => setMenuLoadingStatus("error"));
-  }
+  };
 
   useEffect(() => onRequest, []);
 
   const checkLoading = () => {
     if (menuLoadingStatus === "loading") {
-      return [...Array(4)].map((item: undefined, i) => {return <ItemSkeleton key={i}/>})
+      return [...Array(4)].map((item: undefined, i) => {
+        return <ItemSkeleton key={i} />;
+      });
     } else if (menuLoadingStatus === "error") {
       return <ErrorMessage />;
     }
   };
 
-  const openModal = (event: React.MouseEvent<HTMLElement>) => {
+  const openModal = async (event: React.MouseEvent<HTMLElement>) => {
     const elem = event.target as HTMLElement;
     if (elem.tagName === "BUTTON") {
-      const pizzaId = elem.parentElement?.parentElement?.getAttribute("data-pizza-id");
-      const pizza = menu.find((item) => item.id === pizzaId) as Pizza;
-      setCurrentWeight(pizza.weight[selectedDough as keyof PizzaDough][selectedSize as keyof PizzaSize]);
+      const pizzaId =
+        elem.parentElement?.parentElement?.getAttribute("data-pizza-id");
+      const pizza = await request(
+        `https://db4cff85a63e04f3.mokky.dev/pizzas/${pizzaId}`
+      );
+      setCurrentWeight(
+        pizza.weight[selectedDough as keyof PizzaDough][
+          selectedSize as keyof PizzaSize
+        ]
+      );
       setCurrentSale(pizza.sale[selectedSize as keyof PizzaSize]);
       setModalActive(true);
       setSelectedPizza(pizza);
@@ -73,7 +86,7 @@ const SectionPizzas = memo(() => {
     selectedDough,
     setSelectedDough,
     selectedPizza,
-    setSelectedPizza
+    setSelectedPizza,
   };
 
   const renderItems = () => {
@@ -123,7 +136,10 @@ const SectionPizzas = memo(() => {
         <button
           onClick={() => onRequest()}
           aria-label="Посмотреть ещё варианты пицц"
-          style={{ display: menuEnded || menuLoadingStatus !== "idle" ? "none" : "block" }}
+          style={{
+            display:
+              menuEnded || menuLoadingStatus !== "idle" ? "none" : "block",
+          }}
           className={styles.btnLoad}
         >
           Посмотреть ещё

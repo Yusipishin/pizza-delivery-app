@@ -56,5 +56,5 @@ export default withBaseRequest(
   ActionsPage,
   ActionItemSkeleton,
   3,
-  "http://localhost:3001/actions"
+  "actions"
 );

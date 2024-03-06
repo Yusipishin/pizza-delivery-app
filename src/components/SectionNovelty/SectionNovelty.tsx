@@ -47,5 +47,5 @@ export default withBaseRequest(
   SectionNovelty,
   NoveltySkeleton,
   4,
-  "http://localhost:3001/novelty"
+  "novelty"
 );

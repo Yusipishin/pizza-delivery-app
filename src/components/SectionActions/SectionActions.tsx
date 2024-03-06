@@ -61,5 +61,5 @@ export default withBaseRequest(
   SectionStocks,
   ActionBlockSkeleton,
   1,
-  "http://localhost:3001/stocks"
+  "stocks"
 );
