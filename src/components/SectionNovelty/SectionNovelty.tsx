@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import NoveltySkeleton from "../UI/Skeletons/NoveltySkeleton";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 
 import { withBaseRequest } from "../../hocs/withBaseRequest";
 

@@ -8,43 +8,28 @@ import closeGreyIc from "../../../../assets/img/icons/close-grey-ic.svg";
 import napkins from "../../../../assets/img/optional/napkins.png";
 import PromocodeForm from "../../../UI/PromocodeForm/PromocodeForm";
 
-import styles from "./style.module.scss";
+import store from "../../../../store/store";
+import * as actions from "../../../../actions/actions";
+import { useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import styles from "./style.module.css";
+import ItemSkeleton from "../../../UI/Skeletons/ItemSkeleton";
 
 const CartMain = memo(() => {
+  const cart = useSelector((state) => state.cart);
+  const { dispatch } = store;
+  const { removeItem } = bindActionCreators(actions, dispatch);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const pizzas = [
-    {
-      img: "https://dodopizza-a.akamaihd.net/static/Img/Products/11ee8a3878dd949ebe0175e3fc3b1e9b_292x292.webp",
-      name: "С креветками и трюфелями",
-      weight: 350,
-      sale: 600,
-      ingr: "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г",
-    },
-    {
-      img: "https://dodopizza-a.akamaihd.net/static/Img/Products/11ee8a3878dd949ebe0175e3fc3b1e9b_292x292.webp",
-      name: "С креветками и трюфелями",
-      weight: 350,
-      sale: 600,
-      ingr: "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г",
-    },
-    {
-      img: "https://dodopizza-a.akamaihd.net/static/Img/Products/11ee8a3878dd949ebe0175e3fc3b1e9b_292x292.webp",
-      name: "С креветками и трюфелями",
-      weight: 350,
-      sale: 600,
-      ingr: "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г",
-    },
-    {
-      img: "https://dodopizza-a.akamaihd.net/static/Img/Products/11ee8a3878dd949ebe0175e3fc3b1e9b_292x292.webp",
-      name: "С креветками и трюфелями",
-      weight: 350,
-      sale: 600,
-      ingr: "Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное масло, черный перец, пармезан.350 г",
-    },
-  ];
+  const totalPrice = () => {
+    return cart.reduce((sum, item) => {
+      return sum + item.sale;
+    }, 0);
+  };
 
   const sliders = [
     {
@@ -102,21 +87,19 @@ const CartMain = memo(() => {
       <div className="mx-auto my-0 px-4 py-0 max-w-[830px]">
         <h1 className="font-bold text-4xl text-yel">Корзина</h1>
         <div className="my-10">
-          {pizzas.map((item, i) => {
+          {cart.map((item) => {
             return (
-              <div className={styles.pizzas} key={i}>
+              <div className={styles.pizzas} key={item.id}>
                 <img src={item.img} className="max-w-[80px]" />
                 <div className="flex flex-col justify-center">
                   <h3 className="text-[19px] mb-4">{item.name}</h3>
                   <span className={styles.pizzaDescription}>
-                    {item.ingr}
-                    {/* {currentWidth} см, 
-                    {selectedDough === "thin" ? "тонкое" : "традиционное"} тесто,{" "}
-                    {currentWeight} г */}
+                    {item.composition}. 
+                    {item.weight} г
                   </span>
                 </div>
                 <div className="wrapper gap-8">
-                  <span className="font-bold text-2xl text-yel">600 ₽</span>
+                  <span className="font-bold text-2xl text-yel">{item.sale} ₽</span>
                   <div className="wrapper gap-4">
                     <div className="wrapper gap-4 bg-whBtn rounded-lg  py-2">
                       <button className="px-3">+</button>
@@ -126,6 +109,7 @@ const CartMain = memo(() => {
                   </div>
                 </div>
                 <button
+                  onClick={() => removeItem(item.id)}
                   className="absolute top-1/2 -translate-y-1/2 right-4 w-[28px]"
                   aria-label="Удалить пиццу"
                 >
@@ -198,7 +182,7 @@ const CartMain = memo(() => {
           <div className="wrapper">
             <PromocodeForm />
             <p className="text-2xl font-semibold">
-              Сумма заказа: <span className={styles.orderPrice}>2400 ₽</span>
+              Сумма заказа: <span className={styles.orderPrice}>{totalPrice()} ₽</span>
             </p>
           </div>
           <div className="wrapper">

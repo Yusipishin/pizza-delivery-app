@@ -1,11 +1,9 @@
-@import url(reset.scss); //  RESET-STYLES
-@import url(fonts.scss); //  CONNECTING-FONTS
+@import url(reset.css);
+@import url(fonts.css);
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-//---------------------------   COMMON-STYLES  -------------------------------//
 
 
 #wrapper {
@@ -27,7 +25,6 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 
-//---------------------------  REUSED-STYLES  -------------------------------//
 
 .container {
   margin: 0 auto;
@@ -67,8 +64,6 @@ html, body {
     border: 2px dashed #f7d22d;
   }
 }
-
-//---------------------------  OTHER-STYLES  -------------------------------//
 
 
 .scroll__off::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import closeGreyIc from "../../../assets/img/icons/close-grey-ic.svg";
@@ -48,9 +48,9 @@ const CartPanel = memo(({ panelActive, setPanelActive }: Props) => {
           {cart.length} товара на {totalPrice()} ₽
         </span>
         <div className="flex flex-col gap-4 my-8">
-          {cart.map((item, i) => {
+          {cart.map((item) => {
             return (
-              <div className={styles.pizzas} key={i}>
+              <div className={styles.pizzas} key={item.id}>
                 <img src={item.img} className="max-w-[120px]" />
                 <div className="flex flex-col min-w-[280px]">
                   <h3 className="text-xl">{item.name}</h3>

@@ -1,6 +1,6 @@
 import Modal from "../../UI/Modal/Modal";
 import InputMask from "react-input-mask";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 // import warningIcon from "../../../assets/img/icons/warning-ic.svg"
 import { ChangeEvent, memo, useState } from "react";
 

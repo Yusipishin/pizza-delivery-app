@@ -1,6 +1,6 @@
 import { memo, useEffect } from "react";
 
-import styles from './style.module.scss'
+import styles from './style.module.css'
 
 const CartOrder = memo(() => {
   useEffect(() => {

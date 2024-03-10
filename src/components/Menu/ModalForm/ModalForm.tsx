@@ -1,6 +1,6 @@
 import addIngredients from "../../../static/addIngredients";
 import Modal from "../../UI/Modal/Modal";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 import { useState, memo, useEffect } from "react";
 
 import store from "../../../store/store";
@@ -168,6 +168,7 @@ const ModalForm = memo(
         weight: currentWeight,
         sale: currentSale,
         dough: selectedDough,
+        composition: selectedIngredients.join(', ')
       });
       setModalActive(false);
     };

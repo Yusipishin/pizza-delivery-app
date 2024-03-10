@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NoBonus from "../../../assets/img/bonuses/no-bonus.png";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 
 import InputMask from "react-input-mask";
 

@@ -5,7 +5,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import CartHeader from "../CartHeader/CartHeader";
 import AppFooter from "../AppFooter/AppFooter";
 
-import "../../styles/style.scss";
+import "../../styles/style.css";
 import { MainPage, Page404, ContactPage, ActionsPage, AccountPage } from "../pages";
 import Cart from "../pages/Cart";
 

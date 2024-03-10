@@ -2,7 +2,7 @@ import { useHttp } from "../../../hooks/http.hook";
 import ItemSkeleton from "../../UI/Skeletons/ItemSkeleton";
 import ErrorMessage from "../../UI/ErrorMessage/ErrorMessage";
 
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 
 import ModalForm from "../ModalForm/ModalForm";
 

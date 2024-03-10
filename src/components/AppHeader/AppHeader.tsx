@@ -1,6 +1,6 @@
 import logo from "../../assets/img/logo.png";
 import headerLinks from "../../static/headerList";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 
 import ModalForm from "./ModalForm/ModalForm";
 import CartPanel from "./CartPanel/CartPanel";

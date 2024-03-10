@@ -1,5 +1,5 @@
 import deliveryInfo from "../../static/deliveryInfo";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 
 import { memo } from "react";
 

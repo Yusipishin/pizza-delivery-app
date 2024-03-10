@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import ActionBlockSkeleton from "../UI/Skeletons/ActionBlockSkeleton";
-import styles from "./style.module.scss";
+import styles from "./style.module.css";
 import { withBaseRequest } from "../../hocs/withBaseRequest";
 import { Link } from "react-router-dom";
 import { HocBaseProps, Stock } from "../../interfaces/interfaces";
