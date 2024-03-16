@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import ActionBlockSkeleton from "../UI/Skeletons/ActionBlockSkeleton";
 import styles from "./style.module.css";
 import { withBaseRequest } from "../../hocs/withBaseRequest";

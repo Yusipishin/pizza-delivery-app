@@ -2,12 +2,12 @@ import Modal from "../../UI/Modal/Modal";
 import InputMask from "react-input-mask";
 import styles from "./style.module.css";
 // import warningIcon from "../../../assets/img/icons/warning-ic.svg"
-import { ChangeEvent, memo, useState } from "react";
+import { ChangeEvent, memo, useState, Dispatch, SetStateAction } from "react";
 
 
 interface Props {
   modalActive: boolean,
-  setModalActive: React.Dispatch<React.SetStateAction<boolean>>
+  setModalActive: Dispatch<SetStateAction<boolean>>
 }
 
 const ModalForm = memo(({modalActive, setModalActive}: Props) => {

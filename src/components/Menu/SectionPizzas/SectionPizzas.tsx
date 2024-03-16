@@ -47,7 +47,7 @@ const SectionPizzas = memo(() => {
 
   const checkLoading = () => {
     if (menuLoadingStatus === "loading") {
-      return [...Array(4)].map((item: undefined, i) => {
+      return [...Array(4)].map((_item: undefined, i) => {
         return <ItemSkeleton key={i} />;
       });
     } else if (menuLoadingStatus === "error") {
@@ -124,29 +124,29 @@ const SectionPizzas = memo(() => {
   };
 
   return (
-    <section className="py-14">
-      <div className="container">
-        <h2 className={"menu-title relative " + styles.title} id="menu-pizza">
-          Пицца
-        </h2>
-        <ul className={styles.list} onClick={openModal}>
-          {renderItems()}
-          {checkLoading()}
-        </ul>
-        <button
-          onClick={() => onRequest()}
-          aria-label="Посмотреть ещё варианты пицц"
-          style={{
-            display:
-              menuEnded || menuLoadingStatus !== "idle" ? "none" : "block",
-          }}
-          className={styles.btnLoad}
-        >
-          Посмотреть ещё
-        </button>
-      </div>
-      <ModalForm {...modalFormProps} />
-    </section>
+      <section className="py-14">
+        <div className="container">
+          <h2 className={"menu-title relative " + styles.title} id="menu-pizza">
+            Пицца
+          </h2>
+          <ul className={styles.list} onClick={openModal}>
+            {renderItems()}
+            {checkLoading()}
+          </ul>
+          <button
+            onClick={() => onRequest()}
+            aria-label="Посмотреть ещё варианты пицц"
+            style={{
+              display:
+                menuEnded || menuLoadingStatus !== "idle" ? "none" : "block",
+            }}
+            className={styles.btnLoad}
+          >
+            Посмотреть ещё
+          </button>
+        </div>
+        <ModalForm {...modalFormProps} />
+      </section>
   );
 });
 

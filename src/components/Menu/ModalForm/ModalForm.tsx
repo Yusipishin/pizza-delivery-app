@@ -160,16 +160,18 @@ const ModalForm = memo(
     };
 
     const onClickAddPizza = () => {
-      addItem({
-        id: selectedPizza?.id,
-        img: selectedPizza?.img.url,
-        name: selectedPizza?.name,
-        width: currentWidth,
-        weight: currentWeight,
-        sale: currentSale,
-        dough: selectedDough,
-        composition: selectedIngredients.join(', ')
-      });
+      if (selectedPizza) {
+        addItem({
+          id: selectedPizza.id,
+          img: selectedPizza.img.url,
+          name: selectedPizza.name,
+          width: currentWidth,
+          weight: currentWeight,
+          sale: currentSale,
+          dough: selectedDough,
+          composition: selectedIngredients.join(', ')
+        });
+      }
       setModalActive(false);
     };
 

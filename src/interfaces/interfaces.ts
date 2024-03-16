@@ -1,5 +1,16 @@
+export interface ActionPizza {
+  id: number,
+  img: string,
+  name: string,
+  width: number,
+  weight: number,
+  sale: number,
+  dough: string,
+  composition: string,
+}
+
 export interface Stock {
-  id: string;
+  id: number;
   name: string;
   img: {
     url: string;
@@ -57,10 +68,4 @@ export interface PizzaDough {
     average: number;
     big: number;
   };
-}
-
-export interface HocBaseProps {
-  checkLoading: () => JSX.Element | JSX.Element[] | undefined;
-  list: (Action | Stock | Novelty)[];
-  loadingStatus?: string;
 }

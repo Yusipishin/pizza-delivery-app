@@ -1,7 +1,5 @@
 import { memo, useEffect } from "react";
 
-import styles from './style.module.css'
-
 const CartOrder = memo(() => {
   useEffect(() => {
     window.scrollTo(0, 0)

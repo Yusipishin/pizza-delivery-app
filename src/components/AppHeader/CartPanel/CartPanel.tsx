@@ -1,5 +1,5 @@
 import styles from "./style.module.css";
-import { memo } from "react";
+import { memo, Dispatch, SetStateAction, FC } from "react";
 import { NavLink } from "react-router-dom";
 import closeGreyIc from "../../../assets/img/icons/close-grey-ic.svg";
 import sauces from "../../../assets/img/optional/sauces.png";
@@ -11,16 +11,16 @@ import Modal from "../../UI/Modal/Modal";
 
 import store from "../../../store/store";
 import * as actions from "../../../actions/actions";
-import { useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import {useAppSelector} from "../../../hooks/getRedux.hook.ts";
 
 interface Props {
   panelActive: boolean;
-  setPanelActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setPanelActive: Dispatch<SetStateAction<boolean>>;
 }
 
-const CartPanel = memo(({ panelActive, setPanelActive }: Props) => {
-  const cart = useSelector((state) => state.cart);
+const CartPanel: FC<Props> = memo(({ panelActive, setPanelActive }) => {
+  const cart = useAppSelector((state) => state.cart);
   const { dispatch } = store;
   const { removeItem } = bindActionCreators(actions, dispatch);
 

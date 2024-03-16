@@ -1,7 +1,11 @@
-import { legacy_createStore as createStore } from "redux";
+import {compose, legacy_createStore as createStore} from "redux";
 import reducer from "../reducers/reducers";
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ 
-                                && window.__REDUX_DEVTOOLS_EXTENSION__())
+const composeEnhancers= window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, composeEnhancers())
 
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

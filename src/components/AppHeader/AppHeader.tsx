@@ -9,7 +9,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
 import { memo, useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import {useAppSelector} from "../../hooks/getRedux.hook.ts";
 
 interface Props {
   mainRef: React.RefObject<HTMLElement>;
@@ -20,7 +20,7 @@ const AppHeader = memo(({ mainRef }: Props) => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [panelActive, setPanelActive] = useState<boolean>(false);
 
-  const cart = useSelector((state) => state.cart);
+  const cart = useAppSelector((state) => state.cart);
   
   mainRef.current?.classList.toggle("mt-[38px]", headerScroll);
   

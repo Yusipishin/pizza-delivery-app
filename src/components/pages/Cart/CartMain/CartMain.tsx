@@ -10,14 +10,13 @@ import PromocodeForm from "../../../UI/PromocodeForm/PromocodeForm";
 
 import store from "../../../../store/store";
 import * as actions from "../../../../actions/actions";
-import { useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import styles from "./style.module.css";
-import ItemSkeleton from "../../../UI/Skeletons/ItemSkeleton";
+import {useAppSelector} from "../../../../hooks/getRedux.hook.ts";
 
 const CartMain = memo(() => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useAppSelector((state) => state.cart);
   const { dispatch } = store;
   const { removeItem } = bindActionCreators(actions, dispatch);
 

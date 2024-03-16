@@ -1,11 +1,11 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "../components/UI/ErrorMessage/ErrorMessage";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ComponentType } from "react";
 import { HocBaseProps } from "../interfaces/interfaces";
 
 export function withBaseRequest(
-  Component: React.ComponentType<HocBaseProps>,
-  Skeleton: React.ComponentType,
+  Component: ComponentType<HocBaseProps>,
+  Skeleton: ComponentType,
   countSkeleton: number,
   url: string,
 ) {

@@ -1,12 +1,17 @@
-/* eslint-disable react-refresh/only-export-components */
 import NoveltySkeleton from "../UI/Skeletons/NoveltySkeleton";
 import styles from "./style.module.css";
 
 import { withBaseRequest } from "../../hocs/withBaseRequest";
 
-import { Novelty, HocBaseProps } from "../../interfaces/interfaces";
+import {Novelty} from "../../interfaces/interfaces";
+import {FC} from "react";
 
-const SectionNovelty = ({ checkLoading, list }: HocBaseProps) => {
+interface NoveltyProps {
+  checkLoading: () => JSX.Element[],
+  list: Novelty[],
+}
+
+const SectionNovelty: FC<NoveltyProps> = ({checkLoading, list}) => {
   const renderItems = () => {
     return list.map((item: Novelty) => {
       return (
