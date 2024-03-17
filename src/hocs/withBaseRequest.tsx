@@ -1,15 +1,20 @@
 import { useHttp } from "../hooks/http.hook";
 import ErrorMessage from "../components/UI/ErrorMessage/ErrorMessage";
-import { useEffect, useState, ComponentType } from "react";
-import { HocBaseProps } from "../interfaces/interfaces";
+import {useEffect, useState, FC} from "react";
 
-export function withBaseRequest(
-  Component: ComponentType<HocBaseProps>,
-  Skeleton: ComponentType,
+export interface HocBaseProps<TCheckLoading, TList> {
+  checkLoading?: () => TCheckLoading,
+  list?: TList[],
+  loadingStatus?: string
+}
+
+export function withBaseRequest<TCheckLoading, TList>(
+  Component: FC<HocBaseProps<TCheckLoading, TList>>,
+  Skeleton: FC,
   countSkeleton: number,
   url: string,
 ) {
-  return function (props: HocBaseProps) {
+  return function (props: HocBaseProps<TCheckLoading, TList>) {
     const [list, setList] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState<string>("");
 
@@ -29,14 +34,18 @@ export function withBaseRequest(
 
     const checkLoading = () => {
       if (loadingStatus === "loading") {
-        return [...Array(countSkeleton)].map((item, i) => {
+        return [...Array(countSkeleton)].map((_item, i) => {
           return <Skeleton key={i} />;
-        });
-      } else if (loadingStatus === "error") {
-        return <ErrorMessage />;
+        }) as TCheckLoading;
+      } else if (loadingStatus === 'error') {
+        return <ErrorMessage /> as TCheckLoading;
       }
+      return undefined as TCheckLoading
     };
 
-    return <Component {...props} checkLoading={checkLoading} list={list} loadingStatus={loadingStatus} />;
+    return <Component {...props}
+                      checkLoading={checkLoading}
+                      list={list}
+                      loadingStatus={loadingStatus} />;
   };
 }

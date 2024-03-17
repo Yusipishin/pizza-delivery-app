@@ -89,7 +89,7 @@ const CartMain = memo(() => {
           {cart.map((item) => {
             return (
               <div className={styles.pizzas} key={item.id}>
-                <img src={item.img} className="max-w-[80px]" />
+                <img alt={item.name} src={item.img} className="max-w-[80px]" />
                 <div className="flex flex-col justify-center">
                   <h3 className="text-[19px] mb-4">{item.name}</h3>
                   <span className={styles.pizzaDescription}>
@@ -112,7 +112,7 @@ const CartMain = memo(() => {
                   className="absolute top-1/2 -translate-y-1/2 right-4 w-[28px]"
                   aria-label="Удалить пиццу"
                 >
-                  <img src={closeGreyIc} />
+                  <img alt="Удалить" src={closeGreyIc} />
                 </button>
               </div>
             );

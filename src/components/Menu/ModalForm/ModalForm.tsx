@@ -1,7 +1,7 @@
 import addIngredients from "../../../static/addIngredients";
 import Modal from "../../UI/Modal/Modal";
 import styles from "./style.module.css";
-import { useState, memo, useEffect } from "react";
+import {useState, memo, useEffect, SetStateAction, Dispatch, MouseEvent} from "react";
 
 import store from "../../../store/store";
 import * as actions from "../../../actions/actions";
@@ -83,8 +83,8 @@ const ModalForm = memo(
     };
 
     const handleClickOption = (
-      event: React.MouseEvent<HTMLElement>,
-      updateFunction: React.Dispatch<React.SetStateAction<string>>
+      event: MouseEvent<HTMLElement>,
+      updateFunction: Dispatch<SetStateAction<string>>
     ) => {
       const elem = event.target as HTMLElement;
       if (elem.tagName === "BUTTON") {
@@ -110,7 +110,7 @@ const ModalForm = memo(
         const sale = Number(elem.getAttribute("data-sale"));
         if (name && sale) {
           const arrContain =
-            selectedIngredients.indexOf(name) !== -1 ? false : true;
+            selectedIngredients.indexOf(name) === -1;
           setSelectedIngredients((selectedIngredients) =>
             arrContain
               ? [...selectedIngredients, name]
