@@ -1,4 +1,4 @@
-import { useHttp } from "../../../hooks/http.hook";
+import {useHttp} from "../../../hooks/http.hook";
 import ItemSkeleton from "../../UI/Skeletons/ItemSkeleton";
 import ErrorMessage from "../../UI/ErrorMessage/ErrorMessage";
 
@@ -6,22 +6,20 @@ import styles from "./style.module.css";
 
 import ModalForm from "../ModalForm/ModalForm";
 
-import { useEffect, useState, memo } from "react";
+import {memo, useEffect, useState} from "react";
 
-import { Pizza, PizzaDough, PizzaSize } from "../../../interfaces/interfaces";
+import {Dough, LoadingStatus, Pizza, Size} from "../../../interfaces/interfaces";
 
 const SectionPizzas = memo(() => {
   const [menu, setMenu] = useState<Pizza[]>([]);
-  const [menuLoadingStatus, setMenuLoadingStatus] = useState<string>("idle");
-  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [menuLoadingStatus, setMenuLoadingStatus] = useState<LoadingStatus>(LoadingStatus.IDLE);
+  const [modalActive, setModalActive] = useState(false);
   const [offset, setOffset] = useState(8);
   const [menuEnded, setMenuEnded] = useState(false);
 
-  const [selectedPizza, setSelectedPizza] = useState<Pizza | undefined>(
-    undefined
-  );
-  const [selectedSize, setSelectedSize] = useState<string>("average");
-  const [selectedDough, setSelectedDough] = useState<string>("traditional");
+  const [selectedPizza, setSelectedPizza] = useState<Pizza | undefined>();
+  const [selectedSize, setSelectedSize] = useState<Size>(Size.AVERAGE);
+  const [selectedDough, setSelectedDough] = useState<Dough>(Dough.TRADITIONAL);
 
   const [currentWeight, setCurrentWeight] = useState<number>(0);
   const [currentSale, setCurrentSale] = useState<number>(0);
@@ -29,7 +27,7 @@ const SectionPizzas = memo(() => {
   const { request } = useHttp();
 
   const onRequest = () => {
-    setMenuLoadingStatus("loading");
+    setMenuLoadingStatus(LoadingStatus.LOADING);
     request(
       `https://db4cff85a63e04f3.mokky.dev/pizzas?page=${offset / 8}&limit=8`
     )
@@ -38,9 +36,9 @@ const SectionPizzas = memo(() => {
         setMenuEnded(newItems.length < 8);
         setOffset((offset) => offset + newItems.length);
         setMenu((state) => [...state, ...newItems]);
-        setMenuLoadingStatus("idle");
+        setMenuLoadingStatus(LoadingStatus.IDLE);
       })
-      .catch(() => setMenuLoadingStatus("error"));
+      .catch(() => setMenuLoadingStatus(LoadingStatus.ERROR));
   };
 
   useEffect(() => onRequest, []);
@@ -64,11 +62,9 @@ const SectionPizzas = memo(() => {
         `https://db4cff85a63e04f3.mokky.dev/pizzas/${pizzaId}`
       );
       setCurrentWeight(
-        pizza.weight[selectedDough as keyof PizzaDough][
-          selectedSize as keyof PizzaSize
-        ]
+        pizza.weight[selectedDough][selectedSize]
       );
-      setCurrentSale(pizza.sale[selectedSize as keyof PizzaSize]);
+      setCurrentSale(pizza.sale[selectedSize]);
       setModalActive(true);
       setSelectedPizza(pizza);
     }
@@ -138,7 +134,7 @@ const SectionPizzas = memo(() => {
             aria-label="Посмотреть ещё варианты пицц"
             style={{
               display:
-                menuEnded || menuLoadingStatus !== "idle" ? "none" : "block",
+                menuEnded || menuLoadingStatus !== LoadingStatus.IDLE ? "none" : "block",
             }}
             className={styles.btnLoad}
           >

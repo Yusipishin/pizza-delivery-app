@@ -3,12 +3,13 @@ import styles from "./style.module.css";
 
 import {withBaseRequest} from "../../hocs/withBaseRequest";
 
-import {Novelty} from "../../interfaces/interfaces";
+import {Pizza} from "../../interfaces/interfaces";
 
-const SectionNovelty = withBaseRequest<JSX.Element, Novelty>(({checkLoading, list})  => {
+const SectionNovelty = withBaseRequest<JSX.Element, Pizza>(({checkLoading, list})  => {
   if (list && checkLoading) {
     const renderItems = () => {
-      return list.map((item: Novelty) => {
+      return list.map((item: Pizza, i) => {
+        if (i > 3) return null;
         return (
             <li className={styles.item} key={item.id}>
               <a href="#">
@@ -20,7 +21,7 @@ const SectionNovelty = withBaseRequest<JSX.Element, Novelty>(({checkLoading, lis
                   />
                   <div>
                     <span className={styles.pizzaName}>{item.name}</span>
-                    <span className={styles.pizzaSale}>от {item.sale} ₽</span>
+                    <span className={styles.pizzaSale}>от {item.sale.small} ₽</span>
                   </div>
                 </article>
               </a>
@@ -45,7 +46,7 @@ const SectionNovelty = withBaseRequest<JSX.Element, Novelty>(({checkLoading, lis
 },
     NoveltySkeleton,
     4,
-    "novelty"
+    "pizzas"
 );
 
 export default SectionNovelty

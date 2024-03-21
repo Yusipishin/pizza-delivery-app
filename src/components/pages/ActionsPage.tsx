@@ -1,10 +1,10 @@
 import {useEffect} from "react";
-import {Action} from "../../interfaces/interfaces";
+import {Promo} from "../../interfaces/interfaces";
 
 import {withBaseRequest} from "../../hocs/withBaseRequest";
 import ActionItemSkeleton from "../UI/Skeletons/ActionItemSkeleton";
 
-const ActionsPage = withBaseRequest<JSX.Element[], Action>(({checkLoading, list}) => {
+const ActionsPage = withBaseRequest<JSX.Element[], Promo>(({checkLoading, list}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -12,7 +12,7 @@ const ActionsPage = withBaseRequest<JSX.Element[], Action>(({checkLoading, list}
 
   if (list && checkLoading) {
     const renderItems = () => {
-      return list.map((item: Action) => {
+      return list.map((item: Promo) => {
         return (
             <li
                 className="rounded-xl shadow-shad flex"

@@ -2,13 +2,13 @@ import ActionBlockSkeleton from "../UI/Skeletons/ActionBlockSkeleton";
 import styles from "./style.module.css";
 import { withBaseRequest} from "../../hocs/withBaseRequest";
 import { Link } from "react-router-dom";
-import {Stock} from "../../interfaces/interfaces";
+import {Promo} from "../../interfaces/interfaces";
 
-const SectionStocks = withBaseRequest<JSX.Element[], Stock>(({checkLoading,list,loadingStatus}) => {
+const SectionStocks = withBaseRequest<JSX.Element[], Promo>(({checkLoading,list,loadingStatus}) => {
 
   if (list && checkLoading) {
     const renderItems = () => {
-      return list.map((item: Stock, i: number) => {
+      return list.map((item: Promo, i: number) => {
         return (
             <li className={i === 0 ? "row-span-2" : ""} key={item.id}>
               <article>

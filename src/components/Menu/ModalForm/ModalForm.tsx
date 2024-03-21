@@ -1,52 +1,51 @@
 import addIngredients from "../../../static/addIngredients";
 import Modal from "../../UI/Modal/Modal";
 import styles from "./style.module.css";
-import {useState, memo, useEffect, SetStateAction, Dispatch, MouseEvent} from "react";
+import {Dispatch, memo, MouseEvent, SetStateAction, useEffect, useState} from "react";
 
 import store from "../../../store/store";
 import * as actions from "../../../actions/actions";
-import { bindActionCreators } from "redux";
+import {bindActionCreators} from "redux";
 
-import { Pizza, PizzaDough, PizzaSize } from "../../../interfaces/interfaces";
+import {Dough, Pizza, Size, Sale, Weight, WeightTraditional, WeightThin} from "../../../interfaces/interfaces";
 
-interface Props {
+interface ModalFormProps {
   modalActive: boolean;
-  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalActive: Dispatch<SetStateAction<boolean>>;
   currentWeight: number;
-  setCurrentWeight: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentWeight: Dispatch<SetStateAction<number>>;
   currentSale: number;
-  setCurrentSale: React.Dispatch<React.SetStateAction<number>>;
-  selectedSize: string;
-  setSelectedSize: React.Dispatch<React.SetStateAction<string>>;
-  selectedDough: string;
-  setSelectedDough: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentSale: Dispatch<SetStateAction<number>>;
+  selectedSize: Size;
+  setSelectedSize: Dispatch<SetStateAction<Size>>;
+  selectedDough: Dough;
+  setSelectedDough: Dispatch<SetStateAction<Dough>>;
   selectedPizza: Pizza | undefined;
-  setSelectedPizza: React.Dispatch<React.SetStateAction<Pizza | undefined>>;
+  setSelectedPizza: Dispatch<SetStateAction<Pizza | undefined>>;
 }
 
-const ModalForm = memo(
-  ({
-    modalActive,
-    setModalActive,
-    currentWeight,
-    setCurrentWeight,
-    currentSale,
-    setCurrentSale,
-    selectedSize,
-    setSelectedSize,
-    selectedDough,
-    setSelectedDough,
-    selectedPizza,
-    setSelectedPizza,
-  }: Props) => {
-    const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
-      []
-    );
+const ModalForm = memo(({
+      modalActive,
+      setModalActive,
+      currentWeight,
+      setCurrentWeight,
+      currentSale,
+      setCurrentSale,
+      selectedSize,
+      setSelectedSize,
+      selectedDough,
+      setSelectedDough,
+      selectedPizza,
+      setSelectedPizza,
+    }: ModalFormProps) => {
 
-    const [currentWidth, setCurrentWidth] = useState<number>(30);
-    const [currentSaleIngr, setCurrentSaleIngr] = useState<number>(0);
 
-    const [differenceOfSale, setDifferenceOfSale] = useState<number>(0);
+    const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+
+    const [currentWidth, setCurrentWidth] = useState(30);
+    const [currentSaleIngr, setCurrentSaleIngr] = useState(0);
+
+    const [differenceOfSale, setDifferenceOfSale] = useState(0);
 
     const { dispatch } = store;
     const { addItem } = bindActionCreators(actions, dispatch);
@@ -58,8 +57,8 @@ const ModalForm = memo(
         setCurrentWidth(30);
         setSelectedIngredients([]);
         setSelectedPizza(undefined);
-        setSelectedSize("average");
-        setSelectedDough("traditional");
+        setSelectedSize(Size.AVERAGE);
+        setSelectedDough(Dough.TRADITIONAL);
         setCurrentWeight(0);
         setCurrentSale(0);
       }
@@ -72,35 +71,27 @@ const ModalForm = memo(
     ) => {
       setDifferenceOfSale(newDifferenceOfSale);
       setCurrentWidth(newCurrentWidth);
-      setCurrentSale(
-        (selectedPizza as Pizza).sale[name as keyof PizzaSize] + currentSaleIngr
-      );
-      setCurrentWeight(
-        (selectedPizza as Pizza).weight[selectedDough as keyof PizzaDough][
-          name as keyof PizzaSize
-        ]
-      );
+      if (selectedPizza) {
+        setCurrentSale((selectedPizza as Pizza).sale[name as keyof Sale] + currentSaleIngr);
+        setCurrentWeight((selectedPizza as Pizza).weight[selectedDough as keyof Weight][name as keyof (WeightTraditional | WeightThin)]);
+      }
     };
 
     const handleClickOption = (
       event: MouseEvent<HTMLElement>,
-      updateFunction: Dispatch<SetStateAction<string>>
+      updateFunction: typeof setSelectedSize | typeof setSelectedDough
     ) => {
+
       const elem = event.target as HTMLElement;
       if (elem.tagName === "BUTTON") {
         const name = elem.getAttribute("data-name");
-        updateFunction(name as string);
+        updateFunction === setSelectedSize ? setSelectedSize(name as Size) : setSelectedDough(name as Dough)
         const pizzaWeight = (selectedPizza as Pizza).weight;
-        if (name === "small") changeOption(-10, 25, name);
-        else if (name === "average") changeOption(0, 30, name);
-        else if (name === "big") changeOption(20, 35, name);
-        else if (name === "traditional")
-          setCurrentWeight(
-            pizzaWeight.traditional[selectedSize as keyof PizzaSize]
-          );
-        else if (name === "thin")
-          setCurrentWeight(pizzaWeight.thin[selectedSize as keyof PizzaSize]);
-      }
+        if (name === Size.SMALL) changeOption(-10, 25, name);
+        else if (name === Size.AVERAGE) changeOption(0, 30, name);
+        else if (name === Size.BIG) changeOption(20, 35, name);
+        else if (name === Dough.TRADITIONAL) setCurrentWeight(pizzaWeight.traditional[selectedSize as keyof WeightTraditional]);
+        else if (name === Dough.THIN) setCurrentWeight(pizzaWeight.thin[selectedSize as keyof WeightThin])}
     };
 
     const handleClickIngr = (event: React.MouseEvent<HTMLElement>) => {
@@ -116,20 +107,16 @@ const ModalForm = memo(
               ? [...selectedIngredients, name]
               : selectedIngredients.filter((item) => item !== name)
           );
-          setCurrentSaleIngr(
-            (currentSaleIngr) => currentSaleIngr + (arrContain ? sale : -sale)
-          );
-          setCurrentSale(
-            (currentSale) => currentSale + (arrContain ? sale : -sale)
-          );
+          setCurrentSaleIngr((currentSaleIngr) => currentSaleIngr + (arrContain ? sale : -sale));
+          setCurrentSale((currentSale) => currentSale + (arrContain ? sale : -sale));
         }
       }
     };
 
     const getStyleBtn = (styleSmall: string, styleThin: string) => {
-      if (selectedSize === "small") {
+      if (selectedSize === Size.SMALL) {
         return styleSmall;
-      } else if (selectedDough === "thin") {
+      } else if (selectedDough === Dough.THIN) {
         return styleThin;
       } else {
         return "bg-whBtn text-gr";
