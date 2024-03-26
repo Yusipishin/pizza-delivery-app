@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
+import {lazy} from "react";
 
-import CartMain from "./CartMain/CartMain";
-import CartOrder from "./CartOrder/CartOrder";
-import CartAccept from "./CartAccept/CartAccept";
+const CartMain = lazy(() => import('./CartMain/CartMain'));
+const CartOrder = lazy(() => import('./CartOrder/CartOrder'));
+const CartAccept = lazy(() => import('./CartAccept/CartAccept'));
 
 const Cart = () => {
   return (
