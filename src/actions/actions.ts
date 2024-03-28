@@ -1,3 +1,4 @@
+import {createAction} from "@reduxjs/toolkit";
 import {ActionPizza} from "../interfaces/interfaces.ts";
 
 interface IAddItem {
@@ -12,16 +13,6 @@ interface IRemoveItem {
 
 export type ActionType = IAddItem | IRemoveItem
 
-export const addItem = (item: ActionPizza): IAddItem => {
-  return {
-    type: "ADD_ITEM",
-    payload: item
-  }
-}
+export const addItem = createAction<ActionPizza>("ADD_ITEM")
 
-export const removeItem = (item: number): IRemoveItem => {
-  return {
-    type: "REMOVE_ITEM",
-    payload: item
-  }
-}
+export const removeItem = createAction<number>("REMOVE_ITEM")

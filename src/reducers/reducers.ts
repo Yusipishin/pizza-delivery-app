@@ -1,5 +1,10 @@
+import {createReducer} from "@reduxjs/toolkit";
 import {ActionPizza} from "../interfaces/interfaces.ts";
-import {ActionType} from "../actions/actions.ts";
+
+import {
+  addItem,
+  removeItem
+} from "../actions/actions.ts";
 
 interface stateProp {
   cart: ActionPizza[]
@@ -9,26 +14,15 @@ const initialState: stateProp = {
   cart: []
 }
 
-const reducer = (state: stateProp = initialState, action: ActionType ) => {
-  switch (action.type) {
-    case "ADD_ITEM":
-      if (typeof action.payload !== 'number') {
-        return {
-          ...state,
-          cart: [...state.cart, action.payload],
-        }
-      }
-      break;
-    case "REMOVE_ITEM":
-      if (typeof action.payload === 'number') {
-        return {
-          ...state,
-          cart: state.cart.filter((item) => item.id !== action.payload)
-        }
-      }
-      break;
-    default: return state
-  }
-}
+const reducer = createReducer(initialState, builder => {
+  builder
+      .addCase(addItem, ((state, action) => {
+        state.cart.push(action.payload)
+      }))
+      .addCase(removeItem, ((state, action) => {
+        state.cart = state.cart.filter((item) => item.id !== action.payload)
+      }))
+      .addDefaultCase(() => {})
+})
 
 export default reducer;
